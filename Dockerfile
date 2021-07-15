@@ -2,7 +2,7 @@
 FROM node:lts AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 WORKDIR /exam105-fe
-COPY package.json npm.lock ./
+COPY package.json package-lock.json ./
 RUN npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
