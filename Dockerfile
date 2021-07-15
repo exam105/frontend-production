@@ -10,7 +10,7 @@ FROM node:lts AS builder
 WORKDIR /exam105-fe
 COPY . .
 COPY --from=deps /exam105-fe/node_modules ./node_modules
-RUN npm build && npm install --production --ignore-scripts --prefer-offline
+RUN npm build
 
 # Production image, copy all the files and run next
 FROM node:lts AS runner
@@ -18,17 +18,13 @@ WORKDIR /exam105-fe
 
 # ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
 COPY --from=builder /exam105-fe/public ./public
-COPY --from=builder --chown=nextjs:nodejs /exam105-fe/.next ./.next
+COPY --from=builder /exam105-fe/.next ./.next
 COPY --from=builder /exam105-fe/node_modules ./node_modules
 COPY --from=builder /exam105-fe/package.json ./package.json
 
-USER nextjs
 
 EXPOSE 8081
 
