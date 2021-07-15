@@ -1,7 +1,7 @@
 .showcase {
   height: 300px;
   width: 100%;
-  background: #0b5f97 url("/images/showcase.jpg") no-repeat center center;
+  background: #0b5f97 no-repeat center center;
   color: #fff;
   position: relative;
   display: flex;
