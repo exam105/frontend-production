@@ -10,7 +10,7 @@ FROM node:lts AS builder
 WORKDIR /exam105-fe
 COPY . .
 COPY --from=deps /exam105-fe/node_modules ./node_modules
-RUN npm build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:lts AS runner
@@ -21,7 +21,7 @@ WORKDIR /exam105-fe
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
 COPY --from=builder /exam105-fe/public ./public
-# COPY --from=builder /exam105-fe/.next ./.next
+COPY --from=builder /exam105-fe/.next ./.next
 COPY --from=builder /exam105-fe/node_modules ./node_modules
 COPY --from=builder /exam105-fe/package.json ./package.json
 
