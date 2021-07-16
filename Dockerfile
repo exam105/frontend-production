@@ -26,7 +26,7 @@ COPY --from=builder /exam105-fe/node_modules ./node_modules
 COPY --from=builder /exam105-fe/package.json ./package.json
 
 
-EXPOSE 8090
+EXPOSE 8080
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
