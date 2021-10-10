@@ -1,66 +1,109 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
+/* @import url("https://fonts.cdnfonts.com/css/poppins"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap%27");
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: poppins;
 }
-
-html,
-body {
-  font-family: "Poppins", sans-serif;
-  line-height: 1.8;
+.content-width {
+  width: 85%;
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
-
 a {
   text-decoration: none;
   color: steelblue;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  /* margin-right: 40px; */
 }
-
-p {
-  margin: 10px 0;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-.btn {
-  display: inline-block;
-  background: #0c91e8;
-  color: #fff;
-  padding: 10px 20px;
+.btn-style {
   cursor: pointer;
-  border: 0;
-  border-radius: 5px;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.btn-secondary {
-  font: inherit;
-  font-size: 13px;
-  background: #000;
-  color: #fff !important;
-  border: 0;
-  border-radius: 5px;
-  padding: 5px 15px;
-  margin: 0 20px;
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  opacity: 0.8;
-}
-
-.btn-icon {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.015em;
+  color: #268dec;
+  width: fit-content;
+  height: 50px;
+  padding: 20px 32px;
+  background: #fff;
+  border: 2px solid #268dec;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s ease-in-out;
+}
+.logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+label {
+  display: block;
+}
+img {
+  margin-right: 10px;
+}
+/* The below css ids were not meant to be global. These are here just because Next.js does not support using IDs in the module.css. So we've used in the globar. */
+input#home-search-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #d0cfce;
+  outline: none;
+  border-radius: 5px;
 }
 
-.btn-icon svg {
-  margin-right: 5px;
+input#home-search-bar:hover {
+  border: 1px solid #268dec;
+}
+input#search-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #d0cfce;
+  outline: none;
+  border-radius: 5px;
+}
+
+input#search-bar:hover {
+  border: 1px solid #268dec;
+}
+
+@media screen and (max-width: 768px) {
+  input#home-search-bar {
+    width: 85%;
+    display: flex;
+    flex-basis: 50%;
+  }
+  input#search-bar {
+    font-size: 14px;
+    display: flex;
+    flex-basis: 50%;
+  }
 }
