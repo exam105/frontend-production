@@ -6,7 +6,7 @@ import { getSearchPapers } from "@/services/searchSlice";
 function HomeComponent() {
   const dispatch = useDispatch();
 
-  const inputs = {
+  let inputs = {
     subject: "Math",
     system: "IGCSE",
     board: "Edexcel",
@@ -25,7 +25,7 @@ function HomeComponent() {
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Subject" />
+              <input type="text" id="home-search-bar" placeholder="System" />
               <Link href="#">
                 <a>
                   <i
@@ -36,7 +36,7 @@ function HomeComponent() {
             </form>
 
             <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Subject" />
+              <input type="text" id="home-search-bar" placeholder="Board" />
               <Link href="#">
                 <a>
                   <i
@@ -50,17 +50,6 @@ function HomeComponent() {
           <div
             className={`${styles.searchFields} ${styles.mobileResponsive} ${styles.mobile}`}
           >
-            <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Subject" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form>
-
             <form className={styles.searchContainer}>
               <input type="text" id="home-search-bar" placeholder="Subject" />
               <Link href="#">
@@ -129,8 +118,8 @@ function HomeComponent() {
             <Link href="/search">
               <a
                 onClick={() => {
-                  let choice = "daterange";
-                  dispatch(getSearchPapers(inputs, choice));
+                  inputs["choice"] = "daterange";
+                  dispatch(getSearchPapers(inputs));
                 }}
                 className="btn-style sign"
               >

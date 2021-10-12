@@ -18,10 +18,12 @@ const initialState = {
 };
 export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
-  async (inputs, choice) => {
+  async (inputs) => {
+    let choice = inputs["choice"];
+    delete inputs["choice"];
     console.log("execution came here, data: ", inputs, "and param: ", choice);
     const response = await api.post(
-      `/dashboard/de/search/${choice ? choice : "date"}`,
+      `/dashboard/de/search/daterange`,
       JSON.stringify(inputs)
     );
     return response.data;

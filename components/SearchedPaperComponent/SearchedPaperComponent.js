@@ -12,7 +12,7 @@ function SearchedPaperComponent({ paper }) {
             <p>{paper.board}</p>
           </div>
           <div className={styles.grayColor}>
-            <p>{paper.question_hex_ids.length}</p>
+            <p>Qs: {paper.question_hex_ids.length}</p>
           </div>
         </div>
         <div className={styles.cardFooter}>
@@ -23,8 +23,8 @@ function SearchedPaperComponent({ paper }) {
             <p>
               {new Date(paper.date).toLocaleString("default", {
                 month: "long",
-              })}
-              {new Date(row.date).getFullYear()}
+              })}{" "}
+              {new Date(paper.date).getFullYear()}
             </p>
           </div>
         </div>

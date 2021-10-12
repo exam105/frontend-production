@@ -15,7 +15,7 @@ function SearchComponent() {
               className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
               <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="Subject" />
+                <input type="text" id="search-bar" placeholder="System" />
                 <a href="#">
                   <i
                     className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
@@ -24,7 +24,7 @@ function SearchComponent() {
               </form>
 
               <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="Subject" />
+                <input type="text" id="search-bar" placeholder="Board" />
                 <a href="#">
                   <i
                     className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
@@ -33,15 +33,6 @@ function SearchComponent() {
               </form>
 
               <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="Subject" />
-                <a href="#">
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </form>
-
-              <form className={styles.last}>
                 <input type="text" id="search-bar" placeholder="Subject" />
                 <a href="#">
                   <i
@@ -118,7 +109,7 @@ function SearchComponent() {
           <div className={`${styles.gridLogoss} ${styles.logos}`}>
             {/* mapping through the data */}
             {data.map((paper, i) => {
-              <SearchedPaperComponent paper={paper} key={i} />;
+              return <SearchedPaperComponent paper={paper} key={i} />;
             })}
           </div>
           <div className={`${styles.searchButton} ${styles.buttonMargin}`}>

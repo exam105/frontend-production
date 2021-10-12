@@ -31,7 +31,7 @@
 
 .searchContainer {
   margin: 0 auto;
-  margin-right: 30px;
+  margin-left: 30px;
 }
 .searchIcon {
   position: relative;
@@ -164,7 +164,7 @@
     margin: 0px auto;
   }
   .searchContainer {
-    margin-right: 0px;
+    margin-left: 0px;
   }
   .searchIcon {
     left: -10px;
