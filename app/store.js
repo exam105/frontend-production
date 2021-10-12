@@ -5,11 +5,8 @@ import searchReducer from "@/services/searchSlice";
 const store = configureStore({
   reducer: {
     // [papersApi.reducerPath]: papersApi.reducer,
-    searchPapers: searchReducer,
+    papers: searchReducer,
   },
 });
 
 export default store;
-// const AppDispatch = store.dispatch;
-// const RootState = store.getState;
-// export { store, AppDispatch, RootState };

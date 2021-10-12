@@ -1,18 +1,18 @@
 import Link from "next/link";
 import styles from "./HomeComponent.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getSearchPapers, selectSearch } from "@/services/searchSlice";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getSearchPapers } from "@/services/searchSlice";
 
 function HomeComponent() {
   const dispatch = useDispatch();
-  const { data, pending, error } = useSelector((state) => state.searchPapers);
-  useEffect(() => {
-    console.log("this is data: ", data);
-    console.log("error: ", error);
-  }, [data, error]);
-  if (pending) return "Loading...";
 
+  const inputs = {
+    subject: "Math",
+    system: "IGCSE",
+    board: "Edexcel",
+    from_date: "2010-02-01T00:00:00.000Z",
+    to_date: "2022-02-01T00:00:00.000Z",
+  };
   return (
     <div className="content-width">
       <div className={styles.homeContent}>
@@ -128,12 +128,16 @@ function HomeComponent() {
           <div className={styles.loginBtn}>
             <Link href="/search">
               <a
-                onClick={() => dispatch(getSearchPapers())}
+                onClick={() => {
+                  let choice = "daterange";
+                  dispatch(getSearchPapers(inputs, choice));
+                }}
                 className="btn-style sign"
               >
                 Search
               </a>
             </Link>
+
             {/* <button className="btn-style sign">Search</button> */}
           </div>
         </div>

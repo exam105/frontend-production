@@ -1,7 +1,11 @@
 import styles from "./SearchComponent.module.css";
 import { SearchedPaperComponent } from "@/components/SearchedPaperComponent";
+import { useSelector } from "react-redux";
 
 function SearchComponent() {
+  const { data, pending, error } = useSelector((state) => state.papers);
+  if (pending) return "Loading...";
+
   return (
     <div>
       <div className="content-width">
@@ -112,17 +116,10 @@ function SearchComponent() {
       <div className="content-width">
         <div className={styles.mainBox}>
           <div className={`${styles.gridLogoss} ${styles.logos}`}>
-            {/* map through the cards here */}
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
-            <SearchedPaperComponent />
+            {/* mapping through the data */}
+            {data.map((paper, i) => {
+              <SearchedPaperComponent paper={paper} key={i} />;
+            })}
           </div>
           <div className={`${styles.searchButton} ${styles.buttonMargin}`}>
             <div className={styles.loginBtn}>

@@ -1,26 +1,31 @@
 import styles from "./SearchedPaperComponent.module.css";
 
-function SearchedPaperComponent() {
+function SearchedPaperComponent({ paper }) {
   return (
     <div className={`${styles.gridLogos__itemm} ${styles.card}`}>
       <div className={styles.cardContent}>
         <div className={styles.cardHead}>
           <div className={styles.blueColor}>
-            <p>IGCSE</p>
+            <p>{paper.system}</p>
           </div>
           <div className={styles.blueColor}>
-            <p>Edexcel</p>
+            <p>{paper.board}</p>
           </div>
           <div className={styles.grayColor}>
-            <p>Qs: 25</p>
+            <p>{paper.question_hex_ids.length}</p>
           </div>
         </div>
         <div className={styles.cardFooter}>
           <div className={styles.blackColor}>
-            <p>Math</p>
+            <p>{paper.subject}</p>
           </div>
           <div className={styles.blackColor}>
-            <p>June 2021</p>
+            <p>
+              {new Date(paper.date).toLocaleString("default", {
+                month: "long",
+              })}
+              {new Date(row.date).getFullYear()}
+            </p>
           </div>
         </div>
       </div>
