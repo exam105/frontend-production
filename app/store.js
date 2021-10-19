@@ -1,6 +1,6 @@
 import { configureStore, Action, ThunkAction } from "@reduxjs/toolkit";
 // import { papersApi } from "@/services/papersApi";
-import searchReducer from "@/services/searchSlice";
+import searchReducer from "../services/searchSlice";
 
 const store = configureStore({
   reducer: {

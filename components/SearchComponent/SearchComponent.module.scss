@@ -5,6 +5,15 @@
   flex-direction: column;
   text-align: center;
 }
+// The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles
+.select {
+  width: 323px !important;
+  height: 45px !important;
+  font-size: 1rem !important;
+  margin: 0 auto !important;
+  margin-left: 30px !important;
+  border-radius: 5px !important;
+}
 .searchBox {
   display: flex;
   flex-direction: column;
@@ -196,9 +205,15 @@
   .inputDate {
     width: 205px !important;
   }
+  .select {
+    width: 205px !important;
+  }
 }
 @media screen and (max-width: 500px) {
   .inputDate {
+    width: 180px !important;
+  }
+  .select {
     width: 180px !important;
   }
 }

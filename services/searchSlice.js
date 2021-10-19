@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../lib/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -18,14 +18,18 @@ const initialState = {
 };
 export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
-  async (inputs) => {
-    let choice = inputs["choice"];
-    delete inputs["choice"];
-    console.log("execution came here, data: ", inputs, "and param: ", choice);
-    const response = await api.post(
-      `/dashboard/de/search/daterange`,
-      JSON.stringify(inputs)
-    );
+  async (paper) => {
+    let choice = paper["choice"];
+    if (choice === "date") {
+      delete paper["choice"];
+      delete paper["from_date"];
+      delete paper["to_date"];
+    } else {
+      delete paper["choice"];
+      delete paper["date"];
+    }
+    console.log("execution came here, data: ", paper, "and param: ", choice);
+    const response = await api.post(`/dashboard/de/search/${choice}`, paper);
     return response.data;
   }
 );

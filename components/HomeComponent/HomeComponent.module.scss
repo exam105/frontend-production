@@ -129,13 +129,21 @@
   border-radius: 50%;
   background: white;
 }
-
+// The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles
+.select {
+  width: 380px !important;
+  height: 45px !important;
+  font-size: 1rem !important;
+  margin: 0 auto !important;
+  margin-left: 30px !important;
+  border-radius: 5px !important;
+}
 .inputDate {
-  border: 1px solid #c4c4c4;
+  // border: 1px solid #c4c4c4;
   height: 45px;
   width: 380px !important;
   border-radius: 5px;
-  background-color: #fff;
+  // background-color: #fff;
   padding: 3px 5px;
   /* width: 190px; */
 }
@@ -153,6 +161,9 @@
 
 @media screen and (max-width: 500px) {
   .inputDate {
+    width: 180px !important;
+  }
+  .select {
     width: 180px !important;
   }
 }
@@ -181,6 +192,10 @@
   }
 
   .inputDate {
+    width: 205px !important;
+  }
+
+  .select {
     width: 205px !important;
   }
 }

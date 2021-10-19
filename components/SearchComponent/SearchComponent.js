@@ -1,9 +1,12 @@
-import styles from "./SearchComponent.module.css";
-import { SearchedPaperComponent } from "@/components/SearchedPaperComponent";
+import { useState, useEffect } from "react";
+import Select from "react-dropdown-select";
+import styles from "./SearchComponent.module.scss";
+import { SearchedPaperComponent } from "../SearchedPaperComponent";
 import { useSelector } from "react-redux";
 
 function SearchComponent() {
   const { data, pending, error } = useSelector((state) => state.papers);
+
   if (pending) return "Loading...";
 
   return (
@@ -14,7 +17,26 @@ function SearchComponent() {
             <div
               className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
-              <form className={styles.searchContainer}>
+              <Select
+                className={styles.select}
+                options={{ text: "text" }}
+                placeholder="Subject"
+                onChange={(value) => {}}
+              />
+              <Select
+                className={styles.select}
+                options={{ text: "text" }}
+                placeholder="Subject"
+                onChange={(value) => {}}
+              />
+
+              <Select
+                className={styles.select}
+                options={{ text: "text" }}
+                placeholder="Subject"
+                onChange={(value) => {}}
+              />
+              {/* <form className={styles.searchContainer}>
                 <input type="text" id="search-bar" placeholder="System" />
                 <a href="#">
                   <i
@@ -39,7 +61,7 @@ function SearchComponent() {
                     className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
                   ></i>
                 </a>
-              </form>
+              </form> */}
             </div>
 
             <div className={styles.searchBoxx}>
