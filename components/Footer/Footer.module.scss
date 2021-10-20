@@ -1,0 +1,38 @@
+.footerBorder {
+  border-top: 1px solid #92929e;
+}
+.footerContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.footerLinks {
+  margin-top: 5px;
+  width: 15%;
+}
+
+.grayColor {
+  color: #92929e;
+  font-size: 14px;
+  font-weight: 600;
+}
+.noStyle {
+  text-decoration: none;
+  color: #92929e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.noStyle:hover {
+  color: #268dec;
+}
+.footerLinks ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+@media screen and (max-width: 768px) {
+  .footer-links {
+    width: 40% !important;
+  }
+}

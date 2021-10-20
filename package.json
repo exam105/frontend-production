@@ -2,7 +2,6 @@
   "name": "frontend-production",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://exam105_backend:9090",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "11.0.1",
+    "@reduxjs/toolkit": "^1.6.2",
+    "axios": "^0.22.0",
+    "font-awesome": "^4.7.0",
+    "next": "^11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swr": "^0.5.6"
+    "react-dropdown-select": "^4.7.4",
+    "react-redux": "^7.2.5",
+    "sass": "^1.42.1"
   },
   "devDependencies": {
     "eslint": "7.30.0",

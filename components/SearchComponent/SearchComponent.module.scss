@@ -1,0 +1,219 @@
+.homeContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+// The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles
+.select {
+  width: 323px !important;
+  height: 45px !important;
+  font-size: 1rem !important;
+  margin: 0 auto !important;
+  margin-left: 30px !important;
+  border-radius: 5px !important;
+}
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+.searchBoxx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchFields {
+  display: flex;
+  height: 80px;
+  padding: 0px 30px;
+}
+.mobileResponsive {
+  margin: 0px auto;
+}
+.searchContainer {
+  margin: 0 auto;
+  margin-right: 30px;
+}
+
+.searchIcon {
+  position: relative;
+  float: right;
+  width: 75px;
+  height: 75px;
+  top: -40%;
+}
+.iconSize {
+  font-size: 20px !important;
+  color: gray;
+}
+.last {
+  margin-right: 0px;
+  margin: 0 auto;
+}
+.radioBtn {
+  display: flex;
+  justify-content: flex-start;
+}
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.loginBtn {
+  display: flex;
+  align-items: center;
+}
+.mainBox {
+  margin: 0 auto;
+}
+.buttonMargin {
+  margin-bottom: 50px;
+}
+/* Hide the browser's default radio button */
+.radioButton input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+.radio {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+/* radio-button */
+
+.radioButton {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #92929e;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* On mouse-over, add a grey background color */
+.radioButton:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radioButton input:checked ~ .checkmark {
+  background-color: #268dec;
+}
+/* Show the indicator (dot/circle) when checked */
+.radioButton input:checked ~ .checkmark:after {
+  display: block;
+}
+/* Style the indicator (dot/circle) */
+.radioButton .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radioButton:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.radioHead {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.inputDate {
+  border: 1px solid #c4c4c4;
+  height: 45px;
+  width: 360px !important;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  width: 190px;
+}
+.gridLogoss {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+}
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile {
+    margin-top: 50px;
+  }
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .searchFields {
+    display: flex;
+    height: 80px;
+    padding: 0px 15px;
+  }
+  .gridLogoss {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .mobileResponsive {
+    margin: 0px auto;
+  }
+  .searchContainer {
+    margin-right: 10px;
+  }
+  .searchIcon {
+    bottom: 33px;
+    width: 50px;
+  }
+  .dateResponsive {
+    display: flex;
+    margin: 0px auto;
+  }
+  .dateMargin {
+    margin-right: 40px;
+  }
+  .inputDate {
+    width: 205px !important;
+  }
+  .select {
+    width: 205px !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .inputDate {
+    width: 180px !important;
+  }
+  .select {
+    width: 180px !important;
+  }
+}

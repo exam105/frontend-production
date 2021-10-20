@@ -1,0 +1,24 @@
+.navBorder {
+  width: 100%;
+  border-bottom: 1px solid #92929e;
+}
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+}
+
+.login {
+  margin-right: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #268dec;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+}

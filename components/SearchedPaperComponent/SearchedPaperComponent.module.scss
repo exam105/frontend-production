@@ -1,0 +1,59 @@
+.gridLogos__itemm {
+  flex-basis: 30%;
+  display: flex;
+  height: 120px;
+  margin-bottom: 40px;
+}
+.card {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+.cardContent {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.blueColor {
+  color: #268dec;
+  font-size: 14px;
+  font-weight: 600;
+}
+.grayColor {
+  color: #92929e;
+  font-size: 14px;
+  font-weight: 600;
+}
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+}
+.blackColor {
+  color: #101010;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .gridLogos__itemm {
+    flex-basis: 45% !important;
+    display: flex;
+    height: 100px;
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .gridLogos__itemm {
+    flex-basis: 100% !important;
+    display: flex;
+    height: 100px;
+    margin-bottom: 30px;
+  }
+}
