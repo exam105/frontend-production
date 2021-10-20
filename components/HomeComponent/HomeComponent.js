@@ -246,29 +246,29 @@ function HomeComponent() {
 
         <div className={styles.searchButton}>
           <div className={styles.loginBtn}>
-            {/* <Link href="/search"> */}
-            <a
-              onClick={() => {
-                paper["choice"] = isDateRange ? "daterange" : "date";
-                // removing the slashes from within dates
-                if (isDateRange) {
-                  let newFromDate = paper.from_date.replace(/\\/g, "");
-                  paper.from_date = newFromDate;
-                  let newToDate = paper.to_date.replace(/\\/g, "");
-                  paper.to_date = newToDate;
-                } else {
-                  let newDate = paper.date.replace(/\\/g, "");
-                  paper.date = new Date(newDate);
-                  console.log("haza paper: ", newDate, paper);
-                }
-                dispatch(getSearchPapers(paper));
-                delete paper["choice"];
-              }}
-              className="btn-style sign"
-            >
-              Search
-            </a>
-            {/* </Link> */}
+            <Link href="/search">
+              <a
+                onClick={() => {
+                  paper["choice"] = isDateRange ? "daterange" : "date";
+                  // removing the slashes from within dates
+                  if (isDateRange) {
+                    let newFromDate = paper.from_date?.replace(/\\/g, "");
+                    paper.from_date = newFromDate;
+                    let newToDate = paper.to_date?.replace(/\\/g, "");
+                    paper.to_date = newToDate;
+                  } else {
+                    let newDate = paper.date?.replace(/\\/g, "");
+                    paper.date = new Date(newDate);
+                    console.log("haza paper: ", newDate, paper);
+                  }
+                  dispatch(getSearchPapers(paper));
+                  delete paper["choice"];
+                }}
+                className="btn-style sign"
+              >
+                Search
+              </a>
+            </Link>
 
             {/* <button className="btn-style sign">Search</button> */}
           </div>

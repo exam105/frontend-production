@@ -28,6 +28,13 @@ export const getSearchPapers = createAsyncThunk(
       delete paper["choice"];
       delete paper["date"];
     }
+    // const p = {
+    //   subject: "Math",
+    //   system: "IGCSE",
+    //   board: "Edexcel",
+    //   from_date: "2010-02-01T00:00:00.000Z",
+    //   to_date: "2022-01-01T00:00:00.000Z",
+    // };
     console.log("execution came here, data: ", paper, "and param: ", choice);
     const response = await api.post(`/dashboard/de/search/${choice}`, paper);
     return response.data;
