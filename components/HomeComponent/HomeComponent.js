@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Select from "react-dropdown-select";
 import Link from "next/link";
 import styles from "./HomeComponent.module.scss";

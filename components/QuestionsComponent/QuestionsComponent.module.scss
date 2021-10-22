@@ -1,0 +1,122 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+.sidenav {
+  grid-area: sidenav;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 400px;
+  overflow-y: auto;
+  transition: all 0.6s ease-in-out;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  z-index: 2; /* Needs to sit above the hamburger menu icon */
+  background-color: #fff;
+}
+.sidenav.active {
+  transform: translateX(0);
+}
+
+.sidenavTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0px 20px;
+  a {
+    color: #585858 !important;
+  }
+}
+
+.sidenavList {
+  padding: 0;
+  list-style-type: none;
+}
+
+.sidenavListItem {
+  padding: 20px 20px;
+  color: #92929e;
+  font-size: 14px;
+  font-weight: 400;
+  border-top: 1px solid #92929e;
+  height: 150px;
+}
+
+.sidenavListItem:hover {
+  cursor: pointer;
+}
+.textBack {
+  font-weight: 500;
+  font-size: 16px;
+  color: #92929e;
+  display: flex;
+  cursor: pointer;
+}
+.textSelect {
+  display: flex;
+  margin-top: 5px;
+}
+.booksText {
+  color: #268dec;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.icons {
+  margin-right: 10px;
+}
+@media only screen and (min-width: 46.875em) {
+  /* Show the sidenav */
+  .gridContainer {
+    grid-template-columns: 400px 1fr;
+    grid-template-areas:
+      "sidenav header"
+      "sidenav main"
+      "sidenav footer";
+  }
+  .sidenav {
+    position: relative;
+    transform: translateX(0);
+  }
+}
+@media only screen and (max-width: 960px) {
+  .gridContainer {
+    grid-template-columns: 300px 1fr !important;
+    grid-template-areas:
+      "sidenav header"
+      "sidenav main"
+      "sidenav footer";
+  }
+  .sidenav {
+    width: 300px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 300px 1fr !important;
+    grid-template-areas:
+      "sidenav header"
+      "sidenav main"
+      "sidenav footer";
+  }
+  .sidenav {
+    width: 300px !important;
+  }
+}
+
+.plusIcon {
+  display: flex;
+  justify-content: space-between;
+  Image {
+    cursor: pointer;
+  }
+}

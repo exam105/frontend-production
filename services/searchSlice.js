@@ -60,5 +60,4 @@ const searchSlice = createSlice({
       });
   },
 });
-// export const selectSearch = RootState.searchPapers;
 export default searchSlice.reducer;

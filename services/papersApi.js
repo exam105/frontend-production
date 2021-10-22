@@ -1,33 +1,24 @@
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_URL } from "../config";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// const user = {
-//   subject: "Math",
-//   system: "IGCSE",
-//   board: "Edexcel",
-//   from_date: "2010-02-01T00:00:00.000Z",
-//   to_date: "2022-02-01T00:00:00.000Z",
-// };
+const papersApiHeaders = {
+  "Content-Type": "application/json",
+};
 
-// const papersApiHeaders = {
-//   // "Content-Type": "application/json"
-// };
+const baseUrl = API_URL;
 
-// const baseUrl = "http://exam105.com:9090";
+const createRequest = (url) => ({
+  url,
+  headers: papersApiHeaders,
+});
 
-// const createRequest = (url) => ({
-//   url,
-//   headers: papersApiHeaders,
-//   //   method: "POST",
-//   //   body: JSON.stringify(user),
-// });
-
-// export const papersApi = createApi({
-//   reducerPath: "papersApi",
-//   baseQuery: fetchBaseQuery({ baseUrl }),
-//   endpoints: (builder) => ({
-//     getPapers: builder.query({
-//       query: () => createRequest("/exam/question/611584b04df2b34eb506835e"),
-//     }),
-//   }),
-// });
-// export const { useGetPapersQuery } = papersApi;
+export const papersApi = createApi({
+  reducerPath: "papersApi",
+  baseQuery: fetchBaseQuery({ baseUrl }),
+  endpoints: (builder) => ({
+    getQuestion: builder.query({
+      query: (questionId) => createRequest(`/exam/question/${questionId}`),
+    }),
+  }),
+});
+export const { useGetQuestionQuery } = papersApi;

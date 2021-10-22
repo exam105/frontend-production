@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Select from "react-dropdown-select";
 import styles from "./SearchComponent.module.scss";
-import { SearchedPaperComponent } from "../SearchedPaperComponent";
+import { SearchedPaperCard } from "../SearchedPaperCard";
 import { useSelector } from "react-redux";
 
 function SearchComponent() {
@@ -131,7 +131,7 @@ function SearchComponent() {
           <div className={`${styles.gridLogoss} ${styles.logos}`}>
             {/* mapping through the data */}
             {data.map((paper, i) => {
-              return <SearchedPaperComponent paper={paper} key={i} />;
+              return <SearchedPaperCard paper={paper} key={i} />;
             })}
           </div>
           <div className={`${styles.searchButton} ${styles.buttonMargin}`}>
