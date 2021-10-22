@@ -1,3 +1,4 @@
+import ElementModal from "@components/common/ElementModal";
 import { BookModal } from "@components/common/Modals";
 import { SingleQuestion } from "@components/SingleQuestion";
 import Image from "next/image";
@@ -19,22 +20,28 @@ function QuestionsComponent() {
             />{" "}
             Back
           </div>
-          <a
-            className={`${styles.textSelect} ${styles.booksText}`}
-            onClick={() => {
-              console.log("im here");
-              return <BookModal />;
-            }}
-          >
-            <Image
-              className={styles.icons}
-              src="/images/book.svg"
-              alt="books"
-              width="28"
-              height="23"
-            />
-            4
-          </a>
+          <Link href="#openModal-about">
+            <a
+              className={`${styles.textSelect} ${styles.booksText}`}
+              onClick={() => {
+                console.log("im here");
+                return (
+                  <ElementModal show={true}>
+                    <BookModal />
+                  </ElementModal>
+                );
+              }}
+            >
+              <Image
+                className={styles.icons}
+                src="/images/book.svg"
+                alt="books"
+                width="28"
+                height="23"
+              />
+              4
+            </a>
+          </Link>
         </div>
 
         <div className={styles.sidenavList}>
