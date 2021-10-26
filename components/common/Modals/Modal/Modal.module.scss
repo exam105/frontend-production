@@ -1,0 +1,22 @@
+.overlay {
+  position: fixed; /* Positioning and size */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+}
+.closeHeader {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.overlay > div {
+  max-width: 700px;
+  width: 90%;
+  margin: 10% auto;
+  padding: 20px 20px;
+  border-radius: 5px;
+  background: #fff;
+}

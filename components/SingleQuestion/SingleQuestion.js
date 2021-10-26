@@ -1,9 +1,11 @@
-import { ImageSliderModal } from "@components/common/Modals";
+import { ImageSliderModal, Modal } from "@components/common/Modals";
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import styles from "./SingleQuestion.module.scss";
 
 function SingleQuestion() {
+  const [showImageSliderModal, setShowImageSliderModal] = useState(false);
+
   return (
     <main className={styles.main}>
       <div className={styles.badgeHeader}>
@@ -63,22 +65,26 @@ function SingleQuestion() {
       </div>
 
       <div className={styles.mainOverview}>
-        <div className={styles.overviewcard}>
-          <Image
-            src="/images/imgone.png"
-            alt="questionone"
-            height="180"
-            width="60%"
-          />
-        </div>
-        <div className={styles.overviewcard}>
-          <Image
-            src="/images/imgtwo.png"
-            alt="questiontwo"
-            width="400"
-            height="180"
-          />
-        </div>
+        <a onClick={() => setShowImageSliderModal(true)}>
+          <div className={styles.overviewcard}>
+            <Image
+              src="/images/imgone.png"
+              alt="questionone"
+              height="180"
+              width="60%"
+            />
+          </div>
+        </a>
+        <a onClick={() => setShowImageSliderModal(true)}>
+          <div className={styles.overviewcard}>
+            <Image
+              src="/images/imgtwo.png"
+              alt="questiontwo"
+              width="400"
+              height="180"
+            />
+          </div>
+        </a>
       </div>
 
       <div className={styles.mainHeader}>
@@ -110,13 +116,7 @@ function SingleQuestion() {
         </div>
       </div>
       <div className={styles.mainOverview}>
-        {/* <Link href="#openModal-img"> */}
-        <a
-          onClick={() => {
-            console.log("im also here");
-            return <ImageSliderModal />;
-          }}
-        >
+        <a onClick={() => setShowImageSliderModal(true)}>
           <div className={styles.overviewcard}>
             <Image
               src="/images/imgone.png"
@@ -126,15 +126,16 @@ function SingleQuestion() {
             />
           </div>
         </a>
-        {/* </Link> */}
-        <div className={styles.overviewcard}>
-          <Image
-            src="/images/imgtwo.png"
-            alt="questiontwo"
-            width="400"
-            height="180"
-          />
-        </div>
+        <a onClick={() => setShowImageSliderModal(true)}>
+          <div className={styles.overviewcard}>
+            <Image
+              src="/images/imgtwo.png"
+              alt="questiontwo"
+              width="400"
+              height="180"
+            />
+          </div>
+        </a>
       </div>
 
       <div className={styles.buttonHead}>
@@ -161,6 +162,12 @@ function SingleQuestion() {
           </div>
         </div>
       </div>
+      <Modal
+        onClose={() => setShowImageSliderModal(false)}
+        show={showImageSliderModal}
+      >
+        <ImageSliderModal />
+      </Modal>
     </main>
   );
 }

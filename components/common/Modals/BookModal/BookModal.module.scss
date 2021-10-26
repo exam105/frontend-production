@@ -1,44 +1,14 @@
-.modalContent {
-  border-radius: 4px;
-  position: relative;
-  width: 500px;
-  max-width: 90%;
-  background: #fff;
-  padding: 1em 2em;
-}
-.modalDialog {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 99999;
-  opacity: 0;
-  -webkit-transition: opacity 100ms ease-in;
-  -moz-transition: opacity 100ms ease-in;
-  transition: opacity 100ms ease-in;
-  pointer-events: none;
-}
-.modalDialog:target {
-  opacity: 1;
-  pointer-events: auto;
-}
-.modalDialog > div {
-  max-width: 700px;
-  width: 90%;
-  margin: 10% auto;
-  padding: 20px 20px;
-  border-radius: 5px;
-  background: #fff;
-}
-.closeHeader {
-  display: flex;
-  justify-content: flex-end;
-}
-.modalHead {
-  display: flex;
-  flex-direction: column;
+// .modalContent {
+//   border-radius: 4px;
+//   position: relative;
+//   width: 500px;
+//   max-width: 90%;
+//   background: #fff;
+//   padding: 1em 2em;
+// }
+
+.close {
+  margin-bottom: 20px;
 }
 
 .modalContent {

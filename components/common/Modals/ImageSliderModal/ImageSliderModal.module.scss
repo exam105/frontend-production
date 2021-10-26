@@ -31,7 +31,12 @@
 .image {
   width: 100%;
 }
-
+.image > div {
+  position: unset !important;
+}
 .imageSize {
-  width: 100%;
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
 }

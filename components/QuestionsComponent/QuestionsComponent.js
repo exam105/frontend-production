@@ -1,11 +1,13 @@
-import ElementModal from "@components/common/ElementModal";
-import { BookModal } from "@components/common/Modals";
-import { SingleQuestion } from "@components/SingleQuestion";
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { SingleQuestion } from "@components/SingleQuestion";
+import { Modal } from "@components/common/Modals";
+import { BookModal } from "@components/common/Modals";
 import styles from "./QuestionsComponent.module.scss";
 
 function QuestionsComponent() {
+  const [showBookModal, setShowBookModal] = useState(false);
+
   return (
     <div className={styles.gridContainer}>
       <aside className={styles.sidenav}>
@@ -20,28 +22,21 @@ function QuestionsComponent() {
             />{" "}
             Back
           </div>
-          <Link href="#openModal-about">
-            <a
-              className={`${styles.textSelect} ${styles.booksText}`}
-              onClick={() => {
-                console.log("im here");
-                return (
-                  <ElementModal show={true}>
-                    <BookModal />
-                  </ElementModal>
-                );
-              }}
-            >
-              <Image
-                className={styles.icons}
-                src="/images/book.svg"
-                alt="books"
-                width="28"
-                height="23"
-              />
-              4
-            </a>
-          </Link>
+          <a
+            className={`${styles.textSelect} ${styles.booksText}`}
+            onClick={() => {
+              setShowBookModal(true);
+            }}
+          >
+            <Image
+              className={styles.icons}
+              src="/images/book.svg"
+              alt="books"
+              width="28"
+              height="23"
+            />
+            4
+          </a>
         </div>
 
         <div className={styles.sidenavList}>
@@ -64,6 +59,9 @@ function QuestionsComponent() {
         </div>
       </aside>
       <SingleQuestion />
+      <Modal onClose={() => setShowBookModal(false)} show={showBookModal}>
+        <BookModal />
+      </Modal>
     </div>
   );
 }
