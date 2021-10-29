@@ -8,6 +8,10 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
 }
+.card:hover {
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 16px 0px;
+}
 .cardContent {
   padding: 15px;
   width: 100%;

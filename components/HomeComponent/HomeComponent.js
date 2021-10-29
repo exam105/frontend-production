@@ -5,6 +5,7 @@ import styles from "./HomeComponent.module.scss";
 import { useDispatch } from "react-redux";
 import { getSearchPapers } from "../../services/searchSlice";
 import { normalizeDate } from "@lib/normalizeDate";
+import { subjects, systems } from "@lib/papersData";
 
 function HomeComponent() {
   const dispatch = useDispatch();
@@ -14,15 +15,15 @@ function HomeComponent() {
   const [isDateRange, setIsDateRange] = useState(false);
   const [boards, setBoards] = useState([]);
 
-  const [systems] = useState([
-    { key: 0, value: "GCSE", text: "system", label: "GCSE" },
-    { key: 1, value: "IGCSE", text: "system", label: "IGCSE" },
-    { key: 2, value: "AS", text: "system", label: "AS" },
-    { key: 3, value: "A Level", text: "system", label: "A Level" },
-    { key: 4, value: "O Level", text: "system", label: "O Level" },
-    { key: 5, value: "Pre U", text: "system", label: "Pre U" },
-    { key: 6, value: "IB", text: "system", label: "IB" },
-  ]);
+  // const [systems] = useState([
+  //   { key: 0, value: "GCSE", text: "system", label: "GCSE" },
+  //   { key: 1, value: "IGCSE", text: "system", label: "IGCSE" },
+  //   { key: 2, value: "AS", text: "system", label: "AS" },
+  //   { key: 3, value: "A Level", text: "system", label: "A Level" },
+  //   { key: 4, value: "O Level", text: "system", label: "O Level" },
+  //   { key: 5, value: "Pre U", text: "system", label: "Pre U" },
+  //   { key: 6, value: "IB", text: "system", label: "IB" },
+  // ]);
   const [paper, setPaper] = useState({
     subject: "",
     system: "",
@@ -32,12 +33,12 @@ function HomeComponent() {
     to_date: "",
   });
 
-  const [subjects] = useState([
-    { key: 0, value: "Math", text: "subject", label: "Math" },
-    { key: 1, value: "Physics", text: "subject", label: "Physics" },
-    { key: 2, value: "Biology", text: "subject", label: "Biology" },
-    { key: 3, value: "Chemistry", text: "subject", label: "Chemistry" },
-  ]);
+  // const [subjects] = useState([
+  //   { key: 0, value: "Math", text: "subject", label: "Math" },
+  //   { key: 1, value: "Physics", text: "subject", label: "Physics" },
+  //   { key: 2, value: "Biology", text: "subject", label: "Biology" },
+  //   { key: 3, value: "Chemistry", text: "subject", label: "Chemistry" },
+  // ]);
   const change_input = (e) => {
     if (e[0].text === "system") {
       if (e[0].value === "GCSE") {
@@ -83,19 +84,27 @@ function HomeComponent() {
   };
 
   const change_start_month_and_year = (e) => {
+    e.preventDefault();
     const newDate = normalizeDate(e.target.value);
     setStartDate(newDate);
-    setPaper({ ...paper, from_date: startDate });
+    setPaper({ ...paper, from_date: newDate });
   };
   const change_end_month_and_year = (e) => {
+    e.preventDefault();
     const newDate = normalizeDate(e.target.value);
     setEndDate(newDate);
-    setPaper({ ...paper, to_date: endDate });
+    setPaper({ ...paper, to_date: newDate });
   };
   const change_month_and_year = (e) => {
+    e.preventDefault();
     const newDate = normalizeDate(e.target.value);
     setDate(newDate);
-    setPaper({ ...paper, date: date });
+    setPaper({ ...paper, date: newDate });
+  };
+  const onSubmit = (e) => {
+    paper["choice"] = isDateRange ? "daterange" : "date";
+    dispatch(getSearchPapers(paper));
+    delete paper["choice"];
   };
 
   return (
@@ -247,25 +256,7 @@ function HomeComponent() {
         <div className={styles.searchButton}>
           <div className={styles.loginBtn}>
             <Link href="/search">
-              <a
-                onClick={() => {
-                  paper["choice"] = isDateRange ? "daterange" : "date";
-                  // removing the slashes from within dates
-                  if (isDateRange) {
-                    let newFromDate = paper.from_date?.replace(/\\/g, "");
-                    paper.from_date = newFromDate;
-                    let newToDate = paper.to_date?.replace(/\\/g, "");
-                    paper.to_date = newToDate;
-                  } else {
-                    let newDate = paper.date?.replace(/\\/g, "");
-                    paper.date = new Date(newDate);
-                    console.log("haza paper: ", newDate, paper);
-                  }
-                  dispatch(getSearchPapers(paper));
-                  delete paper["choice"];
-                }}
-                className="btn-style sign"
-              >
+              <a onClick={onSubmit} className="btn-style sign">
                 Search
               </a>
             </Link>

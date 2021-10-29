@@ -1,4 +1,4 @@
-import styles from "./SearchedPaperComponent.module.scss";
+import styles from "./SearchedPaperCard.module.scss";
 
 function SearchedPaperComponent({ paper }) {
   return (
