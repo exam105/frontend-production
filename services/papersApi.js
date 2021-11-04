@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const papersApiHeaders = {
   "Content-Type": "application/json",
-  Authorization:
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsImF1dGhvcml6ZWQiOnRydWUsImVtYWlsIjoiam9AZW1haWwuY29tIiwiZXhwIjoxNjM1NDkyNTAwLCJuYW1lIjoiam8ifQ.AhGSKeyBl4GFPAo3-2LD5YfEw_B0ong2bYaSfhaO30s",
+  // Authorization:
+  // "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6ZmFsc2UsImF1dGhvcml6ZWQiOnRydWUsImVtYWlsIjoiam9AZW1haWwuY29tIiwiZXhwIjoxNjM1NjYyOTQ1LCJuYW1lIjoiam8ifQ.1vmRCK3ZpyIVaurMsQy75E0uW7ppmcm3KnRmncZSi2w",
 };
 
 const baseUrl = API_URL;

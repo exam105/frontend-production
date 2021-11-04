@@ -1,5 +1,5 @@
-import Layout from "../components/common/Layout";
-import { SearchComponent } from "../components/SearchComponent";
+import Layout from "@components/common/Layout";
+import { SearchComponent } from "@components/SearchComponent";
 
 function SearchPage() {
   return (

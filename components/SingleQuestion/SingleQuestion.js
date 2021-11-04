@@ -2,70 +2,56 @@ import { ImageSliderModal, Modal } from "@components/common/Modals";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./SingleQuestion.module.scss";
+import { MathpixMarkdown, MathpixLoader } from "mathpix-markdown-it";
 
-function SingleQuestion() {
+function SingleQuestion({ data }) {
   const [showImageSliderModal, setShowImageSliderModal] = useState(false);
 
   return (
     <main className={styles.main}>
       <div className={styles.badgeHeader}>
-        <span className={`${styles.badge} ${styles.badgePrimary}`}>
-          established
-        </span>
-        <span className={`${styles.badge} ${styles.badgePrimary}`}>
-          Computer science
-        </span>
-        <span className={`${styles.badge} ${styles.badgePrimary}`}>
-          Lorem ipsum
-        </span>
-        <span className={`${styles.badge} ${styles.badgePrimary}`}>
-          establish
-        </span>
+        {/* map through topics in data */}
+        {data.topics.map((topic, index) => (
+          <span
+            key={index}
+            className={`${styles.badge} ${styles.badgePrimary}`}
+          >
+            {topic.topic}
+          </span>
+        ))}
       </div>
 
       <div className={styles.mainHeader}>
         <div className={styles.questionMain}>
           <div className={styles.questionHead}>
-            <p className={styles.questionText}>Question no: 1</p>
-            <p className={styles.questionMarks}>Marks 5</p>
+            <p className={styles.questionText}>Question:</p>
+            <p className={styles.questionMarks}>Marks: {data.marks}</p>
           </div>
 
           <div className={styles.question}>
-            <ul className={styles.alphaStyle}>
-              <p>
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don&apos;t look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn&apos;t anything
-                embarrassing hidden in the middle of text. There are many
-                variations of passages of Lorem Ipsum available, but the
-                majority.
-              </p>
-              <br />
-              <li>
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don&apos;t look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn&apos;t anything
-                embarrassing hidden in the middle of text.
-              </li>
-              <br />
-              <li>
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don&apos;t look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there.
-              </li>
-            </ul>
+            <MathpixLoader>
+              <MathpixMarkdown text={data.question} />
+            </MathpixLoader>
           </div>
         </div>
       </div>
 
       <div className={styles.mainOverview}>
-        <a onClick={() => setShowImageSliderModal(true)}>
+        {data.images.map((image, index) => (
+          <div
+            key={index}
+            className={styles.overviewcard}
+            onClick={() => setShowImageSliderModal(true)}
+          >
+            <Image
+              src={image.imageurl}
+              alt={image.imageurl}
+              width={200}
+              height={200}
+            />
+          </div>
+        ))}
+        {/* <a onClick={() => setShowImageSliderModal(true)}>
           <div className={styles.overviewcard}>
             <Image
               src="/images/imgone.png"
@@ -84,13 +70,13 @@ function SingleQuestion() {
               height="180"
             />
           </div>
-        </a>
+        </a> */}
       </div>
 
       <div className={styles.mainHeader}>
         <div className={styles.questionMain}>
           <div className={styles.questionHead}>
-            <p className={styles.solutionText}>Solution</p>
+            <p className={styles.solutionText}>Answer:</p>
           </div>
 
           <div className={styles.answerText}>
@@ -116,7 +102,21 @@ function SingleQuestion() {
         </div>
       </div>
       <div className={styles.mainOverview}>
-        <a onClick={() => setShowImageSliderModal(true)}>
+        {data.images.map((image, index) => (
+          <div
+            key={index}
+            className={styles.overviewcard}
+            onClick={() => setShowImageSliderModal(true)}
+          >
+            <Image
+              src={image.imageurl}
+              alt={image.imageurl}
+              width={200}
+              height={200}
+            />
+          </div>
+        ))}
+        {/* <a onClick={() => setShowImageSliderModal(true)}>
           <div className={styles.overviewcard}>
             <Image
               src="/images/imgone.png"
@@ -135,7 +135,7 @@ function SingleQuestion() {
               height="180"
             />
           </div>
-        </a>
+        </a> */}
       </div>
 
       <div className={styles.buttonHead}>

@@ -48,9 +48,11 @@ const searchSlice = createSlice({
     builder
       .addCase(getSearchPapers?.pending, (state) => {
         state.pending = true;
+        state.error = false;
       })
       .addCase(getSearchPapers?.fulfilled, (state, action) => {
         state.pending = false;
+        state.error = false;
         state.data = action.payload;
       })
       .addCase(getSearchPapers?.rejected, (state) => {
