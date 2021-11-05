@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 import { SingleQuestion } from "@components/SingleQuestion";
 import { Modal } from "@components/common/Modals";
 import { BookModal } from "@components/common/Modals";
@@ -13,6 +14,7 @@ import { getQuestions } from "@services/questionsSlice";
 function QuestionsComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
+  const questionRef = useRef(null);
   const [showBookModal, setShowBookModal] = useState(false);
   const [questionId, setQuestionId] = useState("");
   const [paperId, setPaperId] = useState("");
@@ -35,11 +37,15 @@ function QuestionsComponent() {
 
   useEffect(() => {
     if (questionId) {
+      router.push(`/search/${paperId}/${questionId}`, undefined, {
+        shallow: true,
+      });
       dispatch(getQuestion(questionId));
     }
   }, [questionId]);
   useEffect(() => {
-    if (data.id) {
+    console.log(questionRef);
+    if (data.id && questionRef.current === null) {
       if (data.options) {
         console.log("data: ", data ? data : "");
         dispatch(getQuestions(paperId, false));
@@ -47,11 +53,9 @@ function QuestionsComponent() {
         console.log("data: ", data ? data : "");
         dispatch(getQuestions(paperId, true));
       }
+      questionRef.current = true;
     }
-    if (pending) {
-      console.log("loading...");
-    }
-  }, [data, pending]);
+  }, [data]);
   useEffect(() => {
     if (questionsData[0].id) {
       console.log("questionsData: ", questionsData ? questionsData : "");
@@ -59,21 +63,28 @@ function QuestionsComponent() {
     if (questionsPending) {
       console.log("Loading questionsList");
     }
-    console.log(router.pathname);
   }, [questionsData, questionsPending]);
+
+  const loadQuestion = (id) => {
+    setQuestionId(id);
+  };
   return (
     <div className={styles.gridContainer}>
       <aside className={styles.sidenav}>
         <div className={styles.sidenavTop}>
           <div className={styles.textBack}>
-            <Image
-              src="/images/back.svg"
-              width="70"
-              height="19"
-              className={styles.icons}
-              alt="back"
-            />{" "}
-            Back
+            <Link href="/search/" passHref>
+              <a>
+                <Image
+                  src="/images/back.svg"
+                  width="70"
+                  height="19"
+                  className={styles.icons}
+                  alt="back"
+                />{" "}
+                Back
+              </a>
+            </Link>
           </div>
           <a
             className={`${styles.textSelect} ${styles.booksText}`}
@@ -94,30 +105,33 @@ function QuestionsComponent() {
 
         <div className={styles.sidenavList}>
           {/* map through questions */}
-          {questionsData.map((question) => {
-            return (
-              <div
-                key={question.id}
-                className={`${styles.sidenavListItem} ${styles.plusIcon}`}
-              >
-                <div>{question.question}</div>
-                <div
-                  onClick={() => {
-                    let number = questionCart;
-                    number++;
-                    setQuestionCart(number);
-                  }}
-                >
-                  <Image
-                    src="/images/plusColor.svg"
-                    alt="plus"
-                    width="14"
-                    height="14"
-                  />
-                </div>
-              </div>
-            );
-          })}
+          {questionsData
+            ? questionsData.map((question) => {
+                return (
+                  <div
+                    key={question.id}
+                    className={`${styles.sidenavListItem} ${styles.plusIcon}`}
+                    onClick={() => loadQuestion(question.id)}
+                  >
+                    <div>{question.question}</div>
+                    <div
+                      onClick={() => {
+                        let number = questionCart;
+                        number++;
+                        setQuestionCart(number);
+                      }}
+                    >
+                      <Image
+                        src="/images/plusColor.svg"
+                        alt="plus"
+                        width="14"
+                        height="14"
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            : ""}
         </div>
       </aside>
       <SingleQuestion data={data} />

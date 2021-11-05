@@ -3,11 +3,7 @@ import styles from "./SearchedPaperCard.module.scss";
 
 function SearchedPaperComponent({ paper }) {
   return (
-    <Link
-      onClick={routeFn}
-      href={`/search/${paper.id}/${paper.question_hex_ids[0]}`}
-      passHref
-    >
+    <Link href={`/search/${paper.id}/${paper.question_hex_ids[0]}`} passHref>
       <div className={`${styles.gridLogos__itemm} ${styles.card}`}>
         <div className={styles.cardContent}>
           <div className={styles.cardHead}>
