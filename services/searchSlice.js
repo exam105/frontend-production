@@ -28,6 +28,8 @@ export const getSearchPapers = createAsyncThunk(
       delete paper["choice"];
       delete paper["date"];
     }
+    console.log("taxi", paper);
+
     // const p = {
     //   subject: "Math",
     //   system: "IGCSE",

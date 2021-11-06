@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Select from "react-dropdown-select";
 import styles from "./SearchComponent.module.scss";
 import { SearchedPaperCard } from "../SearchedPaperCard";
@@ -66,7 +66,7 @@ function SearchComponent() {
     }
     setPaper({ ...paper, [e[0].text]: e[0].value });
   };
-  const { data, pending } = useSelector((state) => state.papers);
+  const { data, pending, error } = useSelector((state) => state.papers);
 
   const change_start_month_and_year = (e) => {
     e.preventDefault();
@@ -236,29 +236,37 @@ function SearchComponent() {
       </div>
 
       {/* Grid */}
-
-      {pending ? (
-        "Loading..."
-      ) : data ? (
-        <div className="content-width">
-          <div className={styles.mainBox}>
-            <div className={`${styles.gridLogoss} ${styles.logos}`}>
-              {/* mapping through the data */}
-              {data
-                ? data.map((paper, i) => {
+      {/*check if data, pending, and error all are false */}
+      {data && !data[0].id && !pending && !error ? (
+        <div style={{ margin: "0px 0px 30px 30px" }}>Perform a search.</div>
+      ) : (
+        <>
+          {pending ? (
+            "Loading..."
+          ) : data ? (
+            <div className="content-width">
+              <div className={styles.mainBox}>
+                <div className={`${styles.gridLogoss} ${styles.logos}`}>
+                  {/* mapping through the data */}
+                  {data?.map((paper, i) => {
                     return <SearchedPaperCard paper={paper} key={i} />;
-                  })
-                : "We didn't find any papers matching your criteria."}
-            </div>
-            <div className={`${styles.searchButton} ${styles.buttonMargin}`}>
-              <div className={styles.loginBtn}>
-                {/* <button className="btn-style sign">Read More</button> */}
+                  })}
+                </div>
+                <div
+                  className={`${styles.searchButton} ${styles.buttonMargin}`}
+                >
+                  <div className={styles.loginBtn}>
+                    {/* <button className="btn-style sign">Read More</button> */}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        "There was some error while fetching the data. We will take notice of the problem and fix at our earliest."
+          ) : data === null ? (
+            "We didn't find any papers matching your criteria."
+          ) : (
+            "There was some error while fetching the data. We will take notice of the problem and fix at our earliest."
+          )}
+        </>
       )}
     </div>
   );

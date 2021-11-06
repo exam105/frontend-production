@@ -19,6 +19,7 @@ function QuestionsComponent() {
   const [questionId, setQuestionId] = useState("");
   const [paperId, setPaperId] = useState("");
   const [questionCart, setQuestionCart] = useState(0);
+  const [selectedQuestionId, setSelectedQuestionId] = useState("");
   // Getting individual question
   const { data, pending } = useSelector((state) => state.question);
   // Getting all questions list
@@ -59,6 +60,7 @@ function QuestionsComponent() {
   useEffect(() => {
     if (questionsData[0].id) {
       console.log("questionsData: ", questionsData ? questionsData : "");
+      setSelectedQuestionId(data.id);
     }
     if (questionsPending) {
       console.log("Loading questionsList");
@@ -111,7 +113,16 @@ function QuestionsComponent() {
                   <div
                     key={question.id}
                     className={`${styles.sidenavListItem} ${styles.plusIcon}`}
-                    onClick={() => loadQuestion(question.id)}
+                    onClick={() => {
+                      loadQuestion(question.id);
+                      setSelectedQuestionId(question.id);
+                    }}
+                    style={{
+                      backgroundColor:
+                        selectedQuestionId === question.id
+                          ? "#f5f5f5"
+                          : "transparent",
+                    }}
                   >
                     <div>{question.question}</div>
                     <div

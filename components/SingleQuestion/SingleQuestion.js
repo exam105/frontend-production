@@ -37,7 +37,7 @@ function SingleQuestion({ data }) {
           </div>
         </div>
         <p className={styles.questionText}>
-          {data.images?.length !== 0 ? "Images:" : ""}
+          {data?.images && data?.images.length > 0 ? "Images:" : ""}
         </p>
       </div>
 
@@ -152,7 +152,7 @@ function SingleQuestion({ data }) {
           </div>
         </div>
         <p className={styles.questionText}>
-          {data.images?.length !== 0 ? "Images:" : ""}
+          {data?.images && data?.images.length > 0 ? "Images:" : ""}
         </p>
       </div>
 
