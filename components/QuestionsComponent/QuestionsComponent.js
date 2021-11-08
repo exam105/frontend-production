@@ -10,6 +10,7 @@ import { getQuestion } from "@services/questionSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getQuestions } from "@services/questionsSlice";
+import { MathpixMarkdown, MathpixLoader } from "mathpix-markdown-it";
 
 function QuestionsComponent() {
   const dispatch = useDispatch();
@@ -81,14 +82,16 @@ function QuestionsComponent() {
                   src="/images/back.svg"
                   width="70"
                   height="19"
-                  className={styles.icons}
+                  // className={styles.icons}
                   alt="back"
-                />{" "}
-                Back
+                  style={{ marginTop: "10px", marginRight: "-10px" }}
+                />
               </a>
             </Link>
+            <span>Back</span>
           </div>
-          <a
+
+          <div
             className={`${styles.textSelect} ${styles.booksText}`}
             onClick={() => {
               setShowBookModal(true);
@@ -101,14 +104,14 @@ function QuestionsComponent() {
               width="28"
               height="23"
             />
-            {questionCart}
-          </a>
+            <div style={{ marginLeft: "10px" }}>{questionCart}</div>
+          </div>
         </div>
 
         <div className={styles.sidenavList}>
           {/* map through questions */}
           {questionsData
-            ? questionsData.map((question) => {
+            ? questionsData.map((question, i) => {
                 return (
                   <div
                     key={question.id}
@@ -124,7 +127,12 @@ function QuestionsComponent() {
                           : "transparent",
                     }}
                   >
-                    <div>{question.question}</div>
+                    {/* <div>
+                      <MathpixLoader>
+                        <MathpixMarkdown text={question.question} />
+                      </MathpixLoader>
+                    </div> */}
+                    <div>Question no: {i + 1}</div>
                     <div
                       onClick={() => {
                         let number = questionCart;
