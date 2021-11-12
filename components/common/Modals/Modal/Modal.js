@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import styles from "./Modal.module.scss";
+import styles from "./Modal.module.css";
 import Image from "next/image";
 
 // Create Document Component

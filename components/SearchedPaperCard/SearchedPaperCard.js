@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./SearchedPaperCard.module.scss";
+import styles from "./SearchedPaperCard.module.css";
 
 function SearchedPaperComponent({ paper }) {
   return (

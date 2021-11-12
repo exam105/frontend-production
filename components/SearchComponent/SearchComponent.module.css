@@ -5,7 +5,7 @@
   flex-direction: column;
   text-align: center;
 }
-// The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles
+/* The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles */
 .select {
   width: 323px !important;
   height: 45px !important;
@@ -73,6 +73,23 @@
 }
 .buttonMargin {
   margin-bottom: 50px;
+}
+.appear {
+  animation: pulse 0.2s ease-in;
+}
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 /* Hide the browser's default radio button */
 .radioButton input {

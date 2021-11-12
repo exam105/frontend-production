@@ -40,3 +40,31 @@
   position: relative !important;
   height: unset !important;
 }
+.buttonHead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+.buttonBack {
+  display: flex;
+  color: #92929e;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.backFooter {
+  margin-right: 10px;
+}
+
+.nextFooter {
+  margin-left: 10px;
+}

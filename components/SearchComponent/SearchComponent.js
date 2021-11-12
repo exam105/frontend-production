@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Select from "react-dropdown-select";
-import styles from "./SearchComponent.module.scss";
+import styles from "./SearchComponent.module.css";
 import { SearchedPaperCard } from "../SearchedPaperCard";
 import { useSelector } from "react-redux";
 import { subjects, systems } from "@lib/papersData";
 import { normalizeDate } from "@lib/normalizeDate";
 import { useDispatch } from "react-redux";
 import { getSearchPapers } from "../../services/searchSlice";
+import Loader from "@components/common/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SearchComponent() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState("");
@@ -23,9 +28,17 @@ function SearchComponent() {
     from_date: "",
     to_date: "",
   });
+  // useEffect(() => {
+  //   console.log("data:", router.query, "router: ", router);
+  //   let paper = router.query;
+  //   dispatch(getSearchPapers(paper));
+  // }, []);
   const change_input = (e) => {
     if (e[0].text === "system") {
+      setBoards([{ key: 0, value: "", text: "", label: "" }]);
+
       if (e[0].value === "GCSE") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
         setBoards([
           { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
           { key: 1, value: "AQA", text: "board", label: "AQA" },
@@ -33,11 +46,13 @@ function SearchComponent() {
           { key: 3, value: "CCEA", text: "board", label: "CCEA" },
         ]);
       } else if (e[0].value === "IGCSE") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
         setBoards([
           { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
           { key: 7, value: "CIE", text: "board", label: "CIE" },
         ]);
       } else if (e[0].value === "AS" || e[0].value === "A Level") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
         setBoards([
           { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
           { key: 5, value: "AQA", text: "board", label: "AQA" },
@@ -51,8 +66,11 @@ function SearchComponent() {
           },
         ]);
       } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
         setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
       } else if (e[0].value === "IB") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+
         setBoards([
           {
             key: 9,
@@ -88,9 +106,41 @@ function SearchComponent() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    paper["choice"] = isDateRange ? "daterange" : "date";
-    dispatch(getSearchPapers(paper));
-    delete paper["choice"];
+
+    if (isDateRange) {
+      if (
+        paper.subject &&
+        paper.system &&
+        paper.board &&
+        paper.to_date &&
+        (paper.from_date || paper.date)
+      ) {
+        if (!paper.from_date) {
+          paper.from_date = paper.date;
+        }
+        paper["choice"] = isDateRange ? "daterange" : "date";
+        dispatch(getSearchPapers(paper));
+        delete paper["choice"];
+      } else {
+        toast.error("Please fill in all the required fields.");
+      }
+    } else {
+      if (
+        paper.subject &&
+        paper.system &&
+        paper.board &&
+        (paper.date || paper.from_date)
+      ) {
+        if (!paper.date) {
+          paper.date = paper.from_date;
+        }
+        paper["choice"] = isDateRange ? "daterange" : "date";
+        dispatch(getSearchPapers(paper));
+        delete paper["choice"];
+      } else {
+        toast.error("Please fill in all the required fields.");
+      }
+    }
   };
   return (
     <div>
@@ -109,6 +159,7 @@ function SearchComponent() {
               />
               <Select
                 className={styles.select}
+                values={boards}
                 options={boards}
                 placeholder="Board"
                 onChange={change_input}
@@ -160,7 +211,10 @@ function SearchComponent() {
                   <div className={`${styles.radioHead}`}>
                     <div className={styles.radioBtn}>
                       <label className={styles.radioButton}>
-                        Date {isDateRange && "(Start Date)"}
+                        Date{" "}
+                        {isDateRange && (
+                          <span className={styles.appear}>(Start Date)</span>
+                        )}
                         <input
                           type="radio"
                           name="radio"
@@ -195,7 +249,10 @@ function SearchComponent() {
                   <div className={`${styles.radioHead}`}>
                     <div className={styles.radioBtn}>
                       <label className={styles.radioButton}>
-                        Date Range {isDateRange && "(End Date)"}
+                        Date Range{" "}
+                        {isDateRange && (
+                          <span className={styles.appear}>(End Date)</span>
+                        )}
                         <input
                           type="radio"
                           name="radio"
@@ -212,7 +269,7 @@ function SearchComponent() {
                     </div>
                     {isDateRange && (
                       <input
-                        className={styles.inputDate}
+                        className={`${styles.inputDate} ${styles.appear}`}
                         type="date"
                         name="endDate"
                         id="endDate"
@@ -234,7 +291,31 @@ function SearchComponent() {
           </div>
         </div>
       </div>
-
+      <div style={{ margin: "0px 5px 10px 10px" }}>
+        {router.query.subject && (
+          <>
+            Showing results for:{" "}
+            <b>
+              {router.query.system}, {router.query.board},{" "}
+              {router.query.subject},{" "}
+              {router.query.date && (
+                <>
+                  {router.query.date.substr(4, 3)}/ {/*Month*/}
+                  {router.query.date.substr(11, 4)} {/*Year*/}
+                </>
+              )}
+              {router.query.from_date && (
+                <>
+                  {router.query.from_date.substr(4, 3)}/{" "}
+                  {router.query.from_date.substr(11, 4)} -{" "}
+                  {router.query.to_date.substr(4, 3)}/{" "}
+                  {router.query.to_date.substr(11, 4)}
+                </>
+              )}{" "}
+            </b>
+          </>
+        )}
+      </div>
       {/* Grid */}
       {/*check if data, pending, and error all are false */}
       {data && !data[0].id && !pending && !error ? (
@@ -242,7 +323,7 @@ function SearchComponent() {
       ) : (
         <>
           {pending ? (
-            "Loading..."
+            <Loader fontSize="15px" />
           ) : data ? (
             <div className="content-width">
               <div className={styles.mainBox}>
@@ -268,6 +349,7 @@ function SearchComponent() {
           )}
         </>
       )}
+      <ToastContainer />
     </div>
   );
 }

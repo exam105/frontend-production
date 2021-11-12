@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import styles from "./BookModal.module.scss";
+import styles from "./BookModal.module.css";
 
 function BookModal() {
   return (

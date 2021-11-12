@@ -30,7 +30,6 @@
 }
 
 .searchContainer {
-  margin: 0 auto;
   margin-left: 30px;
 }
 .searchIcon {
@@ -55,7 +54,23 @@
   display: flex;
   justify-content: flex-start;
 }
-
+.appear {
+  animation: pulse 0.2s ease-in;
+}
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 /* radio-button */
 
 .radioButton {
@@ -129,7 +144,7 @@
   border-radius: 50%;
   background: white;
 }
-// The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles
+/* The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles */
 .select {
   width: 380px !important;
   height: 45px !important;
@@ -139,11 +154,11 @@
   border-radius: 5px !important;
 }
 .inputDate {
-  // border: 1px solid #c4c4c4;
+  /* border: 1px solid #c4c4c4; */
   height: 45px;
   width: 380px !important;
   border-radius: 5px;
-  // background-color: #fff;
+  /* background-color: #fff; */
   padding: 3px 5px;
   /* width: 190px; */
 }

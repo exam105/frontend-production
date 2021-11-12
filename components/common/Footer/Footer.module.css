@@ -1,11 +1,12 @@
 .footerBorder {
   border-top: 1px solid #92929e;
+  min-height: 125px !important;
 }
 .footerContainer {
   margin-top: 50px;
   margin-bottom: 50px;
+  height: 125px !important;
 }
-
 .footerLinks {
   margin-top: 5px;
   width: 15%;

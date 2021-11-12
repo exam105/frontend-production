@@ -20,6 +20,7 @@ export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
   async (paper) => {
     let choice = paper["choice"];
+    // delete paper["choice"];
     if (choice === "date") {
       delete paper["choice"];
       delete paper["from_date"];
@@ -28,15 +29,14 @@ export const getSearchPapers = createAsyncThunk(
       delete paper["choice"];
       delete paper["date"];
     }
-    console.log("taxi", paper);
 
-    // const p = {
-    //   subject: "Math",
-    //   system: "IGCSE",
-    //   board: "Edexcel",
-    //   from_date: "2010-02-01T00:00:00.000Z",
-    //   to_date: "2022-01-01T00:00:00.000Z",
-    // };
+    const p = {
+      subject: "Math",
+      system: "IGCSE",
+      board: "Edexcel",
+      from_date: "2010-02-01T00:00:00.000Z",
+      to_date: "2022-01-01T00:00:00.000Z",
+    };
     const response = await api.post(`/dashboard/de/search/${choice}`, paper);
     return response.data;
   }

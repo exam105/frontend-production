@@ -1,4 +1,4 @@
-import "../styles/globals.scss";
+import "../styles/globals.css";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { Provider } from "react-redux";
 import store from "../app/store";

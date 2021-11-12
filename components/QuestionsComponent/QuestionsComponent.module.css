@@ -30,9 +30,9 @@
   align-items: center;
   height: 80px;
   padding: 0px 20px;
-  a {
-    color: #585858 !important;
-  }
+}
+.sidenavTop > a {
+  color: #585858 !important;
 }
 
 .sidenavList {
@@ -118,7 +118,7 @@
 .plusIcon {
   display: flex;
   justify-content: space-between;
-  Image {
-    cursor: pointer;
-  }
+}
+.plusIcon > image {
+  cursor: pointer;
 }
