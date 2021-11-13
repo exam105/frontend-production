@@ -20,6 +20,7 @@ function SearchComponent() {
   const [date, setDate] = useState("");
   const [isDateRange, setIsDateRange] = useState(false);
   const [boards, setBoards] = useState([]);
+  const [updateUrl, setUpdateUrl] = useState(false);
   const [paper, setPaper] = useState({
     subject: "",
     system: "",
@@ -33,6 +34,22 @@ function SearchComponent() {
   //   let paper = router.query;
   //   dispatch(getSearchPapers(paper));
   // }, []);
+  useEffect(() => {
+    if (updateUrl) {
+      router.push(
+        `${
+          isDateRange
+            ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}`
+            : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}`
+        }`,
+        undefined,
+        {
+          shallow: true,
+        }
+      );
+    }
+    setUpdateUrl(false);
+  }, [updateUrl]);
   const change_input = (e) => {
     if (e[0].text === "system") {
       setBoards([{ key: 0, value: "", text: "", label: "" }]);
@@ -106,7 +123,7 @@ function SearchComponent() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-
+    setUpdateUrl(true);
     if (isDateRange) {
       if (
         paper.subject &&
