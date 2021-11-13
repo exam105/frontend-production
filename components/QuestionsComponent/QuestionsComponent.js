@@ -23,6 +23,13 @@ function QuestionsComponent() {
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
   // Getting individual question
   const { data, pending, error } = useSelector((state) => state.question);
+  const quesImages = data?.images?.filter((image) =>
+    image.imageurl.includes("ques")
+  );
+  const ansImages = data?.images?.filter((image) =>
+    image.imageurl.includes("ans")
+  );
+
   // Getting all questions list
   const {
     data: questionsData,
@@ -48,13 +55,10 @@ function QuestionsComponent() {
     }
   }, [questionId]);
   useEffect(() => {
-    console.log(questionRef);
     if (data.id && questionRef.current === null) {
       if (data.options) {
-        console.log("data: ", data ? data : "");
         dispatch(getQuestions(paperId, false));
       } else {
-        console.log("data: ", data ? data : "");
         dispatch(getQuestions(paperId, true));
       }
       questionRef.current = true;
@@ -62,7 +66,6 @@ function QuestionsComponent() {
   }, [data]);
   useEffect(() => {
     if (questionsData[0].id) {
-      console.log("questionsData: ", questionsData ? questionsData : "");
       setSelectedQuestionId(data.id);
     }
   }, [questionsData, questionsPending]);
@@ -96,7 +99,7 @@ function QuestionsComponent() {
                   width="70"
                   height="19"
                   alt="back"
-                  style={{ marginTop: "10px", marginRight: "-10px" }}
+                  className={styles.back}
                 />
               </a>
             </Link>
@@ -184,6 +187,8 @@ function QuestionsComponent() {
           data={data}
           pending={pending}
           error={error}
+          quesImages={quesImages}
+          ansImages={ansImages}
         />
       )}
 

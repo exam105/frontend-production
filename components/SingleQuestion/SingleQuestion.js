@@ -11,10 +11,12 @@ function SingleQuestion({
   loadNextQuestion,
   pending,
   error,
+  quesImages,
+  ansImages,
 }) {
   const [showImageSliderModal, setShowImageSliderModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const [ansImagesSlider, setAnsImagesSlider] = useState(false);
   return (
     <main className={styles.main}>
       {pending && <Loader />}
@@ -49,29 +51,32 @@ function SingleQuestion({
               </div>
             </div>
             <p className={styles.questionText}>
-              {data?.images && data?.images.length > 0 ? "Images:" : ""}
+              {quesImages && quesImages.length > 0 ? "Images:" : ""}
             </p>
           </div>
 
           <div className={styles.mainOverview}>
-            {data.images?.length !== 0
-              ? data.images?.map((image, index) => (
-                  <div
-                    key={index}
-                    className={styles.overviewcard}
-                    onClick={() => {
-                      setCurrentImageIndex(index);
-                      setShowImageSliderModal(true);
-                    }}
-                  >
-                    <Image
-                      src={image.imageurl}
-                      alt={image.imageurl}
-                      width={200}
-                      height={200}
-                    />
-                  </div>
-                ))
+            {quesImages?.length !== 0
+              ? quesImages?.map((image, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={styles.overviewcard}
+                      onClick={() => {
+                        setAnsImagesSlider(false);
+                        setCurrentImageIndex(index);
+                        setShowImageSliderModal(true);
+                      }}
+                    >
+                      <Image
+                        src={image.imageurl}
+                        alt={image.imageurl}
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                  );
+                })
               : ""}
             {/* <a onClick={() => setShowImageSliderModal(true)}>
           <div className={styles.overviewcard}>
@@ -151,29 +156,32 @@ function SingleQuestion({
               </div>
             </div>
             <p className={styles.questionText}>
-              {data?.images && data?.images.length > 0 ? "Images:" : ""}
+              {ansImages && ansImages.length > 0 ? "Images:" : ""}
             </p>
           </div>
 
           <div className={styles.mainOverview}>
-            {data.images?.length !== 0
-              ? data.images?.map((image, index) => (
-                  <div
-                    key={index}
-                    className={styles.overviewcard}
-                    onClick={() => {
-                      setCurrentImageIndex(index);
-                      setShowImageSliderModal(true);
-                    }}
-                  >
-                    <Image
-                      src={image.imageurl}
-                      alt={image.imageurl}
-                      width={200}
-                      height={200}
-                    />
-                  </div>
-                ))
+            {ansImages?.length !== 0
+              ? ansImages?.map((image, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={styles.overviewcard}
+                      onClick={() => {
+                        setAnsImagesSlider(true);
+                        setCurrentImageIndex(index);
+                        setShowImageSliderModal(true);
+                      }}
+                    >
+                      <Image
+                        src={image.imageurl}
+                        alt={image.imageurl}
+                        width={200}
+                        height={200}
+                      />
+                    </div>
+                  );
+                })
               : ""}
             {/* <a onClick={() => setShowImageSliderModal(true)}>
                 <div className={styles.overviewcard}>
@@ -228,7 +236,7 @@ function SingleQuestion({
         show={showImageSliderModal}
       >
         <ImageSliderModal
-          data={data.images}
+          data={ansImagesSlider ? ansImages : quesImages}
           currentImageIndex={currentImageIndex}
         />
       </Modal>

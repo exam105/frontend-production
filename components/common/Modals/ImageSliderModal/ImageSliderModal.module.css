@@ -30,6 +30,7 @@
 }
 .image {
   width: 100%;
+  /* position: unset !important; */
 }
 .image > div {
   position: unset !important;
