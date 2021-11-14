@@ -308,8 +308,8 @@ function SearchComponent() {
           </div>
         </div>
       </div>
-      <div style={{ margin: "0px 5px 10px 10px" }}>
-        {router.query.subject && (
+      <div style={{ margin: "0px 5px 10px 30px" }}>
+        {router.query.subject && data && data[0].id && !pending && !error ? (
           <>
             Showing results for:{" "}
             <b>
@@ -331,6 +331,8 @@ function SearchComponent() {
               )}{" "}
             </b>
           </>
+        ) : (
+          ""
         )}
       </div>
       {/* Grid */}
@@ -341,7 +343,7 @@ function SearchComponent() {
         <>
           {pending ? (
             <Loader fontSize="15px" />
-          ) : data ? (
+          ) : data[0].id ? (
             <div className="content-width">
               <div className={styles.mainBox}>
                 <div className={`${styles.gridLogoss} ${styles.logos}`}>
@@ -360,9 +362,14 @@ function SearchComponent() {
               </div>
             </div>
           ) : data === null ? (
-            "We didn't find any papers matching your criteria."
+            <div style={{ margin: "0px 0px 30px 30px" }}>
+              We didn&sbquo;t find any papers matching your criteria.
+            </div>
           ) : (
-            "There was some error while fetching the data. We will take notice of the problem and fix at our earliest."
+            <div style={{ margin: "0px 0px 30px 30px" }}>
+              There was some error while fetching the data. We will take notice
+              of the problem and fix at our earliest.
+            </div>
           )}
         </>
       )}
