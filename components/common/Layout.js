@@ -11,7 +11,7 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      <div>{children}</div>
+      <div style={{ height: "100vh" }}>{children}</div>
       <Footer />
     </div>
   );
