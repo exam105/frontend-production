@@ -12,11 +12,17 @@ import "react-toastify/dist/ReactToastify.css";
 function HomeComponent() {
   const dispatch = useDispatch();
   // const choiceRef = useRef(null);
+  // const [choice, setChoice] = useState("date");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState("");
   const [isDateRange, setIsDateRange] = useState(false);
-  // const [choice, setChoice] = useState("date");
+  // redding the borders of fields if there is a missing field
+  const [redSystem, setRedSystem] = useState(false);
+  const [redSubject, setRedSubject] = useState(false);
+  const [redBoard, setRedBoard] = useState(false);
+  const [redStartDate, setRedStartDate] = useState(false);
+  const [redEndDate, setRedEndDate] = useState(false);
   const [boards, setBoards] = useState([]);
   const [paper, setPaper] = useState({
     subject: "",
@@ -34,69 +40,81 @@ function HomeComponent() {
   //   }
   // }, [isDateRange]);
   const change_input = (e) => {
-    if (e[0].text === "system") {
-      setBoards([{ key: 0, value: "", text: "", label: "" }]);
-      if (e[0].value === "GCSE") {
-        setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        setBoards([
-          { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-          { key: 1, value: "AQA", text: "board", label: "AQA" },
-          { key: 2, value: "OCR", text: "board", label: "OCR" },
-          { key: 3, value: "CCEA", text: "board", label: "CCEA" },
-        ]);
-      } else if (e[0].value === "IGCSE") {
-        setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        setBoards([
-          { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-          { key: 7, value: "CIE", text: "board", label: "CIE" },
-        ]);
-      } else if (e[0].value === "AS" || e[0].value === "A Level") {
-        setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        setBoards([
-          { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
-          { key: 5, value: "AQA", text: "board", label: "AQA" },
-          { key: 6, value: "OCR", text: "board", label: "OCR" },
-          { key: 7, value: "CIE", text: "board", label: "CIE" },
-          {
-            key: 8,
-            value: "Edexcel IAL",
-            text: "board",
-            label: "Edexcel IAL",
-          },
-        ]);
-      } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
-        setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-      } else if (e[0].value === "IB") {
-        setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        setBoards([
-          {
-            key: 9,
-            value: "No Board",
-            text: "board",
-            label: "No Board",
-            status: "disable",
-          },
-        ]);
+    if (e[0] !== undefined) {
+      if (e[0].text === "subject") {
+        setRedSubject(false);
       }
+      if (e[0].text === "board") {
+        setRedBoard(false);
+      }
+      if (e[0].text === "system") {
+        setRedSystem(false);
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        if (e[0].value === "GCSE") {
+          setBoards([{ key: 0, value: "", text: "", label: "" }]);
+          setBoards([
+            { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+            { key: 1, value: "AQA", text: "board", label: "AQA" },
+            { key: 2, value: "OCR", text: "board", label: "OCR" },
+            { key: 3, value: "CCEA", text: "board", label: "CCEA" },
+          ]);
+        } else if (e[0].value === "IGCSE") {
+          setBoards([{ key: 0, value: "", text: "", label: "" }]);
+          setBoards([
+            { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+            { key: 7, value: "CIE", text: "board", label: "CIE" },
+          ]);
+        } else if (e[0].value === "AS" || e[0].value === "A Level") {
+          setBoards([{ key: 0, value: "", text: "", label: "" }]);
+          setBoards([
+            { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
+            { key: 5, value: "AQA", text: "board", label: "AQA" },
+            { key: 6, value: "OCR", text: "board", label: "OCR" },
+            { key: 7, value: "CIE", text: "board", label: "CIE" },
+            {
+              key: 8,
+              value: "Edexcel IAL",
+              text: "board",
+              label: "Edexcel IAL",
+            },
+          ]);
+        } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+          setBoards([{ key: 0, value: "", text: "", label: "" }]);
+          setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
+        } else if (e[0].value === "IB") {
+          setBoards([{ key: 0, value: "", text: "", label: "" }]);
+          setBoards([
+            {
+              key: 9,
+              value: "No Board",
+              text: "board",
+              label: "No Board",
+              status: "disable",
+            },
+          ]);
+        }
+      }
+      setPaper({ ...paper, [e[0].text]: e[0].value });
     }
-    setPaper({ ...paper, [e[0].text]: e[0].value });
   };
 
   const change_start_month_and_year = (e) => {
     e.preventDefault();
+    setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
     setStartDate(newDate);
     setPaper({ ...paper, from_date: newDate });
   };
   const change_end_month_and_year = (e) => {
     e.preventDefault();
+    setRedEndDate(false);
     const newDate = normalizeDate(e.target.value);
     setEndDate(newDate);
     setPaper({ ...paper, to_date: newDate });
   };
   const change_month_and_year = (e) => {
     e.preventDefault();
+    setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
     setDate(newDate);
     setPaper({ ...paper, date: newDate });
@@ -121,7 +139,22 @@ function HomeComponent() {
         delete paper["choice"];
       } else {
         e.preventDefault();
-        toast.error("Please fill in all the required fields.");
+        if (!paper.subject) {
+          setRedSubject(true);
+        }
+        if (!paper.system) {
+          setRedSystem(true);
+        }
+        if (!paper.board) {
+          setRedBoard(true);
+        }
+        if (!paper.to_date) {
+          setRedEndDate(true);
+        }
+        if (!paper.from_date && !paper.date) {
+          setRedStartDate(true);
+        }
+        toast.error("Please fill in all the missing fields.");
       }
     } else {
       if (
@@ -141,6 +174,18 @@ function HomeComponent() {
         delete paper["choice"];
       } else {
         e.preventDefault();
+        if (!paper.subject) {
+          setRedSubject(true);
+        }
+        if (!paper.system) {
+          setRedSystem(true);
+        }
+        if (!paper.board) {
+          setRedBoard(true);
+        }
+        if (!paper.from_date && !paper.date) {
+          setRedStartDate(true);
+        }
         toast.error("Please fill in all the required fields.");
       }
     }
@@ -177,6 +222,7 @@ function HomeComponent() {
               placeholder="System"
               onChange={change_input}
               required
+              style={{ borderColor: redSystem ? "red" : "" }}
             />
             <Select
               className={styles.select}
@@ -185,6 +231,7 @@ function HomeComponent() {
               placeholder="Board"
               onChange={change_input}
               required
+              style={{ borderColor: redBoard ? "red" : "" }}
             />
             {/* <form className={styles.searchContainer}>
               <input type="text" id="home-search-bar" placeholder="Board" />
@@ -217,6 +264,7 @@ function HomeComponent() {
               placeholder="Subject"
               onChange={change_input}
               required
+              style={{ borderColor: redSubject ? "red" : "" }}
             />
           </div>
 
@@ -257,6 +305,9 @@ function HomeComponent() {
                       ? change_start_month_and_year
                       : change_month_and_year
                   }
+                  min="2010-01-01"
+                  max="2023-12-28"
+                  style={{ borderColor: redStartDate ? "red" : "" }}
                 />
               </div>
             </div>
@@ -293,6 +344,9 @@ function HomeComponent() {
                     id="endDate"
                     required
                     onChange={change_end_month_and_year}
+                    min="2010-01-01"
+                    max="2023-12-28"
+                    style={{ borderColor: redEndDate ? "red" : "" }}
                   />
                 )}
               </div>

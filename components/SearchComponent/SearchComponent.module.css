@@ -172,6 +172,13 @@
   padding: 3px 5px;
   width: 190px;
 }
+.inputDate:focus {
+  outline: none;
+}
+.inputDate:hover {
+  border: 1px solid #268dec;
+}
+
 .gridLogoss {
   display: flex;
   flex-wrap: wrap;

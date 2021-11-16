@@ -154,13 +154,19 @@
   border-radius: 5px !important;
 }
 .inputDate {
-  /* border: 1px solid #c4c4c4; */
+  border: 1px solid #c4c4c4;
   height: 45px;
   width: 380px !important;
   border-radius: 5px;
   /* background-color: #fff; */
   padding: 3px 5px;
   /* width: 190px; */
+}
+.inputDate:focus {
+  outline: none;
+}
+.inputDate:hover {
+  border: 1px solid #268dec;
 }
 .searchButton {
   display: flex;
