@@ -37,6 +37,12 @@ function QuestionsComponent() {
     error: questionsError,
   } = useSelector((state) => state.questions);
 
+  // Resetting qeustionRef in order to get questions list on initial render
+  useEffect(() => {
+    questionRef.current = false;
+    console.log("i got trigger", questionRef.current);
+  }, []);
+
   useEffect(() => {
     let url = window.location.pathname;
     url = url?.split("search").pop();
@@ -55,7 +61,10 @@ function QuestionsComponent() {
     }
   }, [questionId]);
   useEffect(() => {
-    if (data.id && questionRef.current === null) {
+    if (
+      data.id &&
+      (questionRef.current === null || questionRef.current === false)
+    ) {
       if (data.options) {
         dispatch(getQuestions(paperId, false));
       } else {
@@ -63,7 +72,9 @@ function QuestionsComponent() {
       }
       questionRef.current = true;
     }
+    console.log(questionRef.current);
   }, [data]);
+
   useEffect(() => {
     if (questionsData[0].id) {
       setSelectedQuestionId(data.id);
