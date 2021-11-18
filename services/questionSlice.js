@@ -22,10 +22,14 @@ export const getQuestion = createAsyncThunk(
   }
 );
 
-const questionSlice = createSlice({
+export const questionSlice = createSlice({
   name: "question",
   initialState,
-  reducers: {},
+  reducers: {
+    resetQuestion: (state) => {
+      state.data = initialState.data;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getQuestion?.pending, (state) => {
@@ -43,4 +47,5 @@ const questionSlice = createSlice({
       });
   },
 });
+export const { resetQuestion } = questionSlice.actions;
 export default questionSlice.reducer;

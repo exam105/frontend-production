@@ -1,10 +1,22 @@
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { resetQuestion } from "@services/questionSlice";
+import { resetQuestions } from "@services/questionsSlice";
 import styles from "./SearchedPaperCard.module.css";
 
 function SearchedPaperComponent({ paper }) {
+  const dispatch = useDispatch();
+  const resetData = () => {
+    dispatch(resetQuestion());
+    dispatch(resetQuestions());
+  };
+
   return (
     <Link href={`/search/${paper.id}/${paper.question_hex_ids[0]}`} passHref>
-      <div className={`${styles.gridLogos__itemm} ${styles.card}`}>
+      <div
+        onClick={() => resetData()}
+        className={`${styles.gridLogos__itemm} ${styles.card}`}
+      >
         <div className={styles.cardContent}>
           <div className={styles.cardHead}>
             <div className={styles.blueColor}>

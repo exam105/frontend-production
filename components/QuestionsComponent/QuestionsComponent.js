@@ -30,20 +30,13 @@ function QuestionsComponent() {
     image.imageurl.includes("ans")
   );
 
-  // Getting all questions list
-  const {
-    data: questionsData,
-    pending: questionsPending,
-    error: questionsError,
-  } = useSelector((state) => state.questions);
+  const { questionsData, questionsPending, questionsError } = useSelector(
+    (state) => state.questions
+  );
 
-  // Resetting qeustionRef in order to get questions list on initial render
   useEffect(() => {
+    // Resetting qeustionRef in order to get questions list on initial render
     questionRef.current = false;
-    console.log("i got trigger", questionRef.current);
-  }, []);
-
-  useEffect(() => {
     let url = window.location.pathname;
     url = url?.split("search").pop();
     setQuestionId(url?.split("/").pop());
@@ -72,14 +65,13 @@ function QuestionsComponent() {
       }
       questionRef.current = true;
     }
-    console.log(questionRef.current);
   }, [data]);
 
   useEffect(() => {
     if (questionsData[0].id) {
       setSelectedQuestionId(data.id);
     }
-  }, [questionsData, questionsPending]);
+  }, [questionsData]);
 
   const loadQuestion = (id) => {
     setQuestionId(id);
