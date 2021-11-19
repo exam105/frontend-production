@@ -37,9 +37,10 @@
 }
 .imageSize {
   object-fit: contain;
-  width: 100% !important;
+  width: 200px !important;
+  height: 300px !important;
   position: relative !important;
-  height: unset !important;
+  /* height: unset !important; */
 }
 .buttonHead {
   display: flex;

@@ -30,14 +30,13 @@ function QuestionsComponent() {
     image.imageurl.includes("ans")
   );
 
-  // Getting all questions list
-  const {
-    data: questionsData,
-    pending: questionsPending,
-    error: questionsError,
-  } = useSelector((state) => state.questions);
+  const { questionsData, questionsPending, questionsError } = useSelector(
+    (state) => state.questions
+  );
 
   useEffect(() => {
+    // Resetting qeustionRef in order to get questions list on initial render
+    questionRef.current = false;
     let url = window.location.pathname;
     url = url?.split("search").pop();
     setQuestionId(url?.split("/").pop());
@@ -55,7 +54,10 @@ function QuestionsComponent() {
     }
   }, [questionId]);
   useEffect(() => {
-    if (data.id && questionRef.current === null) {
+    if (
+      data.id &&
+      (questionRef.current === null || questionRef.current === false)
+    ) {
       if (data.options) {
         dispatch(getQuestions(paperId, false));
       } else {
@@ -64,11 +66,12 @@ function QuestionsComponent() {
       questionRef.current = true;
     }
   }, [data]);
+
   useEffect(() => {
     if (questionsData[0].id) {
       setSelectedQuestionId(data.id);
     }
-  }, [questionsData, questionsPending]);
+  }, [questionsData]);
 
   const loadQuestion = (id) => {
     setQuestionId(id);

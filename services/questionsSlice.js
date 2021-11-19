@@ -2,14 +2,14 @@ import api from "../lib/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: [
+  questionsData: [
     {
       id: "",
       question: "",
     },
   ],
-  pending: false,
-  error: false,
+  questionsPending: false,
+  questionsError: false,
 };
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions",
@@ -21,25 +21,30 @@ export const getQuestions = createAsyncThunk(
   }
 );
 
-const questionsSlice = createSlice({
+export const questionsSlice = createSlice({
   name: "questions",
   initialState,
-  reducers: {},
+  reducers: {
+    resetQuestions: (state) => {
+      state.questionsData = initialState.questionsData;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getQuestions?.pending, (state) => {
-        state.pending = true;
-        state.error = false;
+        state.questionsPending = true;
+        state.questionsError = false;
       })
       .addCase(getQuestions?.fulfilled, (state, action) => {
-        state.pending = false;
-        state.error = false;
-        state.data = action.payload;
+        state.questionsPending = false;
+        state.questionsError = false;
+        state.questionsData = action.payload;
       })
       .addCase(getQuestions?.rejected, (state) => {
-        state.pending = false;
-        state.error = true;
+        state.questionsPending = false;
+        state.questionsError = true;
       });
   },
 });
+export const { resetQuestions } = questionsSlice.actions;
 export default questionsSlice.reducer;
