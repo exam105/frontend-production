@@ -37,6 +37,7 @@ function QuestionsComponent() {
   useEffect(() => {
     // Resetting qeustionRef in order to get questions list on initial render
     questionRef.current = false;
+
     let url = window.location.pathname;
     url = url?.split("search").pop();
     setQuestionId(url?.split("/").pop());
@@ -46,6 +47,13 @@ function QuestionsComponent() {
   }, []);
 
   useEffect(() => {
+    // loading relevant question if back button of browser is pressed
+    if (router.query.questionId) {
+      setQuestionId(router.query.questionId);
+    }
+  }, [router.query.questionId]);
+
+  useEffect(() => {
     if (questionId) {
       router.push(`/search/${paperId}/${questionId}`, undefined, {
         shallow: true,
@@ -53,6 +61,7 @@ function QuestionsComponent() {
       dispatch(getQuestion(questionId));
     }
   }, [questionId]);
+
   useEffect(() => {
     if (
       data.id &&
