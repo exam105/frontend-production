@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { MEASUREMENT_ID } from "@config/index";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -10,9 +11,26 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta
+          {/* <meta
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
+          /> */}
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
           />
         </Head>
         <body>

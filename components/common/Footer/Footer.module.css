@@ -3,9 +3,9 @@
   min-height: 125px !important;
 }
 .footerContainer {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  height: 125px !important;
+  margin-top: 20px;
+  /* margin-bottom: 50px; */
+  /* height: 125px !important; */
   z-index: auto;
 }
 .footerLinks {
