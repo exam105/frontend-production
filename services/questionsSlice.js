@@ -1,5 +1,6 @@
-import api from "../lib/api";
+// import api from "../lib/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "../config/";
 
 const initialState = {
   questionsData: [
@@ -14,10 +15,23 @@ const initialState = {
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions",
   async (id, isTheory) => {
-    const response = await api.get(
-      isTheory ? `/exam/questions/theory/${id}` : `/exam/questions/${id}`
+    // const response = await api.get(
+    //   isTheory ? `/exam/questions/theory/${id}` : `/exam/questions/${id}`
+    // );
+    const res = await fetch(
+      isTheory
+        ? `${API}/exam/questions/theory/${id}`
+        : `${API}/exam/questions/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
-    return response.data;
+    const data = await res.json();
+    return data;
+    // return response.data;
   }
 );
 

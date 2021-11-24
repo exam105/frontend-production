@@ -1,5 +1,6 @@
-import api from "../lib/api";
+// import api from "../lib/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "../config/";
 
 const initialState = {
   data: [
@@ -30,15 +31,32 @@ export const getSearchPapers = createAsyncThunk(
       delete paper["date"];
     }
 
-    const p = {
-      subject: "Math",
-      system: "IGCSE",
-      board: "Edexcel",
-      from_date: "2010-02-01T00:00:00.000Z",
-      to_date: "2022-01-01T00:00:00.000Z",
-    };
-    const response = await api.post(`/dashboard/de/search/${choice}`, paper);
-    return response.data;
+    // const p = {
+    //   subject: "Math",
+    //   system: "IGCSE",
+    //   board: "Edexcel",
+    //   from_date: "2010-02-01T00:00:00.000Z",
+    //   to_date: "2022-01-01T00:00:00.000Z",
+    // };
+    // const response = await api.post(`/dashboard/de/search/${choice}`, paper);
+    // const res = await fetch(`${API_URL}/a/b/c`, {
+
+    const res = await fetch(`${API}/dashboard/de/search/${choice}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(paper),
+    });
+    const data = await res.json();
+    return data;
+    // if (res.ok) {
+    //   const data = await res.json();
+    //   console.log(data);
+    //   return data;
+    // } else {
+    //   return new Error();
+    // }
   }
 );
 
