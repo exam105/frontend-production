@@ -1,14 +1,17 @@
+import { API_URL } from "../../../config/";
 import { createProxyMiddleware } from "http-proxy-middleware";
 
 // Create proxy instance outside of request handler function to avoid unnecessary re-creation
 const apiProxy = createProxyMiddleware({
-  target: "http://dev.exam105.com:9090",
+  target: `${API_URL}`,
   changeOrigin: true,
   pathRewrite: { [`^/api/proxy`]: "" },
   secure: false,
 });
 
 export default function handler(req, res) {
+  console.log("request content: ", req);
+  //print request body
   apiProxy(req, res, (result) => {
     if (result instanceof Error) {
       throw result;
