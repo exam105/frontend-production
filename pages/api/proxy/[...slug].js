@@ -3,7 +3,7 @@ import { API_URL } from "../../../config/";
 
 // Create proxy instance outside of request handler function to avoid unnecessary re-creation
 const apiProxy = createProxyMiddleware({
-  target: { API_URL },
+  target: `${API_URL}`,
   changeOrigin: true,
   pathRewrite: { [`^/api/proxy`]: "" },
   secure: false,
