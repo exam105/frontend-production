@@ -10,8 +10,6 @@ const apiProxy = createProxyMiddleware({
 });
 
 export default function handler(req, res) {
-  console.log("request content: ", req);
-  //print request body
   apiProxy(req, res, (result) => {
     if (result instanceof Error) {
       throw result;
