@@ -11,7 +11,7 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      <div style={{ height: "inherit", height: "auto" }}>{children}</div>
+      <div style={{ height: "inherit" }}>{children}</div>
       <Footer />
     </div>
   );

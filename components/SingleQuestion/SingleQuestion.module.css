@@ -8,8 +8,9 @@
 }
 .questionText {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   color: #10101e;
+  font-style: italic;
 }
 .questionMarks {
   font-size: 14px;
@@ -34,7 +35,7 @@
   flex-direction: column;
   margin: 20px;
   padding: 20px;
-  color: slategray;
+  /* color: slategray; */
 }
 
 .answerText {
@@ -59,6 +60,7 @@
   color: #268dec;
   font-weight: 600;
   font-size: 22px;
+  font-style: italic;
 }
 
 .overviewcard {
