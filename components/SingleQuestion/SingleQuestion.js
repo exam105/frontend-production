@@ -186,14 +186,6 @@ function SingleQuestion({
                     );
                   })
                 : ""}
-              <div className={styles.overviewcard}>
-                <Image
-                  src="https://exam105.s3-ap-southeast-1.amazonaws.com/Math/igcse_edexcel_6_2011_paper2_ques_8.JPG"
-                  alt="questionone"
-                  width={100}
-                  height={100}
-                />
-              </div>
               {/* <a onClick={() => setShowImageSliderModal(true)}>
                 <div className={styles.overviewcard}>
                   <Image
