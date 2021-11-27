@@ -1,6 +1,5 @@
 import { API_URL } from "../../../config/";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { API_URL } from "../../../config/";
 
 // Create proxy instance outside of request handler function to avoid unnecessary re-creation
 const apiProxy = createProxyMiddleware({
