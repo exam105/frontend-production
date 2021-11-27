@@ -3,7 +3,7 @@ import { SearchComponent } from "@components/SearchComponent";
 
 function SearchPage() {
   return (
-    <Layout>
+    <Layout height="inherit">
       <SearchComponent />
     </Layout>
   );

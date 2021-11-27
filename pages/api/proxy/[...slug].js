@@ -1,3 +1,4 @@
+import { API_URL } from "../../../config/";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { API_URL } from "../../../config/";
 
@@ -10,8 +11,9 @@ const apiProxy = createProxyMiddleware({
 });
 
 export default function handler(req, res) {
-  console.log("request content: ", req);
-
+  console.log(
+    `Method: ${req.method} URL: ${req.url} Status Code: ${res.statusCode}`
+  );
   apiProxy(req, res, (result) => {
     if (result instanceof Error) {
       throw result;

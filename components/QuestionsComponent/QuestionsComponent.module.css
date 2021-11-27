@@ -12,7 +12,7 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   width: 300px;
   overflow-y: auto;
   transition: all 0.6s ease-in-out;
@@ -38,15 +38,33 @@
 .sidenavList {
   padding: 0;
   list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.questionNo {
+  background-color: #34a853;
+  padding: 10px 20px;
+  width: 40px;
+  margin-right: 5px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidenavListItem {
-  padding: 20px 20px;
-  color: #92929e;
+  /* padding: 20px 20px; */
+  /* color: #92929e; */
+  color: #fff;
   font-size: 14px;
-  font-weight: 400;
-  border-top: 1px solid #92929e;
-  height: 60px;
+  font-weight: 600;
+  /* border-top: 1px solid #92929e; */
+  height: 40px;
+  display: flex;
 }
 
 .sidenavListItem:hover {
@@ -122,6 +140,7 @@
 .plusIcon {
   display: flex;
   justify-content: space-between;
+  margin: 5px;
 }
 .plusIcon > image {
   cursor: pointer;

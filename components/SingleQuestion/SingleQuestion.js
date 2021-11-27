@@ -24,19 +24,21 @@ function SingleQuestion({
         {error && <div>There was some problem fetching the data.</div>}
         {!pending && !error && (
           <>
-            <div className={styles.badgeHeader}>
-              {/* map through topics in data */}
-              {data.topics
-                ? data.topics.map((topic, index) => (
-                    <span
-                      key={index}
-                      className={`${styles.badge} ${styles.badgePrimary}`}
-                    >
-                      {topic.topic}
-                    </span>
-                  ))
-                : ""}
-            </div>
+            {data.topics && (
+              <div className={styles.badgeHeader}>
+                {/* map through topics in data */}
+                {data.topics
+                  ? data.topics.map((topic, index) => (
+                      <span
+                        key={index}
+                        className={`${styles.badge} ${styles.badgePrimary}`}
+                      >
+                        {topic.topic}
+                      </span>
+                    ))
+                  : ""}
+              </div>
+            )}
 
             <div className={styles.mainHeader}>
               <div className={styles.questionMain}>
@@ -111,11 +113,9 @@ function SingleQuestion({
 
                 <div className={styles.answerText}>
                   {data.answer ? (
-                    () => (
-                      <MathpixLoader>
-                        <MathpixMarkdown text={data.answer} />
-                      </MathpixLoader>
-                    )
+                    <MathpixLoader>
+                      <MathpixMarkdown text={data.answer} />
+                    </MathpixLoader>
                   ) : (
                     <div className={styles.options}>
                       {data.options?.map((option, index) => (
@@ -179,8 +179,8 @@ function SingleQuestion({
                         <Image
                           src={image.imageurl}
                           alt={image.imageurl}
-                          width={200}
-                          height={200}
+                          width={100}
+                          height={100}
                         />
                       </div>
                     );
