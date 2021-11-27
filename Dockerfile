@@ -19,7 +19,7 @@ WORKDIR /exam105-fe
 ENV NODE_ENV production
 
 # You only need to copy next.config.js if you are NOT using the default configuration
-# COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/next.config.js ./
 COPY --from=builder /exam105-fe/public ./public
 COPY --from=builder /exam105-fe/.next ./.next
 COPY --from=builder /exam105-fe/node_modules ./node_modules

@@ -159,8 +159,8 @@ function QuestionsComponent() {
                         <MathpixMarkdown text={question.question} />
                       </MathpixLoader>
                     </div> */}
-                  <div>Question no: {i + 1}</div>
-                  <div
+                  <div className={styles.questionNo}>{i + 1}</div>
+                  {/* <div
                     onClick={() => {
                       let number = questionCart;
                       number++;
@@ -173,7 +173,7 @@ function QuestionsComponent() {
                       width="14"
                       height="14"
                     />
-                  </div>
+                  </div> */}
                 </div>
               );
             })
