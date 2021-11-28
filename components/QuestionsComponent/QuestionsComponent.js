@@ -108,14 +108,26 @@ function QuestionsComponent() {
               <a>
                 <Image
                   src="/images/back.svg"
-                  width="70"
+                  width="30"
                   height="19"
                   alt="back"
                   className={styles.back}
                 />
               </a>
             </Link>
-            <span>Back</span>
+            <Link href="/search/" passHref>
+              <a>
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    marginBottom: "1px",
+                    color: "gray",
+                  }}
+                >
+                  Back
+                </span>
+              </a>
+            </Link>
           </div>
 
           <div
@@ -147,19 +159,22 @@ function QuestionsComponent() {
                     loadQuestion(question.id);
                     setSelectedQuestionId(question.id);
                   }}
-                  style={{
-                    backgroundColor:
-                      selectedQuestionId === question.id
-                        ? "#f5f5f5"
-                        : "transparent",
-                  }}
                 >
                   {/* <div>
                       <MathpixLoader>
                         <MathpixMarkdown text={question.question} />
                       </MathpixLoader>
                     </div> */}
-                  <div className={styles.questionNo}>{i + 1}</div>
+                  <div
+                    style={{
+                      backgroundColor:
+                        selectedQuestionId === question.id ? "#34a853" : "",
+                      color: selectedQuestionId === question.id ? "#fff" : "",
+                    }}
+                    className={styles.questionNo}
+                  >
+                    {i + 1}
+                  </div>
                   {/* <div
                     onClick={() => {
                       let number = questionCart;

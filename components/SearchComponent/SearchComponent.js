@@ -362,7 +362,7 @@ function SearchComponent() {
           </div>
         </div>
       </div>
-      <div style={{ margin: "0px 5px 10px 30px" }}>
+      <div style={{ margin: "0px 5px 10px 30px", paddingBottom: "80px" }}>
         {router.query.subject && data && data[0].id && !pending && !error ? (
           <>
             Showing results for:{" "}
