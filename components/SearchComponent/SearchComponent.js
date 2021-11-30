@@ -326,6 +326,7 @@ function SearchComponent() {
                           name="radio"
                           className={`${styles.radioHead}`}
                           value="daterange"
+                          checked={isDateRange === true}
                           onChange={(e) =>
                             e.currentTarget.value === "daterange"
                               ? setIsDateRange(true)

@@ -50,6 +50,7 @@ function QuestionsComponent() {
     // loading relevant question if back button of browser is pressed
     if (router.query.questionId) {
       setQuestionId(router.query.questionId);
+      setSelectedQuestionId(router.query.questionId);
     }
   }, [router.query.questionId]);
 
@@ -65,6 +66,7 @@ function QuestionsComponent() {
   useEffect(() => {
     if (
       data.id &&
+      paperId &&
       (questionRef.current === null || questionRef.current === false)
     ) {
       if (data.options) {
@@ -77,7 +79,7 @@ function QuestionsComponent() {
   }, [data]);
 
   useEffect(() => {
-    if (questionsData[0].id) {
+    if (questionsData[0]?.id) {
       setSelectedQuestionId(data.id);
     }
   }, [questionsData]);
@@ -149,7 +151,7 @@ function QuestionsComponent() {
 
         <div className={styles.sidenavList}>
           {/* map through questions */}
-          {questionsData[0].id ? (
+          {questionsData[0]?.id ? (
             questionsData.map((question, i) => {
               return (
                 <div
