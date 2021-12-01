@@ -201,7 +201,10 @@ function QuestionsComponent() {
               No questions found
             </div>
           ) : questionsError || error ? (
-            <div className={`${styles.sidenavListItem}`}>
+            <div
+              className={`${styles.sidenavListItem}`}
+              style={{ color: "red" }}
+            >
               There was some problem.
             </div>
           ) : (
