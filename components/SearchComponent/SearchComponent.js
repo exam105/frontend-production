@@ -306,8 +306,8 @@ function SearchComponent() {
                           ? change_start_month_and_year
                           : change_month_and_year
                       }
-                      min="2010-01-01"
-                      max="2023-12-28"
+                      min="2000-01-01"
+                      max="2040-12-28"
                       style={{ borderColor: redStartDate ? "red" : "" }}
                     />
                   </div>
@@ -344,8 +344,8 @@ function SearchComponent() {
                         id="endDate"
                         required
                         onChange={change_end_month_and_year}
-                        min="2010-01-01"
-                        max="2023-12-28"
+                        min="2000-01-01"
+                        max="2040-12-28"
                         style={{ borderColor: redEndDate ? "red" : "" }}
                       />
                     )}
