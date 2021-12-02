@@ -32,8 +32,11 @@ const headers = [
     value: "geolocation=*", // allow specified policies here
   },
 ];
-
 module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ["exam105.s3-ap-southeast-1.amazonaws.com"],
+  },
   async headers() {
     return [
       {
@@ -41,11 +44,5 @@ module.exports = {
         headers,
       },
     ];
-  },
-};
-module.exports = {
-  reactStrictMode: true,
-  images: {
-    domains: ["exam105.s3-ap-southeast-1.amazonaws.com"],
   },
 };
