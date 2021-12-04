@@ -1,24 +1,32 @@
-// import api from "../lib/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../config/";
 
 const initialState = {
-  questionsData: [
-    {
+  data: {
+    paperData: {
       id: "",
-      question: "",
+      subject: "",
+      system: "",
+      board: "",
+      series: "",
+      paper: "",
+      date: "",
+      question_hex_ids: [],
     },
-  ],
+    questionsData: [
+      {
+        id: "",
+        question: "",
+      },
+    ],
+  },
   questionsPending: false,
   questionsError: false,
 };
 export const getQuestions = createAsyncThunk(
   "questions/getQuestions",
   async (id, isTheory) => {
-    // const response = await api.get(
-    //   isTheory ? `/exam/questions/theory/${id}` : `/exam/questions/${id}`
-    // );
-    const res = await fetch(
+    const questionsRes = await fetch(
       isTheory
         ? `${API}/exam/questions/theory/${id}`
         : `${API}/exam/questions/${id}`,
@@ -29,9 +37,18 @@ export const getQuestions = createAsyncThunk(
         },
       }
     );
-    const data = await res.json();
-    return data;
-    // return response.data;
+    const paperRes = await fetch(`${API}/exam/metadata/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const questionsData = await questionsRes.json();
+    const paperData = await paperRes.json();
+    return {
+      questionsData,
+      paperData,
+    };
   }
 );
 
@@ -40,7 +57,8 @@ export const questionsSlice = createSlice({
   initialState,
   reducers: {
     resetQuestions: (state) => {
-      state.questionsData = initialState.questionsData;
+      state.data.questionsData = initialState.data.questionsData;
+      state.data.paperData = initialState.data.paperData;
     },
   },
   extraReducers: (builder) => {
@@ -52,7 +70,8 @@ export const questionsSlice = createSlice({
       .addCase(getQuestions?.fulfilled, (state, action) => {
         state.questionsPending = false;
         state.questionsError = false;
-        state.questionsData = action.payload;
+        state.data.questionsData = action.payload.questionsData;
+        state.data.paperData = action.payload.paperData;
       })
       .addCase(getQuestions?.rejected, (state) => {
         state.questionsPending = false;

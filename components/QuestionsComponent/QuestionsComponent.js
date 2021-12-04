@@ -30,8 +30,11 @@ function QuestionsComponent() {
     image.imageurl.includes("ans")
   );
 
-  const { questionsData, questionsPending, questionsError } = useSelector(
+  const { questionsPending, questionsError } = useSelector(
     (state) => state.questions
+  );
+  const { questionsData, paperData } = useSelector(
+    (state) => state.questions.data
   );
 
   useEffect(() => {
@@ -62,7 +65,11 @@ function QuestionsComponent() {
       dispatch(getQuestion(questionId));
     }
   }, [questionId]);
-
+  useEffect(() => {
+    if (data.message) {
+      router.push("/500");
+    }
+  }, [data.message]);
   useEffect(() => {
     if (
       data.id &&
@@ -131,7 +138,6 @@ function QuestionsComponent() {
               </a>
             </Link>
           </div>
-
           <div
             className={`${styles.textSelect} ${styles.booksText}`}
             onClick={() => {
@@ -148,7 +154,25 @@ function QuestionsComponent() {
             <div style={{ marginLeft: "10px" }}>{questionCart}</div>
           </div>
         </div>
-
+        {paperData.id && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              {paperData.system} - {paperData.board} - {paperData.subject}
+            </div>
+            <div>
+              {new Date(paperData.date).toLocaleString("default", {
+                month: "long",
+              })}{" "}
+              / {new Date(paperData.date).getFullYear()}
+            </div>
+          </div>
+        )}
         <div className={styles.sidenavList}>
           {/* map through questions */}
           {questionsData[0]?.id ? (
@@ -207,7 +231,15 @@ function QuestionsComponent() {
             >
               There was some problem.
             </div>
+          ) : data.message ? (
+            <div
+              className={`${styles.sidenavListItem}`}
+              style={{ color: "red" }}
+            >
+              Server-side error occured.
+            </div>
           ) : (
+            // router.push("/500")
             <Loader fontSize="15px" />
           )}
         </div>

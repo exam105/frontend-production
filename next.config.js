@@ -31,6 +31,16 @@ const headers = [
     key: "Permissions-Policy",
     value: "geolocation=*", // allow specified policies here
   },
+  {
+    key: "X-DNS-Prefetch-Control",
+    value: "on",
+  },
+  // {
+  //   key: "Content-Security-Policy",
+  //   value: "default-src *; img-src *; media-src *;",
+  //   // value:
+  //   // "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'; img-src 'none'; script-src 'none'; style-src 'none'; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; plugin-types 'none'; child-src 'none'; frame-src 'none'; frame-ancestors 'none'; worker-src 'none'; manifest-src 'none';",
+  // },
 ];
 module.exports = {
   reactStrictMode: true,
