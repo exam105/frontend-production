@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -6,9 +7,12 @@ export default function Header() {
       <div className="content-width">
         {/* Header */}
         <header className={styles.headerContainer}>
-          <div className="logo">
-            <h1>logo</h1>
-          </div>
+          <Link href="/" passHref>
+            <div className="logo">
+              <h1>logo</h1>
+            </div>
+          </Link>
+
           <div className={styles.loginBtn}>
             <h3 className={styles.login}>Login</h3>
             <button className="btn-style sign">Sign up</button>

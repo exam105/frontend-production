@@ -18,12 +18,12 @@
 //   reducerPath: "papersApi",
 //   baseQuery: fetchBaseQuery({ baseUrl }),
 //   endpoints: (builder) => ({
-//     getQuestionsList: builder.query({
-//       query: (paperId) => createRequest(`/dashboard/de/questions/${paperId}`),
+//     getPaperInfo: builder.query({
+//       query: (paperId) => createRequest(`/exam/metadata/${paperId}`),
 //     }),
 //     getQuestion: builder.query({
 //       query: (questionId) => createRequest(`/exam/question/${questionId}`),
 //     }),
 //   }),
 // });
-// export const { useGetQuestionQuery, useGetQuestionsListQuery } = papersApi;
+// export const { useGetQuestionQuery, useGetPaperInfoQuery } = papersApi;

@@ -30,8 +30,11 @@ function QuestionsComponent() {
     image.imageurl.includes("ans")
   );
 
-  const { questionsData, questionsPending, questionsError } = useSelector(
+  const { questionsPending, questionsError } = useSelector(
     (state) => state.questions
+  );
+  const { questionsData, paperData } = useSelector(
+    (state) => state.questions.data
   );
 
   useEffect(() => {
@@ -50,6 +53,7 @@ function QuestionsComponent() {
     // loading relevant question if back button of browser is pressed
     if (router.query.questionId) {
       setQuestionId(router.query.questionId);
+      setSelectedQuestionId(router.query.questionId);
     }
   }, [router.query.questionId]);
 
@@ -61,10 +65,15 @@ function QuestionsComponent() {
       dispatch(getQuestion(questionId));
     }
   }, [questionId]);
-
+  useEffect(() => {
+    if (data.message) {
+      router.push("/500");
+    }
+  }, [data.message]);
   useEffect(() => {
     if (
       data.id &&
+      paperId &&
       (questionRef.current === null || questionRef.current === false)
     ) {
       if (data.options) {
@@ -77,7 +86,7 @@ function QuestionsComponent() {
   }, [data]);
 
   useEffect(() => {
-    if (questionsData[0].id) {
+    if (questionsData[0]?.id) {
       setSelectedQuestionId(data.id);
     }
   }, [questionsData]);
@@ -108,16 +117,27 @@ function QuestionsComponent() {
               <a>
                 <Image
                   src="/images/back.svg"
-                  width="70"
+                  width="30"
                   height="19"
                   alt="back"
                   className={styles.back}
                 />
               </a>
             </Link>
-            <span>Back</span>
+            <Link href="/search/" passHref>
+              <a>
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    marginBottom: "1px",
+                    color: "gray",
+                  }}
+                >
+                  Back
+                </span>
+              </a>
+            </Link>
           </div>
-
           <div
             className={`${styles.textSelect} ${styles.booksText}`}
             onClick={() => {
@@ -134,10 +154,28 @@ function QuestionsComponent() {
             <div style={{ marginLeft: "10px" }}>{questionCart}</div>
           </div>
         </div>
-
+        {paperData.id && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              {paperData.system} - {paperData.board} - {paperData.subject}
+            </div>
+            <div>
+              {new Date(paperData.date).toLocaleString("default", {
+                month: "long",
+              })}{" "}
+              / {new Date(paperData.date).getFullYear()}
+            </div>
+          </div>
+        )}
         <div className={styles.sidenavList}>
           {/* map through questions */}
-          {questionsData[0].id ? (
+          {questionsData[0]?.id ? (
             questionsData.map((question, i) => {
               return (
                 <div
@@ -147,19 +185,22 @@ function QuestionsComponent() {
                     loadQuestion(question.id);
                     setSelectedQuestionId(question.id);
                   }}
-                  style={{
-                    backgroundColor:
-                      selectedQuestionId === question.id
-                        ? "#f5f5f5"
-                        : "transparent",
-                  }}
                 >
                   {/* <div>
                       <MathpixLoader>
                         <MathpixMarkdown text={question.question} />
                       </MathpixLoader>
                     </div> */}
-                  <div className={styles.questionNo}>{i + 1}</div>
+                  <div
+                    style={{
+                      backgroundColor:
+                        selectedQuestionId === question.id ? "#34a853" : "",
+                      color: selectedQuestionId === question.id ? "#fff" : "",
+                    }}
+                    className={styles.questionNo}
+                  >
+                    {i + 1}
+                  </div>
                   {/* <div
                     onClick={() => {
                       let number = questionCart;
@@ -184,10 +225,21 @@ function QuestionsComponent() {
               No questions found
             </div>
           ) : questionsError || error ? (
-            <div className={`${styles.sidenavListItem}`}>
+            <div
+              className={`${styles.sidenavListItem}`}
+              style={{ color: "red" }}
+            >
               There was some problem.
             </div>
+          ) : data.message ? (
+            <div
+              className={`${styles.sidenavListItem}`}
+              style={{ color: "red" }}
+            >
+              Server-side error occured.
+            </div>
           ) : (
+            // router.push("/500")
             <Loader fontSize="15px" />
           )}
         </div>

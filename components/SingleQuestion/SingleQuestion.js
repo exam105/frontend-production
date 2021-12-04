@@ -106,7 +106,7 @@ function SingleQuestion({
             <div className={styles.mainHeader}>
               <div className={styles.questionMain}>
                 <div className={styles.questionHead}>
-                  <p className={styles.solutionText}>
+                  <p className={styles.questionText}>
                     {data.answer ? "Answer:" : "Options:"}
                   </p>
                 </div>

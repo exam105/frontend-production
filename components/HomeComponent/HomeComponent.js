@@ -8,6 +8,7 @@ import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { S3_USERNAME } from "../../config/";
 
 function HomeComponent() {
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ function HomeComponent() {
   //     choiceRef.current = "date";
   //   }
   // }, [isDateRange]);
+  useEffect(() => {
+    if (S3_USERNAME) {
+      console.log("S3 username is: ", S3_USERNAME);
+    }
+    console.log("S3 username is: ", S3_USERNAME);
+  }, []);
   const change_input = (e) => {
     if (e[0] !== undefined) {
       if (e[0].text === "subject") {
@@ -305,8 +312,8 @@ function HomeComponent() {
                       ? change_start_month_and_year
                       : change_month_and_year
                   }
-                  min="2010-01-01"
-                  max="2023-12-28"
+                  min="2000-01-01"
+                  max="2040-12-28"
                   style={{ borderColor: redStartDate ? "red" : "" }}
                 />
               </div>
@@ -344,8 +351,8 @@ function HomeComponent() {
                     id="endDate"
                     required
                     onChange={change_end_month_and_year}
-                    min="2010-01-01"
-                    max="2023-12-28"
+                    min="2000-01-01"
+                    max="2040-12-28"
                     style={{ borderColor: redEndDate ? "red" : "" }}
                   />
                 )}
@@ -355,17 +362,16 @@ function HomeComponent() {
         </div>
 
         <div className={styles.searchButton}>
-          <div className={styles.loginBtn}>
+          <div onClick={onSubmit} className={styles.loginBtn}>
             <Link
+              as="/search"
               href={`${
                 isDateRange
                   ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}`
                   : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}`
               }`}
             >
-              <a onClick={onSubmit} className="btn-style sign">
-                Search
-              </a>
+              <a className="btn-style sign">Search</a>
             </Link>
 
             {/* <button className="btn-style sign">Search</button> */}

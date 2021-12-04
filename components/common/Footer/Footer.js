@@ -9,7 +9,9 @@ export default function Footer() {
           <div className="desktop">
             <div className="footer-content">
               <div className="logo">
-                <h1>logo</h1>
+                <Link href="/" passHref>
+                  <h1>logo</h1>
+                </Link>
               </div>
               <div className={styles.footerLinks}>
                 <ul>

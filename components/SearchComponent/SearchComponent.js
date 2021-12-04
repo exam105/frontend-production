@@ -306,8 +306,8 @@ function SearchComponent() {
                           ? change_start_month_and_year
                           : change_month_and_year
                       }
-                      min="2010-01-01"
-                      max="2023-12-28"
+                      min="2000-01-01"
+                      max="2040-12-28"
                       style={{ borderColor: redStartDate ? "red" : "" }}
                     />
                   </div>
@@ -326,6 +326,7 @@ function SearchComponent() {
                           name="radio"
                           className={`${styles.radioHead}`}
                           value="daterange"
+                          checked={isDateRange === true}
                           onChange={(e) =>
                             e.currentTarget.value === "daterange"
                               ? setIsDateRange(true)
@@ -343,8 +344,8 @@ function SearchComponent() {
                         id="endDate"
                         required
                         onChange={change_end_month_and_year}
-                        min="2010-01-01"
-                        max="2023-12-28"
+                        min="2000-01-01"
+                        max="2040-12-28"
                         style={{ borderColor: redEndDate ? "red" : "" }}
                       />
                     )}
@@ -362,7 +363,7 @@ function SearchComponent() {
           </div>
         </div>
       </div>
-      <div style={{ margin: "0px 5px 10px 30px" }}>
+      <div style={{ margin: "0px 5px 10px 30px", paddingBottom: "80px" }}>
         {router.query.subject && data && data[0].id && !pending && !error ? (
           <>
             Showing results for:{" "}

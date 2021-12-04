@@ -2,6 +2,14 @@
   display: flex;
   flex-direction: column;
 }
+.question {
+  line-height: 1.7;
+  font-size: 15px;
+  /* all: initial; */
+  color: rgba(0, 0, 0, 0.87);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 .questionHead {
   display: flex;
   justify-content: space-between;
@@ -9,7 +17,7 @@
 .questionText {
   font-size: 22px;
   font-weight: 500;
-  color: #10101e;
+  /* color: #10101e; */
   font-style: italic;
 }
 .questionMarks {
@@ -36,14 +44,15 @@
   margin: 20px;
   margin-top: 0px;
   padding: 20px;
-  /* color: slategray; */
 }
 
 .answerText {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   margin-top: 20px;
   margin-bottom: 20px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .mainOverview {
@@ -56,13 +65,13 @@
 .mainOverview > a {
   color: #585858 !important;
 }
-
+/* 
 .solutionText {
   color: #268dec;
   font-weight: 600;
   font-size: 22px;
   font-style: italic;
-}
+} */
 
 .overviewcard {
   display: flex;
