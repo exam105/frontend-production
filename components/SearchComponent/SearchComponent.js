@@ -363,71 +363,74 @@ function SearchComponent() {
           </div>
         </div>
       </div>
-      <div style={{ margin: "0px 5px 10px 30px", paddingBottom: "80px" }}>
-        {router.query.subject && data && data[0].id && !pending && !error ? (
-          <>
-            Showing results for:{" "}
-            <b>
-              {router.query.system}, {router.query.board},{" "}
-              {router.query.subject},{" "}
-              {router.query.date && (
-                <>
-                  {router.query.date.substr(4, 3)}/ {/*Month*/}
-                  {router.query.date.substr(11, 4)} {/*Year*/}
-                </>
-              )}
-              {router.query.from_date && (
-                <>
-                  {router.query.from_date.substr(4, 3)}/{" "}
-                  {router.query.from_date.substr(11, 4)} -{" "}
-                  {router.query.to_date.substr(4, 3)}/{" "}
-                  {router.query.to_date.substr(11, 4)}
-                </>
-              )}{" "}
-            </b>
-          </>
+      <div className="content-width">
+        <div style={{ paddingBottom: "30px" }}>
+          {router.query.subject && data && data[0].id && !pending && !error ? (
+            <>
+              Showing results for:{" "}
+              <b>
+                {router.query.system}, {router.query.board},{" "}
+                {router.query.subject},{" "}
+                {router.query.date && (
+                  <>
+                    {router.query.date.substr(4, 3)}/ {/*Month*/}
+                    {router.query.date.substr(11, 4)} {/*Year*/}
+                  </>
+                )}
+                {router.query.from_date && (
+                  <>
+                    {router.query.from_date.substr(4, 3)}/{" "}
+                    {router.query.from_date.substr(11, 4)} -{" "}
+                    {router.query.to_date.substr(4, 3)}/{" "}
+                    {router.query.to_date.substr(11, 4)}
+                  </>
+                )}{" "}
+              </b>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+        {/* Grid */}
+        {/*check if data, pending, and error all are false */}
+        {data && !data[0].id && !pending && !error ? (
+          <div style={{ margin: "0px 0px 30px 0px" }}>Perform a search.</div>
         ) : (
-          ""
-        )}
-      </div>
-      {/* Grid */}
-      {/*check if data, pending, and error all are false */}
-      {data && !data[0].id && !pending && !error ? (
-        <div style={{ margin: "0px 0px 30px 30px" }}>Perform a search.</div>
-      ) : (
-        <>
-          {pending ? (
-            <Loader fontSize="15px" />
-          ) : data === null ? (
-            <div style={{ margin: "0px 0px 30px 30px" }}>
-              We didn&sbquo;t find any papers matching your criteria.
-            </div>
-          ) : data && data[0].id ? (
-            <div className="content-width">
-              <div className={styles.mainBox}>
-                <div className={`${styles.gridLogoss} ${styles.logos}`}>
-                  {/* mapping through the data */}
-                  {data?.map((paper, i) => {
-                    return <SearchedPaperCard paper={paper} key={i} />;
-                  })}
-                </div>
-                <div
-                  className={`${styles.searchButton} ${styles.buttonMargin}`}
-                >
-                  <div className={styles.loginBtn}>
-                    {/* <button className="btn-style sign">Read More</button> */}
+          <>
+            {pending ? (
+              <Loader fontSize="15px" />
+            ) : data === null ? (
+              <div style={{ margin: "0px 0px 30px 30px" }}>
+                We didn&apos;t find any papers matching your criteria.
+              </div>
+            ) : data && data[0].id ? (
+              // <div className="content-width">
+              <>
+                <div className={styles.mainBox}>
+                  <div className={`${styles.gridLogoss} ${styles.logos}`}>
+                    {/* mapping through the data */}
+                    {data?.map((paper, i) => {
+                      return <SearchedPaperCard paper={paper} key={i} />;
+                    })}
+                  </div>
+                  <div
+                    className={`${styles.searchButton} ${styles.buttonMargin}`}
+                  >
+                    <div className={styles.loginBtn}>
+                      {/* <button className="btn-style sign">Read More</button> */}
+                    </div>
                   </div>
                 </div>
+              </>
+            ) : (
+              <div style={{ margin: "0px 0px 30px 0px" }}>
+                There was some error while fetching the data. We will take
+                notice of the problem and fix at our earliest.
               </div>
-            </div>
-          ) : (
-            <div style={{ margin: "0px 0px 30px 30px" }}>
-              There was some error while fetching the data. We will take notice
-              of the problem and fix at our earliest.
-            </div>
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
+      </div>
       <ToastContainer />
     </div>
   );
