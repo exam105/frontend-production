@@ -54,6 +54,9 @@ function HomeComponent() {
     console.log("s3 is: ", S3_USERNAME);
     console.log("shell: ", shell);
     console.log("logname: ", logname, "pwd: ", pwd);
+    if (process.env.NODE_ENV === "production") {
+      console.log("production env");
+    }
   }, []);
   const change_input = (e) => {
     if (e[0] !== undefined) {
