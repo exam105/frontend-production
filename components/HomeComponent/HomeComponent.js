@@ -8,7 +8,7 @@ import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { S3_USERNAME } from "../../config/";
+import { MEASUREMENT_ID, S3_USERNAME, ENV_PATH } from "../../config/";
 
 function HomeComponent() {
   const dispatch = useDispatch();
@@ -44,7 +44,10 @@ function HomeComponent() {
     if (S3_USERNAME) {
       console.log("S3 username is: ", S3_USERNAME);
     }
-    console.log("S3 username is: ", S3_USERNAME);
+    console.log("S3 username is: ", process.env.ENV_S3_USERNAME);
+
+    // console.log("measurement id is: ", MEASUREMENT_ID);
+    console.log("env path is: ", ENV_PATH);
   }, []);
   const change_input = (e) => {
     if (e[0] !== undefined) {

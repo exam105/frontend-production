@@ -66,6 +66,7 @@ function QuestionsComponent() {
     }
   }, [questionId]);
   useEffect(() => {
+    // when the data has the message property, it means an error has occured
     if (data.message) {
       router.push("/500");
     }
@@ -160,12 +161,16 @@ function QuestionsComponent() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
+              margin: "0 15px",
             }}
           >
             <div>
+              {/* IGCSE - Pre Bean - Pure Mathematicssdf */}
               {paperData.system} - {paperData.board} - {paperData.subject}
             </div>
             <div>
+              {/* December / 2021 */}
               {new Date(paperData.date).toLocaleString("default", {
                 month: "long",
               })}{" "}
