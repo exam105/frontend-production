@@ -8,13 +8,6 @@ import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  logname,
-  MEASUREMENT_ID,
-  pwd,
-  S3_USERNAME,
-  shell,
-} from "../../config/";
 
 function HomeComponent() {
   const dispatch = useDispatch();
@@ -47,13 +40,9 @@ function HomeComponent() {
   //   }
   // }, [isDateRange]);
   useEffect(() => {
-    if (S3_USERNAME) {
-      console.log("S3 username is: ", S3_USERNAME);
+    if (process.env.NODE_ENV) {
+      console.log("node env is true");
     }
-    console.log("measurement id is: ", MEASUREMENT_ID);
-    console.log("s3 is: ", S3_USERNAME);
-    console.log("shell: ", shell);
-    console.log("logname: ", logname, "pwd: ", pwd);
     if (process.env.NODE_ENV === "production") {
       console.log("production env");
     }
