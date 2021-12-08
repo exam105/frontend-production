@@ -195,7 +195,7 @@ function QuestionsComponent() {
               );
             })
           ) : questionsPending ? (
-            <Loader fontSize="15px" />
+              <Loader fontSize="15px" />
           ) : questionsData === null ? (
             <div className={`${styles.sidenavListItem}`}>
               No questions found

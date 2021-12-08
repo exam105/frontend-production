@@ -12,6 +12,15 @@
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
+.loadsss{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @-webkit-keyframes load5 {
   0%,
   100% {

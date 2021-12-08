@@ -393,7 +393,7 @@ function SearchComponent() {
       {/* Grid */}
       {/*check if data, pending, and error all are false */}
       {data && !data[0].id && !pending && !error ? (
-        <div style={{ margin: "0px 0px 30px 30px" }}>Perform a search.</div>
+        <div style={{ margin: "0px 0px 30px 30px", height: "100vh" }}>Perform a search.</div>
       ) : (
         <>
           {pending ? (
