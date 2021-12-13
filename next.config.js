@@ -47,12 +47,12 @@ module.exports = {
   images: {
     domains: ["exam105.s3-ap-southeast-1.amazonaws.com"],
   },
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers,
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/(.*)",
+  //       headers,
+  //     },
+  //   ];
+  // },
 };
