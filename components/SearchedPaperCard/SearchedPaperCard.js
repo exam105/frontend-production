@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { resetQuestion } from "@services/questionSlice";
 import { resetQuestions } from "@services/questionsSlice";
 import styles from "./SearchedPaperCard.module.css";
 
 function SearchedPaperComponent({ paper }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const resetData = () => {
     dispatch(resetQuestion());
     dispatch(resetQuestions());
@@ -14,7 +16,10 @@ function SearchedPaperComponent({ paper }) {
   return (
     <Link href={`/search/${paper.id}/${paper.question_hex_ids[0]}`} passHref>
       <div
-        onClick={() => resetData()}
+        onClick={() => {
+          resetData();
+          router.push(`/search/${paper.id}/${paper.question_hex_ids[0]}`);
+        }}
         className={`${styles.gridLogos__itemm} ${styles.card}`}
       >
         <div className={styles.cardContent}>
