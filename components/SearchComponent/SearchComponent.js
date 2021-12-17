@@ -238,32 +238,6 @@ function SearchComponent() {
                 required
                 style={{ borderColor: redSubject ? "red" : "" }}
               />
-              {/* <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="System" />
-                <a href="#">
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </form>
-
-              <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="Board" />
-                <a href="#">
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </form>
-
-              <form className={styles.searchContainer}>
-                <input type="text" id="search-bar" placeholder="Subject" />
-                <a href="#">
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </form> */}
             </div>
 
             <div className={styles.searchBoxx}>

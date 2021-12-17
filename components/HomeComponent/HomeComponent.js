@@ -40,15 +40,7 @@ function HomeComponent() {
   //     choiceRef.current = "date";
   //   }
   // }, [isDateRange]);
-  useEffect(() => {
-    if (S3_USERNAME) {
-      console.log("S3 username is: ", S3_USERNAME);
-    }
-    console.log("S3 username is: ", process.env.ENV_S3_USERNAME);
 
-    // console.log("measurement id is: ", MEASUREMENT_ID);
-    console.log("env path is: ", ENV_PATH);
-  }, []);
   const change_input = (e) => {
     if (e[0] !== undefined) {
       if (e[0].text === "subject") {
@@ -142,7 +134,6 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // console.log("came range");
         // setChoice("daterange");
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
@@ -177,7 +168,6 @@ function HomeComponent() {
           paper.date = paper.from_date;
         }
         // setChoice("date");
-        // console.log("came date");
 
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
@@ -215,16 +205,6 @@ function HomeComponent() {
 
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="System" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
             <Select
               className={styles.select}
               maxMenuHeight="80"
@@ -243,31 +223,11 @@ function HomeComponent() {
               required
               style={{ borderColor: redBoard ? "red" : "" }}
             />
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Board" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
           </div>
 
           <div
             className={`${styles.searchFields} ${styles.mobileResponsive} ${styles.mobile}`}
           >
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Subject" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
             <Select
               className={styles.select}
               options={subjects}
@@ -376,8 +336,6 @@ function HomeComponent() {
             >
               <a className="btn-style sign">Search</a>
             </Link>
-
-            {/* <button className="btn-style sign">Search</button> */}
           </div>
         </div>
       </div>

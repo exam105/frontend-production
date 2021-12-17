@@ -81,26 +81,6 @@ function SingleQuestion({
                     );
                   })
                 : ""}
-              {/* <a onClick={() => setShowImageSliderModal(true)}>
-          <div className={styles.overviewcard}>
-            <Image
-              src="/images/imgone.png"
-              alt="questionone"
-              height="180"
-              width="60%"
-            />
-          </div>
-            </a>
-            <a onClick={() => setShowImageSliderModal(true)}>
-              <div className={styles.overviewcard}>
-                <Image
-                  src="/images/imgtwo.png"
-                  alt="questiontwo"
-                  width="400"
-                  height="180"
-                />
-              </div>
-            </a> */}
             </div>
 
             <div className={styles.mainHeader}>
@@ -186,26 +166,6 @@ function SingleQuestion({
                     );
                   })
                 : ""}
-              {/* <a onClick={() => setShowImageSliderModal(true)}>
-                <div className={styles.overviewcard}>
-                  <Image
-                    src="/images/imgone.png"
-                    alt="questionone"
-                    height="180"
-                    width="60%"
-                  />
-                </div>
-              </a>
-              <a onClick={() => setShowImageSliderModal(true)}>
-                <div className={styles.overviewcard}>
-                  <Image
-                    src="/images/imgtwo.png"
-                    alt="questiontwo"
-                    width="400"
-                    height="180"
-                  />
-                </div>
-              </a> */}
             </div>
             <div className={styles.buttonHead}>
               <div className={styles.button}>

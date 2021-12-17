@@ -46,9 +46,6 @@
 }
 
 .questionNo {
-  /* background-color: #34a853; */
-  /* apply opacity on color */
-  /* background-color: rgba(52, 168, 83, 0.9); */
   border: 2px solid #34a853;
   padding: 10px 20px;
   width: 40px;
@@ -59,17 +56,10 @@
   align-items: center;
 }
 
-/* .questionNo:active {
-  background-color: #34a853;
-} */
-
 .sidenavListItem {
-  /* padding: 20px 20px; */
-  /* color: #92929e; */
   color: #34a853;
   font-size: 14px;
   font-weight: 600;
-  /* border-top: 1px solid #92929e; */
   height: 40px;
   display: flex;
 }
