@@ -339,7 +339,7 @@ function SearchComponent() {
       </div>
       <div className="content-width">
         <div style={{ paddingBottom: "30px" }}>
-          {router.query.subject && data && data[0].id && !pending && !error ? (
+          {router.query.subject && data && data[0]?.id && !pending && !error ? (
             <>
               Showing results for:{" "}
               <b>
@@ -367,14 +367,14 @@ function SearchComponent() {
         </div>
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
-        {data && !data[0].id && !pending && !error ? (
-          <div style={{ margin: "0px 0px 30px 0px" }}>Perform a search.</div>
+        {data && !data[0]?.id && !pending && !error ? (
+          <div style={{ margin: "0px 0px 30px 0px", height: "50vh" }}>Perform a search.</div>
         ) : (
           <>
             {pending ? (
               <Loader fontSize="15px" />
             ) : data === null ? (
-              <div style={{ margin: "0px 0px 30px 30px" }}>
+              <div style={{ margin: "0px 0px 30px 30px", height: "50vh" }}>
                 We didn&apos;t find any papers matching your criteria.
               </div>
             ) : data && data[0].id ? (
@@ -397,7 +397,7 @@ function SearchComponent() {
                 </div>
               </>
             ) : (
-              <div style={{ margin: "0px 0px 30px 0px" }}>
+              <div style={{ margin: "0px 0px 30px 0px", height: "50vh" }}>
                 There was some error while fetching the data. We will take
                 notice of the problem and fix at our earliest.
               </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./Header.module.css";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -7,12 +8,16 @@ export default function Header() {
       <div className="content-width">
         {/* Header */}
         <header className={styles.headerContainer}>
-          <Link href="/" passHref>
-            <div className="logo">
-              <h1>logo</h1>
-            </div>
-          </Link>
-
+          <div className="logo">
+            {/* <h1>logo</h1> */}
+            <Image
+              src="/images/exam105.png"
+              alt="logo"
+              className={styles.logo}
+              width="150"
+              height="60"
+            />
+          </div>
           <div className={styles.loginBtn}>
             <h3 className={styles.login}>Login</h3>
             <button className="btn-style sign">Sign up</button>
