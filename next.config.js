@@ -1,4 +1,4 @@
-const securityHeaders = [
+const headers = [
   {
     key: "X-DNS-Prefetch-Control",
     value: "on",
@@ -51,7 +51,7 @@ module.exports = {
     return [
       {
         source: "/(.*)",
-        securityHeaders,
+        headers,
       },
     ];
   },
