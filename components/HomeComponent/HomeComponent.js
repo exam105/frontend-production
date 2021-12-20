@@ -8,15 +8,12 @@ import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { MEASUREMENT_ID, S3_USERNAME, ENV_PATH } from "../../config/";
 
 function HomeComponent() {
   const dispatch = useDispatch();
-  // const choiceRef = useRef(null);
+  const choiceRef = useRef("date");
   // const [choice, setChoice] = useState("date");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [date, setDate] = useState("");
+
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
   const [redSystem, setRedSystem] = useState(false);
@@ -33,13 +30,13 @@ function HomeComponent() {
     from_date: "",
     to_date: "",
   });
-  // useEffect(() => {
-  //   if (isDateRange) {
-  //     choiceRef.current = "daterange";
-  //   } else {
-  //     choiceRef.current = "date";
-  //   }
-  // }, [isDateRange]);
+  useEffect(() => {
+    if (isDateRange) {
+      choiceRef.current = "daterange";
+    } else {
+      choiceRef.current = "date";
+    }
+  }, [isDateRange]);
 
   const change_input = (e) => {
     if (e[0] !== undefined) {
@@ -104,21 +101,18 @@ function HomeComponent() {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setStartDate(newDate);
     setPaper({ ...paper, from_date: newDate });
   };
   const change_end_month_and_year = (e) => {
     e.preventDefault();
     setRedEndDate(false);
     const newDate = normalizeDate(e.target.value);
-    setEndDate(newDate);
     setPaper({ ...paper, to_date: newDate });
   };
   const change_month_and_year = (e) => {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setDate(newDate);
     setPaper({ ...paper, date: newDate });
   };
   const onSubmit = (e) => {
@@ -135,6 +129,7 @@ function HomeComponent() {
           paper.from_date = paper.date;
         }
         // setChoice("daterange");
+
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         delete paper["choice"];
@@ -327,11 +322,10 @@ function HomeComponent() {
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
             <Link
-              as="/search"
               href={`${
                 isDateRange
-                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}`
-                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}`
+                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
+                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
               }`}
             >
               <a className="btn-style sign">Search</a>

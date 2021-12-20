@@ -15,9 +15,6 @@ import "react-toastify/dist/ReactToastify.css";
 function SearchComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [date, setDate] = useState("");
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
   const [redSystem, setRedSystem] = useState(false);
@@ -38,6 +35,7 @@ function SearchComponent() {
   // useEffect(() => {
   //   console.log("data:", router.query, "router: ", router);
   //   let paper = router.query;
+
   //   dispatch(getSearchPapers(paper));
   // }, []);
   useEffect(() => {
@@ -122,21 +120,18 @@ function SearchComponent() {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setStartDate(newDate);
     setPaper({ ...paper, from_date: newDate });
   };
   const change_end_month_and_year = (e) => {
     e.preventDefault();
     setRedEndDate(false);
     const newDate = normalizeDate(e.target.value);
-    setEndDate(newDate);
     setPaper({ ...paper, to_date: newDate });
   };
   const change_month_and_year = (e) => {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setDate(newDate);
     setPaper({ ...paper, date: newDate });
   };
   const onSubmit = (e) => {
@@ -339,7 +334,7 @@ function SearchComponent() {
       </div>
       <div className="content-width">
         <div style={{ paddingBottom: "30px" }}>
-          {router.query.subject && data && data[0].id && !pending && !error ? (
+          {router.query.subject && data && !pending && !error ? (
             <>
               Showing results for:{" "}
               <b>
@@ -367,7 +362,7 @@ function SearchComponent() {
         </div>
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
-        {data && !data[0].id && !pending && !error ? (
+        {data && !data[0]?.id && !pending && !error ? (
           <div style={{ margin: "0px 0px 30px 0px" }}>Perform a search.</div>
         ) : (
           <>
