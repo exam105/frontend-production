@@ -14,7 +14,10 @@
   margin: 0 auto !important;
   margin-left: 30px !important;
   border-radius: 5px !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  border: none !important;
 }
+
 .searchBox {
   display: flex;
   flex-direction: column;
@@ -165,7 +168,9 @@
   flex-direction: column;
 }
 .inputDate {
-  border: 1px solid #c4c4c4;
+  /* border: 1px solid #c4c4c4; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  border: none !important;
   height: 45px;
   width: 360px !important;
   border-radius: 5px;
@@ -177,7 +182,7 @@
   outline: none;
 }
 .inputDate:hover {
-  border: 1px solid #268dec;
+  border: 2px solid #268dec;
 }
 
 .gridLogoss {
@@ -241,4 +246,44 @@
   .select {
     width: 180px !important;
   }
+}
+
+.select:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+}
+
+.select:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
+}
+
+/* .select:hover{
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
+} */
+
+.select:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
+}
+
+/* .ItemComponent.react-dropdown-select-item-selected {
+  background-color: red !important;
+} */
+
+.react-dropdown-select-dropdown{
+  text-align: left !important;
+}
+
+.ReactDropdownSelect{
+  text-align: left !important;
+}
+
+.react-dropdown-select-dropdown-position-bottom{
+  text-align: left !important;
 }

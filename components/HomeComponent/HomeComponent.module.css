@@ -6,7 +6,7 @@
   text-align: center;
 }
 .heading {
-  font-size: 36px;
+  font-size: 28px;
   margin-top: 50px;
 }
 .textGreen {
@@ -152,9 +152,13 @@
   margin: 0 auto !important;
   margin-left: 30px !important;
   border-radius: 5px !important;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  border: none !important;
 }
 .inputDate {
-  border: 1px solid #c4c4c4;
+  border: none !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   height: 45px;
   width: 380px !important;
   border-radius: 5px;
@@ -166,7 +170,7 @@
   outline: none;
 }
 .inputDate:hover {
-  border: 1px solid #268dec;
+  border: 2px solid #268dec;
 }
 .searchButton {
   display: flex;
@@ -219,4 +223,28 @@
   .select {
     width: 205px !important;
   }
+}
+
+.select:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+}
+
+.select:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
+}
+
+/* .select:hover{
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
+} */
+
+.select:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 2px solid #268dec !important;
 }

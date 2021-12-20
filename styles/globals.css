@@ -35,18 +35,25 @@ a {
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 0.015em;
-  color: #268dec;
+  color: #ffffff;
+  background-color: #268dec;
   width: fit-content;
   height: 50px;
   padding: 20px 32px;
-  background: #fff;
+  /* background: #fff; */
   border: 2px solid #268dec;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s ease-in-out;
 }
+
+.btn-style:hover {
+  background: #fff;
+  color: #268dec;
+}
+
 .logo {
   cursor: pointer;
   display: flex;
