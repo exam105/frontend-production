@@ -11,11 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 function HomeComponent() {
   const dispatch = useDispatch();
-  // const choiceRef = useRef(null);
+  const choiceRef = useRef("date");
   // const [choice, setChoice] = useState("date");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [date, setDate] = useState("");
+
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
   const [redSystem, setRedSystem] = useState(false);
@@ -32,21 +30,14 @@ function HomeComponent() {
     from_date: "",
     to_date: "",
   });
-  // useEffect(() => {
-  //   if (isDateRange) {
-  //     choiceRef.current = "daterange";
-  //   } else {
-  //     choiceRef.current = "date";
-  //   }
-  // }, [isDateRange]);
   useEffect(() => {
-    if (process.env.NODE_ENV) {
-      console.log("node env is true");
+    if (isDateRange) {
+      choiceRef.current = "daterange";
+    } else {
+      choiceRef.current = "date";
     }
-    if (process.env.NODE_ENV === "production") {
-      console.log("production env");
-    }
-  }, []);
+  }, [isDateRange]);
+
   const change_input = (e) => {
     if (e[0] !== undefined) {
       if (e[0].text === "subject") {
@@ -110,21 +101,18 @@ function HomeComponent() {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setStartDate(newDate);
     setPaper({ ...paper, from_date: newDate });
   };
   const change_end_month_and_year = (e) => {
     e.preventDefault();
     setRedEndDate(false);
     const newDate = normalizeDate(e.target.value);
-    setEndDate(newDate);
     setPaper({ ...paper, to_date: newDate });
   };
   const change_month_and_year = (e) => {
     e.preventDefault();
     setRedStartDate(false);
     const newDate = normalizeDate(e.target.value);
-    setDate(newDate);
     setPaper({ ...paper, date: newDate });
   };
   const onSubmit = (e) => {
@@ -140,8 +128,8 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // console.log("came range");
         // setChoice("daterange");
+
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         delete paper["choice"];
@@ -175,7 +163,6 @@ function HomeComponent() {
           paper.date = paper.from_date;
         }
         // setChoice("date");
-        // console.log("came date");
 
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
@@ -213,16 +200,6 @@ function HomeComponent() {
 
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="System" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
             <Select
               className={styles.select}
               maxMenuHeight="80"
@@ -241,31 +218,11 @@ function HomeComponent() {
               required
               style={{ borderColor: redBoard ? "red" : "" }}
             />
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Board" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
           </div>
 
           <div
             className={`${styles.searchFields} ${styles.mobileResponsive} ${styles.mobile}`}
           >
-            {/* <form className={styles.searchContainer}>
-              <input type="text" id="home-search-bar" placeholder="Subject" />
-              <Link href="#">
-                <a>
-                  <i
-                    className={`fa fa-search ${styles.searchIcon} ${styles.iconSize}`}
-                  ></i>
-                </a>
-              </Link>
-            </form> */}
             <Select
               className={styles.select}
               options={subjects}
@@ -365,17 +322,14 @@ function HomeComponent() {
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
             <Link
-              as="/search"
               href={`${
                 isDateRange
-                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}`
-                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}`
+                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
+                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
               }`}
             >
               <a className="btn-style sign">Search</a>
             </Link>
-
-            {/* <button className="btn-style sign">Search</button> */}
           </div>
         </div>
       </div>

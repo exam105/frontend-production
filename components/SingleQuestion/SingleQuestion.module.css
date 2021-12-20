@@ -4,7 +4,7 @@
 }
 .question {
   line-height: 1.7;
-  font-size: 15px;
+  font-size: 16px;
   /* all: initial; */
   color: rgba(0, 0, 0, 0.87);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -135,4 +135,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.wrong{
+  margin-left: 20px !important;
+}
+
+/* .abc{
+  margin-left: 20px;
+} */
+
+.mainContent ol {
+  margin-left: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }

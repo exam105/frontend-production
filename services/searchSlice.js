@@ -20,7 +20,11 @@ const initialState = {
 export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
   async (paper) => {
+    // console.log("this be the paper", paper);
     let choice = paper["choice"];
+    // console.log("thats the choie", choice);
+    // let jdate = new Date(paper.date);
+    // console.log("json date is: ", jdate.toJSON());
     // delete paper["choice"];
     if (choice === "date") {
       delete paper["choice"];

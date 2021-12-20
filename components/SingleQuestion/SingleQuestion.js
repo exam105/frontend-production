@@ -19,7 +19,7 @@ function SingleQuestion({
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
   return (
     <main className={styles.main}>
-      <div style={{ height: "100vh", overflowX: "hidden", overflowY: "auto" }}>
+      <div className={styles.mainContent} style={{ height: "100vh", overflowX: "hidden", overflowY: "auto" }}>
         {pending && <Loader />}
         {error && <div>There was some problem fetching the data.</div>}
         {!pending && !error && (
@@ -81,26 +81,6 @@ function SingleQuestion({
                     );
                   })
                 : ""}
-              {/* <a onClick={() => setShowImageSliderModal(true)}>
-          <div className={styles.overviewcard}>
-            <Image
-              src="/images/imgone.png"
-              alt="questionone"
-              height="180"
-              width="60%"
-            />
-          </div>
-            </a>
-            <a onClick={() => setShowImageSliderModal(true)}>
-              <div className={styles.overviewcard}>
-                <Image
-                  src="/images/imgtwo.png"
-                  alt="questiontwo"
-                  width="400"
-                  height="180"
-                />
-              </div>
-            </a> */}
             </div>
 
             <div className={styles.mainHeader}>
@@ -129,23 +109,25 @@ function SingleQuestion({
                         >
                           {option.correct === true ? (
                             <Image
-                              src="/images/check.png"
-                              width="20"
-                              height="16"
+                              src="/images/check-new.svg"
+                              width="24"
+                              height="0"
                               alt="correct"
                             />
                           ) : (
                             <Image
-                              src="/images/uncheck.png"
-                              width="20"
-                              height="16"
+                              src="/images/wrong.svg"
+                              width="22"
+                              height="5"
                               alt="wrong"
+                              className="wrong"
                             />
                           )}
                           &nbsp;&nbsp;
                           <p
                             style={{
                               borderBottom: "1px solid rgba(0,0,0,0.3)",
+                              marginLeft: "10px"
                             }}
                           >
                             {" "}
@@ -186,26 +168,6 @@ function SingleQuestion({
                     );
                   })
                 : ""}
-              {/* <a onClick={() => setShowImageSliderModal(true)}>
-                <div className={styles.overviewcard}>
-                  <Image
-                    src="/images/imgone.png"
-                    alt="questionone"
-                    height="180"
-                    width="60%"
-                  />
-                </div>
-              </a>
-              <a onClick={() => setShowImageSliderModal(true)}>
-                <div className={styles.overviewcard}>
-                  <Image
-                    src="/images/imgtwo.png"
-                    alt="questiontwo"
-                    width="400"
-                    height="180"
-                  />
-                </div>
-              </a> */}
             </div>
             <div className={styles.buttonHead}>
               <div className={styles.button}>

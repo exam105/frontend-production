@@ -166,11 +166,9 @@ function QuestionsComponent() {
             }}
           >
             <div>
-              {/* IGCSE - Pre Bean - Pure Mathematicssdf */}
               {paperData.system} - {paperData.board} - {paperData.subject}
             </div>
             <div>
-              {/* December / 2021 */}
               {new Date(paperData.date).toLocaleString("default", {
                 month: "long",
               })}{" "}
@@ -191,11 +189,6 @@ function QuestionsComponent() {
                     setSelectedQuestionId(question.id);
                   }}
                 >
-                  {/* <div>
-                      <MathpixLoader>
-                        <MathpixMarkdown text={question.question} />
-                      </MathpixLoader>
-                    </div> */}
                   <div
                     style={{
                       backgroundColor:
@@ -224,7 +217,7 @@ function QuestionsComponent() {
               );
             })
           ) : questionsPending ? (
-              <Loader fontSize="15px" />
+            <Loader fontSize="15px" />
           ) : questionsData === null ? (
             <div className={`${styles.sidenavListItem}`}>
               No questions found
@@ -244,7 +237,6 @@ function QuestionsComponent() {
               Server-side error occured.
             </div>
           ) : (
-            // router.push("/500")
             <Loader fontSize="15px" />
           )}
         </div>

@@ -14,11 +14,14 @@
   flex-direction: column;
   /* height: 100vh; */
   width: 300px;
+  margin-top: 2px;
   overflow-y: auto;
   transition: all 0.6s ease-in-out;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  /* background-color: #EDEDED !important; */
+  /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08); */
   z-index: 2; /* Needs to sit above the hamburger menu icon */
   background-color: #fff;
+  border-right: 1px solid lightgray;
 }
 .sidenav.active {
   transform: translateX(0);
@@ -30,6 +33,10 @@
   align-items: center;
   height: 80px;
   padding: 0px 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  /* border-bottom: 1px solid #92929e; */
+  margin-bottom: 10px;
+  /* background-color: #92929e; */
 }
 .sidenavTop > a {
   color: #585858 !important;
@@ -46,9 +53,6 @@
 }
 
 .questionNo {
-  /* background-color: #34a853; */
-  /* apply opacity on color */
-  /* background-color: rgba(52, 168, 83, 0.9); */
   border: 2px solid #34a853;
   padding: 10px 20px;
   width: 40px;
@@ -59,17 +63,10 @@
   align-items: center;
 }
 
-/* .questionNo:active {
-  background-color: #34a853;
-} */
-
 .sidenavListItem {
-  /* padding: 20px 20px; */
-  /* color: #92929e; */
   color: #34a853;
   font-size: 14px;
   font-weight: 600;
-  /* border-top: 1px solid #92929e; */
   height: 40px;
   display: flex;
 }

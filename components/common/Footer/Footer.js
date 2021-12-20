@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./Footer.module.css";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,11 +9,18 @@ export default function Footer() {
         <footer className={styles.footerContainer}>
           <div className="desktop">
             <div className="footer-content">
-              <div className="logo">
-                <Link href="/" passHref>
-                  <h1>logo</h1>
-                </Link>
-              </div>
+              {/* <div className="logo">
+                <h1>logo</h1>
+              </div> */}
+              <Link href="/" passHref>
+                <Image
+                  src="/images/exam105.png"
+                  alt="logo"
+                  className={styles.logo}
+                  width="150"
+                  height="60"
+                />
+              </Link>
               <div className={styles.footerLinks}>
                 <ul>
                   <li className={styles.grayColor}>

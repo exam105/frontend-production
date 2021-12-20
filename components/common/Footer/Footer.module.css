@@ -1,5 +1,6 @@
 .footerBorder {
-  border-top: 1px solid #92929e;
+  border-top: 1px solid lightgray;
+  background-color: #f8f9f9;
   min-height: 125px !important;
 }
 .footerContainer {
@@ -12,7 +13,9 @@
   margin-top: 5px;
   width: 15%;
 }
-
+.logo {
+  cursor: pointer;
+}
 .grayColor {
   color: #92929e;
   font-size: 14px;
