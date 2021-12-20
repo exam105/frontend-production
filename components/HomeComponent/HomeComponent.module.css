@@ -153,12 +153,14 @@
   margin-left: 30px !important;
   border-radius: 5px !important;
   /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-  border: none !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  /* border: none !important; */
 }
 .inputDate {
-  border: none !important;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  /* border: none !important; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   height: 45px;
   width: 380px !important;
   border-radius: 5px;
@@ -225,7 +227,7 @@
   }
 }
 
-.select:focus{
+.select:focus {
   outline: none !important;
   box-shadow: none !important;
   border: none;

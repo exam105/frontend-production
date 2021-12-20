@@ -213,7 +213,7 @@ function SearchComponent() {
                 placeholder="System"
                 onChange={change_input}
                 required
-                style={{ borderColor: redSystem ? "red" : "" }}
+                style={{ border: redSystem ? "1px solid red" : "none" }}
               />
               <Select
                 className={styles.select}
@@ -222,7 +222,7 @@ function SearchComponent() {
                 placeholder="Board"
                 onChange={change_input}
                 required
-                style={{ borderColor: redBoard ? "red" : "" }}
+                style={{ border: redBoard ? "1px solid red" : "none" }}
               />
 
               <Select
@@ -231,7 +231,7 @@ function SearchComponent() {
                 placeholder="Subject"
                 onChange={change_input}
                 required
-                style={{ borderColor: redSubject ? "red" : "" }}
+                style={{ border: redSubject ? "1px solid red" : "none" }}
               />
             </div>
 
@@ -277,7 +277,9 @@ function SearchComponent() {
                       }
                       min="2000-01-01"
                       max="2040-12-28"
-                      style={{ borderColor: redStartDate ? "red" : "" }}
+                      style={{
+                        border: redStartDate ? "1px solid red" : "none",
+                      }}
                     />
                   </div>
                 </div>
@@ -315,7 +317,9 @@ function SearchComponent() {
                         onChange={change_end_month_and_year}
                         min="2000-01-01"
                         max="2040-12-28"
-                        style={{ borderColor: redEndDate ? "red" : "" }}
+                        style={{
+                          border: redEndDate ? "1px solid red" : "none",
+                        }}
                       />
                     )}
                   </div>
@@ -369,7 +373,7 @@ function SearchComponent() {
         ) : (
           <>
             {pending ? (
-              <Loader fontSize="15px" />
+              <Loader fontSize="15px" margin="0rem 0rem 30rem 0rem" />
             ) : data === null ? (
               <div style={{ margin: "0px 0px 30px 30px", height: "50vh" }}>
                 We didn&apos;t find any papers matching your criteria.

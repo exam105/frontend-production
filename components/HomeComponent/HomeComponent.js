@@ -8,6 +8,7 @@ import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import router from "next/router";
 
 function HomeComponent() {
   const dispatch = useDispatch();
@@ -116,6 +117,7 @@ function HomeComponent() {
     setPaper({ ...paper, date: newDate });
   };
   const onSubmit = (e) => {
+    e.preventDefault();
     //validate every field here
     if (isDateRange) {
       if (
@@ -132,9 +134,14 @@ function HomeComponent() {
 
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
+        router.push(
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
+        );
         delete paper["choice"];
       } else {
-        e.preventDefault();
+        console.log("i came here in dtrange");
+
+        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -166,9 +173,13 @@ function HomeComponent() {
 
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
+        router.push(
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
+        );
         delete paper["choice"];
       } else {
-        e.preventDefault();
+        console.log("i came here");
+        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -207,7 +218,9 @@ function HomeComponent() {
               placeholder="System"
               onChange={change_input}
               required
-              style={{ borderColor: redSystem ? "red" : "" }}
+              style={{
+                border: redSystem ? "1px solid red" : "none",
+              }}
             />
             <Select
               className={styles.select}
@@ -216,7 +229,9 @@ function HomeComponent() {
               placeholder="Board"
               onChange={change_input}
               required
-              style={{ borderColor: redBoard ? "red" : "" }}
+              style={{
+                border: redBoard ? "1px solid red" : "none",
+              }}
             />
           </div>
 
@@ -229,7 +244,9 @@ function HomeComponent() {
               placeholder="Subject"
               onChange={change_input}
               required
-              style={{ borderColor: redSubject ? "red" : "" }}
+              style={{
+                border: redSubject ? "1px solid red" : "none",
+              }}
             />
           </div>
 
@@ -272,7 +289,7 @@ function HomeComponent() {
                   }
                   min="2000-01-01"
                   max="2040-12-28"
-                  style={{ borderColor: redStartDate ? "red" : "" }}
+                  style={{ border: redStartDate ? "1px solid red" : "none" }}
                 />
               </div>
             </div>
@@ -311,7 +328,7 @@ function HomeComponent() {
                     onChange={change_end_month_and_year}
                     min="2000-01-01"
                     max="2040-12-28"
-                    style={{ borderColor: redEndDate ? "red" : "" }}
+                    style={{ border: redEndDate ? "1px solid red" : "none" }}
                   />
                 )}
               </div>
@@ -321,15 +338,15 @@ function HomeComponent() {
 
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
-            <Link
+            {/* <Link
               href={`${
                 isDateRange
                   ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
                   : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
               }`}
-            >
-              <a className="btn-style sign">Search</a>
-            </Link>
+            > */}
+            <a className="btn-style sign">Search</a>
+            {/* </Link> */}
           </div>
         </div>
       </div>
