@@ -10,13 +10,15 @@ export default function Header() {
         <header className={styles.headerContainer}>
           <div className="logo">
             {/* <h1>logo</h1> */}
-            <Image
-              src="/images/exam105.png"
-              alt="logo"
-              className={styles.logo}
-              width="150"
-              height="60"
-            />
+            <Link href="/" passHref>
+              <Image
+                src="/images/exam105.png"
+                alt="logo"
+                className={styles.logo}
+                width="150"
+                height="60"
+              />
+            </Link>
           </div>
           <div className={styles.loginBtn}>
             <h3 className={styles.login}>Login</h3>

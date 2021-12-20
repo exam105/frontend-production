@@ -12,13 +12,15 @@ export default function Footer() {
               {/* <div className="logo">
                 <h1>logo</h1>
               </div> */}
-               <Image
-              src="/images/exam105.png"
-              alt="logo"
-              className={styles.logo}
-              width="150"
-              height="60"
-            />
+              <Link href="/" passHref>
+                <Image
+                  src="/images/exam105.png"
+                  alt="logo"
+                  className={styles.logo}
+                  width="150"
+                  height="60"
+                />
+              </Link>
               <div className={styles.footerLinks}>
                 <ul>
                   <li className={styles.grayColor}>
