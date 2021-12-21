@@ -19,7 +19,10 @@ function SingleQuestion({
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
   return (
     <main className={styles.main}>
-      <div className={styles.mainContent} style={{ height: "100vh", overflowX: "hidden", overflowY: "auto" }}>
+      <div
+        className={styles.mainContent}
+        style={{ height: "100vh", overflowX: "hidden", overflowY: "auto" }}
+      >
         {pending && <Loader />}
         {error && <div>There was some problem fetching the data.</div>}
         {!pending && !error && (
@@ -71,7 +74,7 @@ function SingleQuestion({
                           setShowImageSliderModal(true);
                         }}
                       >
-                        <Image
+                        <img
                           src={image.imageurl}
                           alt={image.imageurl}
                           width={100}
@@ -127,7 +130,7 @@ function SingleQuestion({
                           <p
                             style={{
                               borderBottom: "1px solid rgba(0,0,0,0.3)",
-                              marginLeft: "10px"
+                              marginLeft: "10px",
                             }}
                           >
                             {" "}
@@ -158,7 +161,7 @@ function SingleQuestion({
                           setShowImageSliderModal(true);
                         }}
                       >
-                        <Image
+                        <img
                           src={image.imageurl}
                           alt={image.imageurl}
                           width={100}

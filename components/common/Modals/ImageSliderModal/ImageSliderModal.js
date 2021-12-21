@@ -17,19 +17,36 @@ function ImageSliderModal({ data, currentImageIndex }) {
       setCurrentImage(nextImage);
     }
   };
+  // const prevStyle = () => {
+  //   const prevImage = data[data.indexOf(currentImage) - 1];
+
+  //   return {
+  //     color: prevImage ? "black" : "gray",
+  //   };
+  // };
+  // const nextStyle = () => {
+  //   const nextImage = data[data.indexOf(currentImage) + 1];
+
+  //   return {
+  //     color: nextImage ? "black" : "gray",
+  //   };
+  // };
 
   return (
-    <div className={styles.image}>
-      <Image
-        src={currentImage.imageurl}
-        alt={currentImage.imageurl}
-        layout="fill"
-        className={styles.imageSize}
-      />
+    <div className={styles.container}>
+      <div className={styles.image}>
+        <img
+          src={currentImage.imageurl}
+          alt={currentImage.imageurl}
+          // layout="fill"
+          className={styles.imageSize}
+        />
+      </div>
       <div className={styles.buttonHead}>
         <div className={styles.button}>
           <div className={styles.buttonBack} onClick={loadPrevImage}>
             <Image
+              // style={prevStyle()}
               src="/images/back.svg"
               alt="back"
               className={styles.backFooter}
@@ -38,7 +55,11 @@ function ImageSliderModal({ data, currentImageIndex }) {
             />
             Back
           </div>
-          <div onClick={loadNextImage} className={styles.buttonBack}>
+          <div
+            // style={nextStyle()}
+            onClick={loadNextImage}
+            className={styles.buttonBack}
+          >
             Next
             <Image
               src="/images/next.svg"
