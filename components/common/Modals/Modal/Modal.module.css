@@ -10,13 +10,14 @@
 .closeHeader {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 .overlay > div {
-  max-width: 700px;
-  width: 90%;
-  margin: 10% auto;
-  padding: 20px 20px;
+  /* max-width: 700px; */
+  width: 85%;
+  height: 85%;
+  margin: 3% auto;
+  padding: 20px 20px 0px 20px;
   border-radius: 5px;
   background: #fff;
 }

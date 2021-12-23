@@ -34,13 +34,16 @@ function ImageSliderModal({ data, currentImageIndex }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.image}>
-        <img
-          src={currentImage.imageurl}
-          alt={currentImage.imageurl}
-          // layout="fill"
-          className={styles.imageSize}
-        />
+      <div className={styles.imageContainer}>
+        <div className={styles.image}>
+          <img
+            src={currentImage.imageurl}
+            // src="https://exam105.s3-ap-southeast-1.amazonaws.com/Chemistry/Igcse_edexcel_1_2012_paper2_ques_4(c).jpg"
+            alt={currentImage.imageurl}
+            // layout="fill"
+            className={styles.imageSize}
+          />
+        </div>
       </div>
       <div className={styles.buttonHead}>
         <div className={styles.button}>

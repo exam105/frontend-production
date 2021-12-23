@@ -31,14 +31,26 @@
 .container {
   width: 100%;
   max-height: 430px;
-  /* height: 400px; */
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   /* border: 1px solid black; */
   /* position: relative; */
   /* display: flex;
   align-content: center; */
 }
+.imageContainer {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .image {
   width: 100%;
+  /* max-height: 30rem; */
+  height: auto;
   overflow: hidden;
   /* display: flex;
   flex: 1;
@@ -58,24 +70,18 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: auto;
+  max-width: 700px;
+  max-height: 430px;
 }
 .buttonHead {
-  display: flex;
-  /* border: 1px solid; */
-  align-items: center;
-  justify-content: center;
-  bottom: 1px;
-  /* right: 50%; */
-  /* left: 30%;
-  position: absolute; */
+  max-height: 18px;
 }
 
 .button {
   display: flex;
-  width: 30%;
-  justify-content: space-between;
+  width: 100%;
   align-items: center;
+  justify-content: center;
   margin-top: 30px;
 }
 .buttonBack {
@@ -85,6 +91,7 @@
   font-weight: 500;
   cursor: pointer;
   padding: 0px 10px;
+  margin: auto 10px;
 }
 
 .backFooter {
