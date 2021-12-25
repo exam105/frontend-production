@@ -74,12 +74,15 @@ function SingleQuestion({
                           setShowImageSliderModal(true);
                         }}
                       >
-                        <img
-                          src={image.imageurl}
-                          alt={image.imageurl}
-                          width={100}
-                          height={100}
-                        />
+                        <div className={styles.cardImageContainer}>
+                          <img
+                            src={image.imageurl}
+                            alt={image.imageurl}
+                            // width={100}
+                            // height={100}
+                            className={styles.cardImage}
+                          />
+                        </div>
                       </div>
                     );
                   })
@@ -161,12 +164,15 @@ function SingleQuestion({
                           setShowImageSliderModal(true);
                         }}
                       >
-                        <img
-                          src={image.imageurl}
-                          alt={image.imageurl}
-                          width={100}
-                          height={100}
-                        />
+                        <div className={styles.cardImageContainer}>
+                          <img
+                            src={image.imageurl}
+                            alt={image.imageurl}
+                            // width={100}
+                            // height={100}
+                            className={styles.cardImage}
+                          />
+                        </div>
                       </div>
                     );
                   })
