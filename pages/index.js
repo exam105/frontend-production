@@ -3,7 +3,7 @@ import Layout from "../components/common/Layout";
 
 export default function HomePage() {
   return (
-    <Layout height="auto">
+    <Layout height="100vh">
       <HomeComponent />
     </Layout>
   );
