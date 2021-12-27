@@ -1,4 +1,11 @@
+.container {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .error {
+  flex: 1;
   text-align: center;
   margin: 100px 0 200px;
 }
