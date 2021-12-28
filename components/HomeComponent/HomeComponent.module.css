@@ -176,7 +176,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
   margin-right: 30px;
 }
 
