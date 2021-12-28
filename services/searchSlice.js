@@ -1,4 +1,5 @@
 // import api from "../lib/api";
+import { normalizeDate } from "@lib/normalizeDate";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../config/";
 
@@ -20,16 +21,26 @@ const initialState = {
 export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
   async (paper) => {
-    // console.log("this be the paper", paper);
+    console.log("this be the paper", paper);
     let choice = paper["choice"];
-    // console.log("thats the choie", choice);
+    //{
+    // console.log("thatsss the choie", choice);
     // let jdate = new Date(paper.date);
     // console.log("json date is: ", jdate.toJSON());
-    // delete paper["choice"];
+    //}
     if (choice === "date") {
       delete paper["choice"];
       delete paper["from_date"];
       delete paper["to_date"];
+      //{
+      // let newDate = new Date(paper["date"]);
+      // console.log("new Date: ", newDate);
+      // let finalDate = normalizeDate(newDate);
+      // paper["date"] = finalDate;
+      // let pdate = new Date(paper.date);
+      // let fdate = new Date(finalDate);
+      // console.log("p date is: ", pdate.toJSON(), "f date is: ", fdate.toJSON());
+      //}
     } else {
       delete paper["choice"];
       delete paper["date"];

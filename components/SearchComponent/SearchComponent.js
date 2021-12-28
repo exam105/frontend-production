@@ -406,7 +406,12 @@ function SearchComponent() {
         </div>
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
-        {data && !data[0]?.id && !pending && !error ? (
+        {data?.message ? (
+          <div style={{ margin: "0px 0px 30px 0px", height: "50vh" }}>
+            There was some error while fetching the data. We will take notice of
+            the problem and fix at our earliest.
+          </div>
+        ) : data && !data[0]?.id && !pending && !error ? (
           <div style={{ margin: "0px 0px 30px 0px", height: "50vh" }}>
             Perform a search.
           </div>

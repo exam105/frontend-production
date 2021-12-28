@@ -14,7 +14,7 @@ import router from "next/router";
 function HomeComponent() {
   const dispatch = useDispatch();
   const choiceRef = useRef("date");
-  // const [choice, setChoice] = useState("date");
+  // const [choice, setChoice] = useState("date"); //delete this
 
   const [date, setDate] = useState(normalizeDate(new Date()));
   const [startDate, setStartDate] = useState(normalizeDate(new Date()));
@@ -134,8 +134,7 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // setChoice("daterange");
-        console.log(paper);
+        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -173,8 +172,7 @@ function HomeComponent() {
         if (!paper.date) {
           paper.date = paper.from_date;
         }
-        // setChoice("date");
-        console.log(paper);
+        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -182,7 +180,6 @@ function HomeComponent() {
         );
         delete paper["choice"];
       } else {
-        console.log("i came here");
         // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
