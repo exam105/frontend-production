@@ -1,20 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import Select from "react-dropdown-select";
-import Link from "next/link";
 import styles from "./HomeComponent.module.css";
 import { useDispatch } from "react-redux";
 import { getSearchPapers } from "../../services/searchSlice";
 import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
 
 function HomeComponent() {
   const dispatch = useDispatch();
   const choiceRef = useRef("date");
-  // const [choice, setChoice] = useState("date");
+  // const [choice, setChoice] = useState("date"); //delete this
 
+  const [date, setDate] = useState(normalizeDate(new Date()));
+  const [startDate, setStartDate] = useState(normalizeDate(new Date()));
+  const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
   const [redSystem, setRedSystem] = useState(false);
@@ -27,9 +31,9 @@ function HomeComponent() {
     subject: "",
     system: "",
     board: "",
-    date: "",
-    from_date: "",
-    to_date: "",
+    date: date,
+    from_date: startDate,
+    to_date: endDate,
   });
   useEffect(() => {
     if (isDateRange) {
@@ -98,22 +102,22 @@ function HomeComponent() {
     }
   };
 
-  const change_start_month_and_year = (e) => {
-    e.preventDefault();
+  const change_start_month_and_year = (date) => {
     setRedStartDate(false);
-    const newDate = normalizeDate(e.target.value);
+    const newDate = normalizeDate(date);
+    setStartDate(newDate);
     setPaper({ ...paper, from_date: newDate });
   };
-  const change_end_month_and_year = (e) => {
-    e.preventDefault();
+  const change_end_month_and_year = (date) => {
     setRedEndDate(false);
-    const newDate = normalizeDate(e.target.value);
+    const newDate = normalizeDate(date);
+    setEndDate(newDate);
     setPaper({ ...paper, to_date: newDate });
   };
-  const change_month_and_year = (e) => {
-    e.preventDefault();
+  const change_month_and_year = (date) => {
     setRedStartDate(false);
-    const newDate = normalizeDate(e.target.value);
+    const newDate = normalizeDate(date);
+    setDate(newDate);
     setPaper({ ...paper, date: newDate });
   };
   const onSubmit = (e) => {
@@ -130,8 +134,7 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // setChoice("daterange");
-
+        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -139,7 +142,7 @@ function HomeComponent() {
         );
         delete paper["choice"];
       } else {
-        console.log("i came here in dtrange");
+        // console.log("i came here in dtrange");
 
         // e.preventDefault();
         if (!paper.subject) {
@@ -169,8 +172,7 @@ function HomeComponent() {
         if (!paper.date) {
           paper.date = paper.from_date;
         }
-        // setChoice("date");
-
+        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -178,7 +180,6 @@ function HomeComponent() {
         );
         delete paper["choice"];
       } else {
-        console.log("i came here");
         // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
@@ -276,7 +277,25 @@ function HomeComponent() {
                     <span className={styles.checkmark}></span>
                   </label>
                 </div>
-                <input
+                <DatePicker
+                  className={styles.inputDate}
+                  selected={isDateRange ? startDate : date}
+                  style={{ border: redStartDate ? "1px solid red" : "none" }}
+                  showMonthYearPicker
+                  peekNextMonth
+                  onChangeRaw={(e) => e.preventDefault()}
+                  onFocus={(e) => e.preventDefault()}
+                  onKeyDown={(e) => e.preventDefault()}
+                  disabledKeyboardNavigation
+                  dateFormat="MMMM yyyy"
+                  onChange={
+                    isDateRange
+                      ? change_start_month_and_year
+                      : change_month_and_year
+                  }
+                  // onChange={change_month_and_year}
+                />
+                {/* <input
                   className={styles.inputDate}
                   type="date"
                   name="startDate"
@@ -290,7 +309,7 @@ function HomeComponent() {
                   min="2000-01-01"
                   max="2040-12-28"
                   style={{ border: redStartDate ? "1px solid red" : "none" }}
-                />
+                /> */}
               </div>
             </div>
 
@@ -319,17 +338,30 @@ function HomeComponent() {
                   </label>
                 </div>
                 {isDateRange && (
-                  <input
+                  <DatePicker
                     className={`${styles.inputDate} ${styles.appear}`}
-                    type="date"
-                    name="endDate"
-                    id="endDate"
-                    required
-                    onChange={change_end_month_and_year}
-                    min="2000-01-01"
-                    max="2040-12-28"
+                    selected={endDate}
                     style={{ border: redEndDate ? "1px solid red" : "none" }}
+                    showMonthYearPicker
+                    peekNextMonth
+                    onChangeRaw={(e) => e.preventDefault()}
+                    onFocus={(e) => e.preventDefault()}
+                    onKeyDown={(e) => e.preventDefault()}
+                    disabledKeyboardNavigation
+                    dateFormat="MMMM yyyy"
+                    onChange={change_end_month_and_year}
                   />
+                  // <input
+                  //   className={`${styles.inputDate} ${styles.appear}`}
+                  //   type="date"
+                  //   name="endDate"
+                  //   id="endDate"
+                  //   required
+                  //   onChange={change_end_month_and_year}
+                  //   min="2000-01-01"
+                  //   max="2040-12-28"
+                  //   style={{ border: redEndDate ? "1px solid red" : "none" }}
+                  // />
                 )}
               </div>
             </div>

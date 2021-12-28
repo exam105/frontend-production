@@ -16,6 +16,12 @@ class MyDocument extends Document {
             content="upgrade-insecure-requests"
           /> */}
           {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <link rel="preconnect" href="https://fonts.googleapis.com/" />
+          <link rel="preconnect" href="https://fonts.gstatic.com/" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins"
+            rel="stylesheet"
+          />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
