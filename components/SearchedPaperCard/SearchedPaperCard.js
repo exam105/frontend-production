@@ -1,23 +1,36 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { resetQuestion } from "@services/questionSlice";
 import { resetQuestions } from "@services/questionsSlice";
 import styles from "./SearchedPaperCard.module.css";
-import Loader from "@components/common/Loader";
+import ButtonLoader from "@components/common/ButtonLoader";
 
 function SearchedPaperComponent({ paper }) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    return () => {
+      setIsLoading(false);
+    };
+  }, []);
   const resetData = () => {
     dispatch(resetQuestion());
     dispatch(resetQuestions());
   };
 
   return (
-    <Link href={`/search/${paper.id}/${paper.question_hex_ids[0]}`} passHref>
+    <Link
+      onClick={() => setIsLoading(true)}
+      href={`/search/${paper.id}/${paper.question_hex_ids[0]}`}
+      passHref
+    >
       <div
+        style={{ position: "relative" }}
         onClick={() => {
+          setIsLoading(true);
           resetData();
           router.push(`/search/${paper.id}/${paper.question_hex_ids[0]}`);
         }}
@@ -49,11 +62,14 @@ function SearchedPaperComponent({ paper }) {
             </div>
           </div>
         </div>
-        {/* <Loader
-          fontSize="10px"
-          position="relative"
-          margin="0rem 0rem 30rem 0rem"
-        /> */}
+        {isLoading && (
+          <ButtonLoader
+            fontSize="10px"
+            position="absolute"
+            margin="0rem 0rem 30rem 0rem"
+            left="50%"
+          />
+        )}
       </div>
     </Link>
   );
