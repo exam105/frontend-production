@@ -139,7 +139,7 @@ function QuestionsComponent() {
               </a>
             </Link>
           </div>
-          <div
+          {/* <div
             className={`${styles.textSelect} ${styles.booksText}`}
             onClick={() => {
               setShowBookModal(true);
@@ -153,7 +153,7 @@ function QuestionsComponent() {
               height="23"
             />
             <div style={{ marginLeft: "10px" }}>{questionCart}</div>
-          </div>
+          </div> */}
         </div>
         {paperData.id && (
           <div

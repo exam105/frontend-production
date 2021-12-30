@@ -39,10 +39,30 @@ function SearchComponent() {
     to_date: endDate,
   });
   // useEffect(() => {
-  //   console.log("data:", router.query, "router: ", router);
-  //   let paper = router.query;
-
-  //   dispatch(getSearchPapers(paper));
+  // console.log("data:", router.query, "router: ", router);
+  // let paper1 = router.asPath;
+  // remove ascii characters from the url
+  // paper1 = paper1.replace(/[^a-zA-Z0-9]/g, " ");
+  // extract the subject, system and board from the url query
+  // let subject = paper1.split("/")[1];
+  // let system = paper1.split("/")[2];
+  // let board = paper1.split("/")[3];
+  // let date = paper1.split("/")[4];
+  // let from_date = paper1.split("/")[5];
+  // let to_date = paper1.split("/")[6];
+  // // extract choices from the url
+  // let choice = paper1.split("/")[7];
+  // setPaper({
+  //   subject: subject,
+  //   system: system,
+  //   board: board,
+  //   date: date,
+  //   from_date: from_date,
+  //   to_date: to_date,
+  //   choice: choice,
+  // });
+  // console.log("special paper:", paper1);
+  //    dispatch(getSearchPapers(paper));
   // }, []);
   useEffect(() => {
     if (updateUrl) {
@@ -386,8 +406,8 @@ function SearchComponent() {
                 {router.query.subject},{" "}
                 {router.query.date && (
                   <>
-                    {router.query.date.substr(4, 3)}/ {/*Month*/}
-                    {router.query.date.substr(11, 4)} {/*Year*/}
+                    {/* {router.query?.date?.substr(4, 3)}/ Month */}
+                    {/* {router.query?.date?.substr(11, 4)} Year */}
                   </>
                 )}
                 {router.query.from_date && (
