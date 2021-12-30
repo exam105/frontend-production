@@ -406,8 +406,8 @@ function SearchComponent() {
                 {router.query.subject},{" "}
                 {router.query.date && (
                   <>
-                    {/* {router.query?.date?.substr(4, 3)}/ Month */}
-                    {/* {router.query?.date?.substr(11, 4)} Year */}
+                    {router.query?.date?.substr(4, 3)}/ {/*Month*/}
+                    {router.query?.date?.substr(11, 4)} {/*Year*/}
                   </>
                 )}
                 {router.query.from_date && (

@@ -1,8 +1,8 @@
 import styles from "./Loader.module.css";
 
-function Loader({ fontSize, margin, position }) {
+function Loader({ fontSize, margin }) {
   return (
-    <div style={{ position: position }} className={styles.loadsss}>
+    <div className={styles.loadsss}>
       <div className={styles.load5}>
         <div
           className={styles.loader}
