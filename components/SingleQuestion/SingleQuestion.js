@@ -50,9 +50,12 @@ function SingleQuestion({
                   <p className={styles.questionMarks}>Marks: {data?.marks}</p>
                 </div>
 
-                <div className={styles.question}>
+                <div className={`${styles.question} markdown-body`}>
                   <MathpixLoader>
-                    <MathpixMarkdown text={data?.question} />
+                    <MathpixMarkdown
+                      // style={{ margin: "unset", padding: "unset" }}
+                      text={data?.question}
+                    />
                   </MathpixLoader>
                 </div>
               </div>

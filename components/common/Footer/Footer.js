@@ -22,7 +22,7 @@ export default function Footer() {
                 />
               </Link>
               <div className={styles.footerLinks}>
-                <ul>
+                {/* <ul>
                   <li className={styles.grayColor}>
                     <Link href="#">
                       <a className={styles.noStyle}>About </a>
@@ -33,7 +33,7 @@ export default function Footer() {
                       <a className={styles.noStyle}>Contact us </a>
                     </Link>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

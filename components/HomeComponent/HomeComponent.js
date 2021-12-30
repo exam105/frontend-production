@@ -134,7 +134,6 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -172,7 +171,6 @@ function HomeComponent() {
         if (!paper.date) {
           paper.date = paper.from_date;
         }
-        // console.log(paper);
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         router.push(
@@ -204,11 +202,21 @@ function HomeComponent() {
         <ToastContainer />
         <h1 className={styles.heading}>
           Welcome to
-          <span className={styles.textGreen}> EXAM105 Platform.</span> Here you
+          <span className={styles.textGreen}> EXAM105 Platform.</span> Right now
+          we have papers of IGCSE Edexcel from{" "}
+          <span className={styles.importantPart}>
+            2011 to 2019 for Maths and Chemistry subjects
+          </span>
+          .
+          {/* Here you
           can Explore and Download Cambridge board past papers. You can even
           download your customized eBook composed of different questions from
-          different papers.
+          different papers. */}
         </h1>
+        <h2 style={{ color: "gray" }}>
+          We are constantly uploading new papers in our databases for your
+          better experience.
+        </h2>
 
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>

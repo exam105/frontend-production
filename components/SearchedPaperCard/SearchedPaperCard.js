@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { resetQuestion } from "@services/questionSlice";
 import { resetQuestions } from "@services/questionsSlice";
 import styles from "./SearchedPaperCard.module.css";
+import Loader from "@components/common/Loader";
 
 function SearchedPaperComponent({ paper }) {
   const dispatch = useDispatch();
@@ -48,6 +49,11 @@ function SearchedPaperComponent({ paper }) {
             </div>
           </div>
         </div>
+        {/* <Loader
+          fontSize="10px"
+          position="relative"
+          margin="0rem 0rem 30rem 0rem"
+        /> */}
       </div>
     </Link>
   );

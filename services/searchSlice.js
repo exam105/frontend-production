@@ -21,9 +21,9 @@ const initialState = {
 export const getSearchPapers = createAsyncThunk(
   "papers/getSearchPapers",
   async (paper) => {
-    console.log("this be the paper", paper);
     let choice = paper["choice"];
     //{
+    // console.log("this be the paper", paper);
     // console.log("thatsss the choie", choice);
     // let jdate = new Date(paper.date);
     // console.log("json date is: ", jdate.toJSON());
@@ -32,15 +32,22 @@ export const getSearchPapers = createAsyncThunk(
       delete paper["choice"];
       delete paper["from_date"];
       delete paper["to_date"];
+
       //{
-      // let newDate = new Date(paper["date"]);
+      // console.log("i am date: ", paper["date"]);
+
+      // let dateString = paper["date"].slice(3, 24);
+      // console.log("dateString: ", dateString);
+
+      // let newDate = new Date(`${dateString}`);
       // console.log("new Date: ", newDate);
       // let finalDate = normalizeDate(newDate);
       // paper["date"] = finalDate;
       // let pdate = new Date(paper.date);
       // let fdate = new Date(finalDate);
       // console.log("p date is: ", pdate.toJSON(), "f date is: ", fdate.toJSON());
-      //}
+      // console.log("date is: ", paper.date);
+      // //}
     } else {
       delete paper["choice"];
       delete paper["date"];

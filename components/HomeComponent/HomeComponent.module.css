@@ -12,7 +12,11 @@
 .textGreen {
   color: #34a853;
 }
-
+.importantPart {
+  /* make this text important */
+  font-weight: 700;
+  font-size: xx-large;
+}
 .loginBtn {
   display: flex;
   align-items: center;

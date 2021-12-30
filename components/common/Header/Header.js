@@ -20,10 +20,10 @@ export default function Header() {
               />
             </Link>
           </div>
-          <div className={styles.loginBtn}>
+          {/* <div className={styles.loginBtn}>
             <h3 className={styles.login}>Login</h3>
             <button className="btn-style sign">Sign up</button>
-          </div>
+          </div> */}
         </header>
       </div>
     </div>
