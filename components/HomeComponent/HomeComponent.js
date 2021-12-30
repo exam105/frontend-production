@@ -134,12 +134,12 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        paper["choice"] = isDateRange ? "daterange" : "date";
-        dispatch(getSearchPapers(paper));
+        // paper["choice"] = isDateRange ? "daterange" : "date";
+        // dispatch(getSearchPapers(paper));
         router.push(
           `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
         );
-        delete paper["choice"];
+        // delete paper["choice"];
       } else {
         // console.log("i came here in dtrange");
 
@@ -171,12 +171,12 @@ function HomeComponent() {
         if (!paper.date) {
           paper.date = paper.from_date;
         }
-        paper["choice"] = isDateRange ? "daterange" : "date";
-        dispatch(getSearchPapers(paper));
+        // paper["choice"] = isDateRange ? "daterange" : "date";
+        // dispatch(getSearchPapers(paper));
         router.push(
           `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
         );
-        delete paper["choice"];
+        // delete paper["choice"];
       } else {
         // e.preventDefault();
         if (!paper.subject) {

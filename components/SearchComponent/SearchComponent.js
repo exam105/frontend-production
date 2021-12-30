@@ -38,39 +38,53 @@ function SearchComponent() {
     from_date: startDate,
     to_date: endDate,
   });
-  // useEffect(() => {
-  // console.log("data:", router.query, "router: ", router);
-  // let paper1 = router.asPath;
-  // remove ascii characters from the url
-  // paper1 = paper1.replace(/[^a-zA-Z0-9]/g, " ");
-  // extract the subject, system and board from the url query
-  // let subject = paper1.split("/")[1];
-  // let system = paper1.split("/")[2];
-  // let board = paper1.split("/")[3];
-  // let date = paper1.split("/")[4];
-  // let from_date = paper1.split("/")[5];
-  // let to_date = paper1.split("/")[6];
-  // // extract choices from the url
-  // let choice = paper1.split("/")[7];
-  // setPaper({
-  //   subject: subject,
-  //   system: system,
-  //   board: board,
-  //   date: date,
-  //   from_date: from_date,
-  //   to_date: to_date,
-  //   choice: choice,
-  // });
-  // console.log("special paper:", paper1);
-  //    dispatch(getSearchPapers(paper));
-  // }, []);
+  const { data, pending, error } = useSelector((state) => state.papers);
+
+  useEffect(() => {
+    // extracting the url and sending the data to the server
+    // check if there is data in the state
+    try {
+      let url = window.location.href;
+      let paper1 = url.substring(url.indexOf("?") + 1);
+      paper1 = decodeURIComponent(paper1);
+      let paper3 = paper1.split("&");
+      let paper4 = paper3.map((item) => {
+        let paper5 = item.split("=");
+        return paper5;
+      });
+      let paper6 = paper4.map((item) => {
+        let paper7 = {};
+        paper7[item[0]] = item[1];
+        return paper7;
+      });
+      let paper8 = paper6.reduce((acc, curr) => {
+        return { ...acc, ...curr };
+      });
+      // correcting the date format
+      if (paper8.choice === "date") {
+        let dateString = paper8["date"].slice(3, 24);
+        let newDate = new Date(`${dateString}`);
+        paper8["date"] = newDate;
+      } else {
+        let fromDateString = paper8["from_date"].slice(3, 24);
+        let toDateString = paper8["to_date"].slice(3, 24);
+        let newFromDate = new Date(`${fromDateString}`);
+        let newToDate = new Date(`${toDateString}`);
+        paper8["from_date"] = newFromDate;
+        paper8["to_date"] = newToDate;
+      }
+
+      console.log("paper8: ", paper8);
+      dispatch(getSearchPapers(paper8));
+    } catch (error) {}
+  }, []);
   useEffect(() => {
     if (updateUrl) {
       router.push(
         `${
           isDateRange
-            ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}`
-            : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}`
+            ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=daterange`
+            : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=date`
         }`,
         undefined,
         {
@@ -140,7 +154,6 @@ function SearchComponent() {
       setPaper({ ...paper, [e[0].text]: e[0].value });
     }
   };
-  const { data, pending, error } = useSelector((state) => state.papers);
 
   const change_start_month_and_year = (date) => {
     setRedStartDate(false);
