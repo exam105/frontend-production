@@ -73,8 +73,6 @@ function SearchComponent() {
         paper8["from_date"] = newFromDate;
         paper8["to_date"] = newToDate;
       }
-
-      console.log("paper8: ", paper8);
       dispatch(getSearchPapers(paper8));
     } catch (error) {}
   }, []);

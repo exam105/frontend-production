@@ -47,6 +47,7 @@ function QuestionsComponent() {
     url = url?.substring(url?.indexOf("/") + 1);
     let id = url?.split("/");
     setPaperId(id[0]);
+    return () => localStorage.removeItem("secondPageUrl");
   }, []);
 
   useEffect(() => {
@@ -114,7 +115,15 @@ function QuestionsComponent() {
       <aside className={styles.sidenav}>
         <div className={styles.sidenavTop}>
           <div className={styles.textBack}>
-            <Link href="/search/" passHref>
+            <div
+              onClick={() => {
+                if (localStorage.getItem("secondPageUrl")) {
+                  router.push(`${localStorage.getItem("secondPageUrl")}`);
+                } else {
+                  router.push("/search");
+                }
+              }}
+            >
               <a>
                 <Image
                   src="/images/back.svg"
@@ -124,8 +133,16 @@ function QuestionsComponent() {
                   className={styles.back}
                 />
               </a>
-            </Link>
-            <Link href="/search/" passHref>
+            </div>
+            <div
+              onClick={() => {
+                if (localStorage.getItem("secondPageUrl")) {
+                  router.push(`${localStorage.getItem("secondPageUrl")}`);
+                } else {
+                  router.push("/search");
+                }
+              }}
+            >
               <a>
                 <span
                   style={{
@@ -137,7 +154,7 @@ function QuestionsComponent() {
                   Back
                 </span>
               </a>
-            </Link>
+            </div>
           </div>
           {/* <div
             className={`${styles.textSelect} ${styles.booksText}`}
