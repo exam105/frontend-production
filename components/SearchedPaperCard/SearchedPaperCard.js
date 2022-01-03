@@ -23,7 +23,9 @@ function SearchedPaperComponent({ paper }) {
 
   return (
     <Link
-      onClick={() => setIsLoading(true)}
+      onClick={() => {
+        setIsLoading(true);
+      }}
       href={`/search/${paper.id}/${paper.question_hex_ids[0]}`}
       passHref
     >
@@ -31,6 +33,7 @@ function SearchedPaperComponent({ paper }) {
         style={{ position: "relative" }}
         onClick={() => {
           setIsLoading(true);
+          sessionStorage.setItem("secondPageUrl", window.location.href);
           resetData();
           router.push(`/search/${paper.id}/${paper.question_hex_ids[0]}`);
         }}
@@ -64,7 +67,7 @@ function SearchedPaperComponent({ paper }) {
         </div>
         {isLoading && (
           <ButtonLoader
-            fontSize="10px"
+            fontSize="7px"
             position="absolute"
             margin="0rem 0rem 30rem 0rem"
             left="50%"

@@ -47,6 +47,13 @@ function QuestionsComponent() {
     url = url?.substring(url?.indexOf("/") + 1);
     let id = url?.split("/");
     setPaperId(id[0]);
+    return () => sessionStorage.removeItem("secondPageUrl");
+    // Here is a corner case where the user closes the tab or the browser is closed, the secondPageUrl from sessionStorage is not cleared.
+    // What is the solution for it:
+    // 1. Clear the sessionStorage on page load
+    // 2. Clear the sessionStorage on page unload
+    // 3. Clear the sessionStorage on browser close
+    // Try the unload and the beforeunload event listener on the window
   }, []);
 
   useEffect(() => {
@@ -114,7 +121,15 @@ function QuestionsComponent() {
       <aside className={styles.sidenav}>
         <div className={styles.sidenavTop}>
           <div className={styles.textBack}>
-            <Link href="/search/" passHref>
+            <div
+              onClick={() => {
+                if (sessionStorage.getItem("secondPageUrl")) {
+                  router.push(`${sessionStorage.getItem("secondPageUrl")}`);
+                } else {
+                  router.push("/search");
+                }
+              }}
+            >
               <a>
                 <Image
                   src="/images/back.svg"
@@ -124,8 +139,16 @@ function QuestionsComponent() {
                   className={styles.back}
                 />
               </a>
-            </Link>
-            <Link href="/search/" passHref>
+            </div>
+            <div
+              onClick={() => {
+                if (sessionStorage.getItem("secondPageUrl")) {
+                  router.push(`${sessionStorage.getItem("secondPageUrl")}`);
+                } else {
+                  router.push("/search");
+                }
+              }}
+            >
               <a>
                 <span
                   style={{
@@ -137,7 +160,7 @@ function QuestionsComponent() {
                   Back
                 </span>
               </a>
-            </Link>
+            </div>
           </div>
           {/* <div
             className={`${styles.textSelect} ${styles.booksText}`}
