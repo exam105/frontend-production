@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Select from "react-dropdown-select";
+// import Select from "react-select";
 import styles from "./HomeComponent.module.css";
 import { useDispatch } from "react-redux";
 import { getSearchPapers } from "../../services/searchSlice";
@@ -225,6 +226,7 @@ function HomeComponent() {
               maxMenuHeight="80"
               options={systems}
               placeholder="System"
+              defaultInputValue="IGCSE"
               onChange={change_input}
               required
               style={{
