@@ -6,7 +6,7 @@
   text-align: center;
   /* margin-bottom: 80px; */
 }
-/* The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles */
+/* The .select style is applied to the react select package, so I had to use the !Important for applying custom css styles */
 .select {
   width: 323px !important;
   height: 45px !important;
@@ -14,9 +14,12 @@
   margin: 0 auto !important;
   margin-left: 30px !important;
   border-radius: 5px !important;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
-    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
   /* border: none !important; */
+}
+.selectRed {
+  border: 1px solid red;
 }
 
 .searchBox {
@@ -169,17 +172,17 @@
   flex-direction: column;
 }
 .inputDate {
-  /* border: 1px solid #c4c4c4; */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
-    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  border: 1px solid #c4c4c4;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
   /* border: none !important; */
-  height: 45px;
+  height: 38px;
   width: 360px !important;
   border-radius: 5px;
   background-color: #fff;
   padding: 3px 5px;
   width: 190px;
-  border: medium none;
+  /* border: medium none; */
 }
 .inputDate:focus {
   outline: none;
@@ -267,11 +270,11 @@
   border: 2px solid #268dec !important;
 } */
 
-.select:focus-within {
+/* .select:focus-within {
   outline: none !important;
   box-shadow: none !important;
   border: 2px solid #268dec !important;
-}
+} */
 
 /* .ItemComponent.react-dropdown-select-item-selected {
   background-color: red !important;

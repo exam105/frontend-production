@@ -141,6 +141,7 @@ function QuestionsComponent() {
               </a>
             </div>
             <div
+              className={styles.backIcon}
               onClick={() => {
                 if (sessionStorage.getItem("secondPageUrl")) {
                   router.push(`${sessionStorage.getItem("secondPageUrl")}`);

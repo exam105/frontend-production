@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from "react-select";
 import styles from "./SearchComponent.module.css";
 import { SearchedPaperCard } from "../SearchedPaperCard";
 import { useSelector } from "react-redux";
@@ -35,7 +36,7 @@ function SearchComponent() {
     system: "",
     board: "",
     date: date,
-    from_date: startDate,
+    from_date: date,
     to_date: endDate,
   });
   const { data, pending, error } = useSelector((state) => state.papers);
@@ -62,19 +63,74 @@ function SearchComponent() {
       });
       // correcting the date format
       if (paper8.choice === "date") {
+        setIsDateRange(false);
         let dateString = paper8["date"].slice(3, 24);
         let newDate = new Date(`${dateString}`);
         paper8["date"] = newDate;
+        setDate(newDate);
+        let normalTodayDate = normalizeDate(new Date());
+        setEndDate(normalTodayDate);
       } else {
+        setIsDateRange(true);
         let fromDateString = paper8["from_date"].slice(3, 24);
         let toDateString = paper8["to_date"].slice(3, 24);
         let newFromDate = new Date(`${fromDateString}`);
         let newToDate = new Date(`${toDateString}`);
         paper8["from_date"] = newFromDate;
         paper8["to_date"] = newToDate;
+        setDate(newFromDate);
+        setEndDate(newToDate);
+      }
+      setPaper(paper8);
+      delete paper.choice;
+      // updated paper.board as is the board value in paper8
+      if (paper8.system === "GCSE") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        setBoards([
+          { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+          { key: 1, value: "AQA", text: "board", label: "AQA" },
+          { key: 2, value: "OCR", text: "board", label: "OCR" },
+          { key: 3, value: "CCEA", text: "board", label: "CCEA" },
+        ]);
+      } else if (paper8.system === "IGCSE") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        setBoards([
+          { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+          { key: 7, value: "CIE", text: "board", label: "CIE" },
+        ]);
+      } else if (paper8.system === "AS" || paper8.system === "A Level") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        setBoards([
+          { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
+          { key: 5, value: "AQA", text: "board", label: "AQA" },
+          { key: 6, value: "OCR", text: "board", label: "OCR" },
+          { key: 7, value: "CIE", text: "board", label: "CIE" },
+          {
+            key: 8,
+            value: "Edexcel IAL",
+            text: "board",
+            label: "Edexcel IAL",
+          },
+        ]);
+      } else if (paper8.system === "O Level" || paper8.system === "Pre U") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
+      } else if (paper8.system === "IB") {
+        setBoards([{ key: 0, value: "", text: "", label: "" }]);
+        setBoards([
+          {
+            key: 9,
+            value: "No Board",
+            text: "board",
+            label: "No Board",
+            status: "disable",
+          },
+        ]);
       }
       dispatch(getSearchPapers(paper8));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   useEffect(() => {
     if (updateUrl) {
@@ -93,18 +149,18 @@ function SearchComponent() {
     setUpdateUrl(false);
   }, [updateUrl]);
   const change_input = (e) => {
-    if (e[0] !== undefined) {
-      if (e[0].text === "subject") {
+    if (e !== undefined) {
+      if (e.text === "subject") {
         setRedSubject(false);
       }
-      if (e[0].text === "board") {
+      if (e.text === "board") {
         setRedBoard(false);
       }
-      if (e[0].text === "system") {
+      if (e.text === "system") {
         setRedSystem(false);
         setBoards([{ key: 0, value: "", text: "", label: "" }]);
-
-        if (e[0].value === "GCSE") {
+        setPaper({ ...paper, board: "" });
+        if (e.value === "GCSE") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
@@ -112,13 +168,13 @@ function SearchComponent() {
             { key: 2, value: "OCR", text: "board", label: "OCR" },
             { key: 3, value: "CCEA", text: "board", label: "CCEA" },
           ]);
-        } else if (e[0].value === "IGCSE") {
+        } else if (e.value === "IGCSE") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
             { key: 7, value: "CIE", text: "board", label: "CIE" },
           ]);
-        } else if (e[0].value === "AS" || e[0].value === "A Level") {
+        } else if (e.value === "AS" || e.value === "A Level") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
@@ -132,12 +188,11 @@ function SearchComponent() {
               label: "Edexcel IAL",
             },
           ]);
-        } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+        } else if (e.value === "O Level" || e.value === "Pre U") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-        } else if (e[0].value === "IB") {
+        } else if (e.value === "IB") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
-
           setBoards([
             {
               key: 9,
@@ -149,16 +204,75 @@ function SearchComponent() {
           ]);
         }
       }
-      setPaper({ ...paper, [e[0].text]: e[0].value });
+      setPaper({ ...paper, [e.text]: e.value });
     }
+
+    // if (e[0] !== undefined) {
+    //   if (e[0].text === "subject") {
+    //     setRedSubject(false);
+    //   }
+    //   if (e[0].text === "board") {
+    //     setRedBoard(false);
+    //   }
+    //   if (e[0].text === "system") {
+    //     setRedSystem(false);
+    //     setBoards([{ key: 0, value: "", text: "", label: "" }]);
+
+    //     if (e[0].value === "GCSE") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 1, value: "AQA", text: "board", label: "AQA" },
+    //         { key: 2, value: "OCR", text: "board", label: "OCR" },
+    //         { key: 3, value: "CCEA", text: "board", label: "CCEA" },
+    //       ]);
+    //     } else if (e[0].value === "IGCSE") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
+    //       ]);
+    //     } else if (e[0].value === "AS" || e[0].value === "A Level") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 5, value: "AQA", text: "board", label: "AQA" },
+    //         { key: 6, value: "OCR", text: "board", label: "OCR" },
+    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
+    //         {
+    //           key: 8,
+    //           value: "Edexcel IAL",
+    //           text: "board",
+    //           label: "Edexcel IAL",
+    //         },
+    //       ]);
+    //     } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
+    //     } else if (e[0].value === "IB") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+
+    //       setBoards([
+    //         {
+    //           key: 9,
+    //           value: "No Board",
+    //           text: "board",
+    //           label: "No Board",
+    //           status: "disable",
+    //         },
+    //       ]);
+    //     }
+    //   }
+    //   setPaper({ ...paper, [e[0].text]: e[0].value });
+    // }
   };
 
-  const change_start_month_and_year = (date) => {
-    setRedStartDate(false);
-    const newDate = normalizeDate(date);
-    setStartDate(newDate);
-    setPaper({ ...paper, from_date: newDate });
-  };
+  // const change_start_month_and_year = (date) => {
+  //   setRedStartDate(false);
+  //   const newDate = normalizeDate(date);
+  //   setStartDate(newDate);
+  //   setPaper({ ...paper, from_date: newDate });
+  // };
   const change_end_month_and_year = (date) => {
     setRedEndDate(false);
     const newDate = normalizeDate(date);
@@ -170,21 +284,20 @@ function SearchComponent() {
     const newDate = normalizeDate(date);
     setDate(newDate);
     setPaper({ ...paper, date: newDate });
+    setPaper({ ...paper, from_date: newDate });
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    change_end_month_and_year(endDate);
+    change_month_and_year(date);
+    paper.to_date = normalizeDate(endDate);
     setUpdateUrl(true);
     if (isDateRange) {
-      if (
-        paper.subject &&
-        paper.system &&
-        paper.board &&
-        paper.to_date &&
-        (paper.from_date || paper.date)
-      ) {
+      if (paper.subject && paper.system && paper.board) {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
+
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         delete paper["choice"];
@@ -198,24 +311,17 @@ function SearchComponent() {
         if (!paper.board) {
           setRedBoard(true);
         }
-        if (!paper.to_date) {
-          setRedEndDate(true);
-        }
-        if (!paper.from_date && !paper.date) {
-          setRedStartDate(true);
-        }
+        // if (!paper.to_date) {
+        //   setRedEndDate(true);
+        // }
+        // if (!paper.from_date && !paper.date) {
+        //   setRedStartDate(true);
+        // }
         toast.error("Please fill in all the required fields.");
       }
     } else {
-      if (
-        paper.subject &&
-        paper.system &&
-        paper.board &&
-        (paper.date || paper.from_date)
-      ) {
-        if (!paper.date) {
-          paper.date = paper.from_date;
-        }
+      if (paper.subject && paper.system && paper.board) {
+        paper.date = paper.from_date;
         paper["choice"] = isDateRange ? "daterange" : "date";
         dispatch(getSearchPapers(paper));
         delete paper["choice"];
@@ -229,9 +335,9 @@ function SearchComponent() {
         if (!paper.board) {
           setRedBoard(true);
         }
-        if (!paper.from_date && !paper.date) {
-          setRedStartDate(true);
-        }
+        // if (!paper.from_date && !paper.date) {
+        //   setRedStartDate(true);
+        // }
         toast.error("Please fill in all the required fields.");
       }
     }
@@ -245,30 +351,55 @@ function SearchComponent() {
               className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
               <Select
-                className={styles.select}
+                className={
+                  redSystem
+                    ? `${styles.selectRed} ${styles.select}`
+                    : `${styles.select}`
+                }
+                maxMenuHeight="80"
                 options={systems}
                 placeholder="System"
+                value={
+                  systems.filter((item) => item.value === paper.system)[0] || ""
+                }
+                instanceId="system"
                 onChange={change_input}
                 required
-                style={{ border: redSystem ? "1px solid red" : "none" }}
               />
               <Select
-                className={styles.select}
-                values={boards}
+                className={
+                  redBoard
+                    ? `${styles.selectRed} ${styles.select}`
+                    : `${styles.select}`
+                }
+                value={
+                  boards.filter((item) => item.value === paper.board)[0] || ""
+                }
                 options={boards}
                 placeholder="Board"
+                instanceId="board"
                 onChange={change_input}
                 required
-                style={{ border: redBoard ? "1px solid red" : "none" }}
               />
 
               <Select
-                className={styles.select}
+                className={
+                  redSubject
+                    ? `${styles.selectRed} ${styles.select}`
+                    : `${styles.select}`
+                }
                 options={subjects}
+                instanceId="subject"
+                value={
+                  subjects.filter((item) => item.value === paper.subject)[0] ||
+                  ""
+                }
                 placeholder="Subject"
                 onChange={change_input}
                 required
-                style={{ border: redSubject ? "1px solid red" : "none" }}
+                style={{
+                  border: redSubject ? "1px solid red" : "none",
+                }}
               />
             </div>
 
@@ -303,7 +434,7 @@ function SearchComponent() {
                     </div>
                     <DatePicker
                       className={styles.inputDate}
-                      selected={isDateRange ? startDate : date}
+                      selected={date}
                       style={{
                         border: redStartDate ? "1px solid red" : "none",
                       }}
@@ -314,11 +445,7 @@ function SearchComponent() {
                       onKeyDown={(e) => e.preventDefault()}
                       disabledKeyboardNavigation
                       dateFormat="MMMM yyyy"
-                      onChange={
-                        isDateRange
-                          ? change_start_month_and_year
-                          : change_month_and_year
-                      }
+                      onChange={change_month_and_year}
                     />
                     {/* <input
                       className={styles.inputDate}
@@ -397,7 +524,15 @@ function SearchComponent() {
                 </div>
                 <div className={styles.searchButton}>
                   <div className={styles.loginBtn}>
-                    <button onClick={onSubmit} className="btn-style sign">
+                    <button
+                      onClick={(e) => {
+                        paper.to_date = normalizeDate(endDate);
+                        paper.date = normalizeDate(date);
+                        paper.from_date = normalizeDate(date);
+                        onSubmit(e);
+                      }}
+                      className="btn-style sign"
+                    >
                       Search
                     </button>
                   </div>
@@ -408,33 +543,33 @@ function SearchComponent() {
         </div>
       </div>
       <div className="content-width">
-        <div style={{ paddingBottom: "30px" }}>
-          {router.query.subject && data && data[0]?.id && !pending && !error ? (
-            <>
-              Showing results for:{" "}
-              <b>
-                {router.query.system}, {router.query.board},{" "}
-                {router.query.subject},{" "}
-                {router.query.date && (
-                  <>
-                    {router.query?.date?.substr(4, 3)}/ {/*Month*/}
-                    {router.query?.date?.substr(11, 4)} {/*Year*/}
-                  </>
-                )}
-                {router.query.from_date && (
-                  <>
-                    {router.query.from_date.substr(4, 3)}/{" "}
-                    {router.query.from_date.substr(11, 4)} -{" "}
-                    {router.query.to_date.substr(4, 3)}/{" "}
-                    {router.query.to_date.substr(11, 4)}
-                  </>
-                )}{" "}
-              </b>
-            </>
-          ) : (
-            ""
-          )}
-        </div>
+        {/* <div style={{ paddingBottom: "30px" }}> */}
+        {/* {router.query.subject && data && data[0]?.id && !pending && !error ? ( */}
+        {/* // <> */}
+        {/* //   Showing results for:{" "} */}
+        {/* //   <b> */}
+        {/* //     {router.query.system}, {router.query.board},{" "} */}
+        {/* //     {router.query.subject},{" "} */}
+        {/* //     {router.query.date && ( */}
+        {/* //       <> */}
+        {/* //         {router.query?.date?.substr(4, 3)}/ Month */}
+        {/* //         {router.query?.date?.substr(11, 4)} Year */}
+        {/* //       </> */}
+        {/* //     )} */}
+        {/* //     {router.query.from_date && ( */}
+        {/* //       <> */}
+        {/* //         {router.query.from_date.substr(4, 3)}/{" "} */}
+        {/* //         {router.query.from_date.substr(11, 4)} -{" "} */}
+        {/* //         {router.query.to_date.substr(4, 3)}/{" "} */}
+        {/* //         {router.query.to_date.substr(11, 4)} */}
+        {/* //       </> */}
+        {/* //     )}{" "} */}
+        {/* //   </b> */}
+        {/* // </> */}
+        {/* //     ) : ( */}
+        {/* //       "" */}
+        {/* //   )} */}
+        {/* // </div> */}
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
         {data?.message ? (
