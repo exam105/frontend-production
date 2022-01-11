@@ -209,6 +209,9 @@ function SingleQuestion({
         )}
 
         <Modal
+          titleMessage={
+            "Hover with your mouse over the image to apply magnifier"
+          }
           onClose={() => setShowImageSliderModal(false)}
           show={showImageSliderModal}
         >
