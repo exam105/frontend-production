@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import Select from "react-dropdown-select";
+// import Select from "react-dropdown-select";
+import Select from "react-select";
 import styles from "./HomeComponent.module.css";
 import { useDispatch } from "react-redux";
 import { getSearchPapers } from "../../services/searchSlice";
@@ -32,7 +33,7 @@ function HomeComponent() {
     system: "",
     board: "",
     date: date,
-    from_date: startDate,
+    from_date: date,
     to_date: endDate,
   });
   useEffect(() => {
@@ -44,17 +45,18 @@ function HomeComponent() {
   }, [isDateRange]);
 
   const change_input = (e) => {
-    if (e[0] !== undefined) {
-      if (e[0].text === "subject") {
+    if (e !== undefined) {
+      if (e.text === "subject") {
         setRedSubject(false);
       }
-      if (e[0].text === "board") {
+      if (e.text === "board") {
         setRedBoard(false);
       }
-      if (e[0].text === "system") {
+      if (e.text === "system") {
         setRedSystem(false);
         setBoards([{ key: 0, value: "", text: "", label: "" }]);
-        if (e[0].value === "GCSE") {
+        setPaper({ ...paper, board: "" });
+        if (e.value === "GCSE") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
@@ -62,13 +64,13 @@ function HomeComponent() {
             { key: 2, value: "OCR", text: "board", label: "OCR" },
             { key: 3, value: "CCEA", text: "board", label: "CCEA" },
           ]);
-        } else if (e[0].value === "IGCSE") {
+        } else if (e.value === "IGCSE") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
             { key: 7, value: "CIE", text: "board", label: "CIE" },
           ]);
-        } else if (e[0].value === "AS" || e[0].value === "A Level") {
+        } else if (e.value === "AS" || e.value === "A Level") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
@@ -82,10 +84,10 @@ function HomeComponent() {
               label: "Edexcel IAL",
             },
           ]);
-        } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+        } else if (e.value === "O Level" || e.value === "Pre U") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-        } else if (e[0].value === "IB") {
+        } else if (e.value === "IB") {
           setBoards([{ key: 0, value: "", text: "", label: "" }]);
           setBoards([
             {
@@ -98,16 +100,73 @@ function HomeComponent() {
           ]);
         }
       }
-      setPaper({ ...paper, [e[0].text]: e[0].value });
+      setPaper({ ...paper, [e.text]: e.value });
     }
+
+    // if (e[0] !== undefined) {
+    //   if (e[0].text === "subject") {
+    //     setRedSubject(false);
+    //   }
+    //   if (e[0].text === "board") {
+    //     setRedBoard(false);
+    //   }
+    //   if (e[0].text === "system") {
+    //     setRedSystem(false);
+    //     setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //     if (e[0].value === "GCSE") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 1, value: "AQA", text: "board", label: "AQA" },
+    //         { key: 2, value: "OCR", text: "board", label: "OCR" },
+    //         { key: 3, value: "CCEA", text: "board", label: "CCEA" },
+    //       ]);
+    //     } else if (e[0].value === "IGCSE") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
+    //       ]);
+    //     } else if (e[0].value === "AS" || e[0].value === "A Level") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
+    //         { key: 5, value: "AQA", text: "board", label: "AQA" },
+    //         { key: 6, value: "OCR", text: "board", label: "OCR" },
+    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
+    //         {
+    //           key: 8,
+    //           value: "Edexcel IAL",
+    //           text: "board",
+    //           label: "Edexcel IAL",
+    //         },
+    //       ]);
+    //     } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
+    //     } else if (e[0].value === "IB") {
+    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
+    //       setBoards([
+    //         {
+    //           key: 9,
+    //           value: "No Board",
+    //           text: "board",
+    //           label: "No Board",
+    //           status: "disable",
+    //         },
+    //       ]);
+    //     }
+    //   }
+    //   setPaper({ ...paper, [e[0].text]: e[0].value });
+    // }
   };
 
-  const change_start_month_and_year = (date) => {
-    setRedStartDate(false);
-    const newDate = normalizeDate(date);
-    setStartDate(newDate);
-    setPaper({ ...paper, from_date: newDate });
-  };
+  // const change_start_month_and_year = (date) => {
+  //   setRedStartDate(false);
+  //   const newDate = normalizeDate(date);
+  //   setStartDate(newDate);
+  //   setPaper({ ...paper, from_date: newDate });
+  // };
   const change_end_month_and_year = (date) => {
     setRedEndDate(false);
     const newDate = normalizeDate(date);
@@ -119,6 +178,7 @@ function HomeComponent() {
     const newDate = normalizeDate(date);
     setDate(newDate);
     setPaper({ ...paper, date: newDate });
+    setPaper({ ...paper, from_date: newDate });
   };
   const onSubmit = (e) => {
     e.preventDefault();
@@ -168,9 +228,7 @@ function HomeComponent() {
         paper.board &&
         (paper.date || paper.from_date)
       ) {
-        if (!paper.date) {
-          paper.date = paper.from_date;
-        }
+        paper.date = paper.from_date;
         // paper["choice"] = isDateRange ? "daterange" : "date";
         // dispatch(getSearchPapers(paper));
         router.push(
@@ -221,26 +279,35 @@ function HomeComponent() {
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <Select
-              className={styles.select}
+              className={
+                redSystem
+                  ? `${styles.selectRed} ${styles.select}`
+                  : `${styles.select}`
+              }
               maxMenuHeight="80"
               options={systems}
               placeholder="System"
+              value={
+                systems.filter((item) => item.value === paper.system)[0] || ""
+              }
+              instanceId="system"
               onChange={change_input}
               required
-              style={{
-                border: redSystem ? "1px solid red" : "none",
-              }}
             />
             <Select
-              className={styles.select}
-              values={boards}
+              className={
+                redBoard
+                  ? `${styles.selectRed} ${styles.select}`
+                  : `${styles.select}`
+              }
+              value={
+                boards.filter((item) => item.value === paper.board)[0] || ""
+              }
               options={boards}
               placeholder="Board"
+              instanceId="board"
               onChange={change_input}
               required
-              style={{
-                border: redBoard ? "1px solid red" : "none",
-              }}
             />
           </div>
 
@@ -248,14 +315,19 @@ function HomeComponent() {
             className={`${styles.searchFields} ${styles.mobileResponsive} ${styles.mobile}`}
           >
             <Select
-              className={styles.select}
+              className={
+                redSubject
+                  ? `${styles.selectRed} ${styles.select}`
+                  : `${styles.select}`
+              }
               options={subjects}
+              instanceId="subject"
+              value={
+                subjects.filter((item) => item.value === paper.subject)[0] || ""
+              }
               placeholder="Subject"
               onChange={change_input}
               required
-              style={{
-                border: redSubject ? "1px solid red" : "none",
-              }}
             />
           </div>
 
@@ -287,7 +359,7 @@ function HomeComponent() {
                 </div>
                 <DatePicker
                   className={styles.inputDate}
-                  selected={isDateRange ? startDate : date}
+                  selected={date}
                   style={{ border: redStartDate ? "1px solid red" : "none" }}
                   showMonthYearPicker
                   peekNextMonth
@@ -296,12 +368,7 @@ function HomeComponent() {
                   onKeyDown={(e) => e.preventDefault()}
                   disabledKeyboardNavigation
                   dateFormat="MMMM yyyy"
-                  onChange={
-                    isDateRange
-                      ? change_start_month_and_year
-                      : change_month_and_year
-                  }
-                  // onChange={change_month_and_year}
+                  onChange={change_month_and_year}
                 />
                 {/* <input
                   className={styles.inputDate}

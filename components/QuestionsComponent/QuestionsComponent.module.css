@@ -150,3 +150,7 @@
 .plusIcon > image {
   cursor: pointer;
 }
+
+.backIcon {
+  margin-bottom: 4px;
+}

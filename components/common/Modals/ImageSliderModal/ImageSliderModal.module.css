@@ -65,16 +65,16 @@
   position: unset !important;
 } */
 .imageSize {
-  object-fit: contain;
+  object-fit: contain !important;
   /* width: auto !important; */
-  /* height:  !important; */
+  /* height: auto !important; */
   position: relative !important;
   /* height: unset !important; */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 700px;
-  max-height: 430px;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 700px !important;
+  max-height: 430px !important;
 }
 .buttonHead {
   max-height: 20px;

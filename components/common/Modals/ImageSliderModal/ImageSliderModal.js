@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./ImageSliderModal.module.css";
+import Magnifier from "react-magnifier";
 
 function ImageSliderModal({ data, currentImageIndex }) {
   const [currentImage, setCurrentImage] = useState(data[currentImageIndex]);
@@ -36,13 +37,22 @@ function ImageSliderModal({ data, currentImageIndex }) {
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <div className={styles.image}>
-          <img
+          <Magnifier
+            src={currentImage.imageurl}
+            mgShape="square"
+            mgWidth={450}
+            mgHeight={450}
+            className={`${styles.imageSize}`}
+            width={400}
+            zoomFactor={0.3}
+          />
+          {/* <img
             src={currentImage.imageurl}
             // src="https://exam105.s3-ap-southeast-1.amazonaws.com/Chemistry/Igcse_edexcel_1_2012_paper2_ques_4(c).jpg"
             alt={currentImage.imageurl}
             // layout="fill"
             className={styles.imageSize}
-          />
+          /> */}
         </div>
       </div>
       <div className={styles.buttonHead}>

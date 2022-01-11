@@ -4,7 +4,7 @@ import styles from "./Modal.module.css";
 import Image from "next/image";
 
 // Create Document Component
-export default function Modal({ show, children, onClose }) {
+export default function Modal({ titleMessage, show, children, onClose }) {
   const [isBrowser, setIsBrowser] = useState(false);
   useEffect(() => {
     setIsBrowser(true);
@@ -17,6 +17,7 @@ export default function Modal({ show, children, onClose }) {
     <div className={styles.overlay}>
       <div>
         <div className={styles.closeHeader}>
+          <span>{titleMessage}</span>
           <a href="#" onClick={handleClose}>
             <Image
               src="/images/close.svg"
