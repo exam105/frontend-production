@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-// import Select from "react-dropdown-select";
 import Select from "react-select";
 import styles from "./HomeComponent.module.css";
-import { useDispatch } from "react-redux";
-import { getSearchPapers } from "../../services/searchSlice";
 import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,12 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
 
 function HomeComponent() {
-  const dispatch = useDispatch();
   const choiceRef = useRef("date");
-  // const [choice, setChoice] = useState("date"); //delete this
-
   const [date, setDate] = useState(normalizeDate(new Date()));
-  const [startDate, setStartDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
@@ -102,71 +95,8 @@ function HomeComponent() {
       }
       setPaper({ ...paper, [e.text]: e.value });
     }
-
-    // if (e[0] !== undefined) {
-    //   if (e[0].text === "subject") {
-    //     setRedSubject(false);
-    //   }
-    //   if (e[0].text === "board") {
-    //     setRedBoard(false);
-    //   }
-    //   if (e[0].text === "system") {
-    //     setRedSystem(false);
-    //     setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //     if (e[0].value === "GCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 1, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 2, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 3, value: "CCEA", text: "board", label: "CCEA" },
-    //       ]);
-    //     } else if (e[0].value === "IGCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //       ]);
-    //     } else if (e[0].value === "AS" || e[0].value === "A Level") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 5, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 6, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //         {
-    //           key: 8,
-    //           value: "Edexcel IAL",
-    //           text: "board",
-    //           label: "Edexcel IAL",
-    //         },
-    //       ]);
-    //     } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-    //     } else if (e[0].value === "IB") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         {
-    //           key: 9,
-    //           value: "No Board",
-    //           text: "board",
-    //           label: "No Board",
-    //           status: "disable",
-    //         },
-    //       ]);
-    //     }
-    //   }
-    //   setPaper({ ...paper, [e[0].text]: e[0].value });
-    // }
   };
 
-  // const change_start_month_and_year = (date) => {
-  //   setRedStartDate(false);
-  //   const newDate = normalizeDate(date);
-  //   setStartDate(newDate);
-  //   setPaper({ ...paper, from_date: newDate });
-  // };
   const change_end_month_and_year = (date) => {
     setRedEndDate(false);
     const newDate = normalizeDate(date);
@@ -194,16 +124,10 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // paper["choice"] = isDateRange ? "daterange" : "date";
-        // dispatch(getSearchPapers(paper));
         router.push(
           `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
         );
-        // delete paper["choice"];
       } else {
-        // console.log("i came here in dtrange");
-
-        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -229,14 +153,10 @@ function HomeComponent() {
         (paper.date || paper.from_date)
       ) {
         paper.date = paper.from_date;
-        // paper["choice"] = isDateRange ? "daterange" : "date";
-        // dispatch(getSearchPapers(paper));
         router.push(
           `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
         );
-        // delete paper["choice"];
       } else {
-        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -445,15 +365,7 @@ function HomeComponent() {
 
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
-            {/* <Link
-              href={`${
-                isDateRange
-                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
-                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
-              }`}
-            > */}
             <a className="btn-style sign">Search</a>
-            {/* </Link> */}
           </div>
         </div>
       </div>
