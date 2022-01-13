@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-// import Select from "react-dropdown-select";
 import Select from "react-select";
 import styles from "./SearchComponent.module.css";
 import { SearchedPaperCard } from "../SearchedPaperCard";
@@ -8,7 +7,7 @@ import { useSelector } from "react-redux";
 import { subjects, systems } from "@lib/papersData";
 import { normalizeDate } from "@lib/normalizeDate";
 import { useDispatch } from "react-redux";
-import { getSearchPapers } from "../../services/searchSlice";
+import { getSearchPapers } from "./searchSlice";
 import Loader from "@components/common/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
@@ -20,7 +19,6 @@ function SearchComponent() {
   const router = useRouter();
 
   const [date, setDate] = useState(normalizeDate(new Date()));
-  const [startDate, setStartDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
@@ -43,7 +41,6 @@ function SearchComponent() {
 
   useEffect(() => {
     // extracting the url and sending the data to the server
-    // check if there is data in the state
     try {
       let url = window.location.href;
       let paper1 = url.substring(url.indexOf("?") + 1);
@@ -206,73 +203,8 @@ function SearchComponent() {
       }
       setPaper({ ...paper, [e.text]: e.value });
     }
-
-    // if (e[0] !== undefined) {
-    //   if (e[0].text === "subject") {
-    //     setRedSubject(false);
-    //   }
-    //   if (e[0].text === "board") {
-    //     setRedBoard(false);
-    //   }
-    //   if (e[0].text === "system") {
-    //     setRedSystem(false);
-    //     setBoards([{ key: 0, value: "", text: "", label: "" }]);
-
-    //     if (e[0].value === "GCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 1, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 2, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 3, value: "CCEA", text: "board", label: "CCEA" },
-    //       ]);
-    //     } else if (e[0].value === "IGCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //       ]);
-    //     } else if (e[0].value === "AS" || e[0].value === "A Level") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 5, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 6, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //         {
-    //           key: 8,
-    //           value: "Edexcel IAL",
-    //           text: "board",
-    //           label: "Edexcel IAL",
-    //         },
-    //       ]);
-    //     } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-    //     } else if (e[0].value === "IB") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-
-    //       setBoards([
-    //         {
-    //           key: 9,
-    //           value: "No Board",
-    //           text: "board",
-    //           label: "No Board",
-    //           status: "disable",
-    //         },
-    //       ]);
-    //     }
-    //   }
-    //   setPaper({ ...paper, [e[0].text]: e[0].value });
-    // }
   };
 
-  // const change_start_month_and_year = (date) => {
-  //   setRedStartDate(false);
-  //   const newDate = normalizeDate(date);
-  //   setStartDate(newDate);
-  //   setPaper({ ...paper, from_date: newDate });
-  // };
   const change_end_month_and_year = (date) => {
     setRedEndDate(false);
     const newDate = normalizeDate(date);
@@ -311,12 +243,6 @@ function SearchComponent() {
         if (!paper.board) {
           setRedBoard(true);
         }
-        // if (!paper.to_date) {
-        //   setRedEndDate(true);
-        // }
-        // if (!paper.from_date && !paper.date) {
-        //   setRedStartDate(true);
-        // }
         toast.error("Please fill in all the required fields.");
       }
     } else {
@@ -335,9 +261,6 @@ function SearchComponent() {
         if (!paper.board) {
           setRedBoard(true);
         }
-        // if (!paper.from_date && !paper.date) {
-        //   setRedStartDate(true);
-        // }
         toast.error("Please fill in all the required fields.");
       }
     }
@@ -447,23 +370,6 @@ function SearchComponent() {
                       dateFormat="MMMM yyyy"
                       onChange={change_month_and_year}
                     />
-                    {/* <input
-                      className={styles.inputDate}
-                      type="date"
-                      name="startDate"
-                      id="startDate"
-                      required
-                      onChange={
-                        isDateRange
-                          ? change_start_month_and_year
-                          : change_month_and_year
-                      }
-                      min="2000-01-01"
-                      max="2040-12-28"
-                      style={{
-                        border: redStartDate ? "1px solid red" : "none",
-                      }}
-                    /> */}
                   </div>
                 </div>
 
@@ -506,19 +412,6 @@ function SearchComponent() {
                         dateFormat="MMMM yyyy"
                         onChange={change_end_month_and_year}
                       />
-                      // <input
-                      //   className={`${styles.inputDate} ${styles.appear}`}
-                      //   type="date"
-                      //   name="endDate"
-                      //   id="endDate"
-                      //   required
-                      //   onChange={change_end_month_and_year}
-                      //   min="2000-01-01"
-                      //   max="2040-12-28"
-                      //   style={{
-                      //     border: redEndDate ? "1px solid red" : "none",
-                      //   }}
-                      // />
                     )}
                   </div>
                 </div>
@@ -543,33 +436,6 @@ function SearchComponent() {
         </div>
       </div>
       <div className="content-width">
-        {/* <div style={{ paddingBottom: "30px" }}> */}
-        {/* {router.query.subject && data && data[0]?.id && !pending && !error ? ( */}
-        {/* // <> */}
-        {/* //   Showing results for:{" "} */}
-        {/* //   <b> */}
-        {/* //     {router.query.system}, {router.query.board},{" "} */}
-        {/* //     {router.query.subject},{" "} */}
-        {/* //     {router.query.date && ( */}
-        {/* //       <> */}
-        {/* //         {router.query?.date?.substr(4, 3)}/ Month */}
-        {/* //         {router.query?.date?.substr(11, 4)} Year */}
-        {/* //       </> */}
-        {/* //     )} */}
-        {/* //     {router.query.from_date && ( */}
-        {/* //       <> */}
-        {/* //         {router.query.from_date.substr(4, 3)}/{" "} */}
-        {/* //         {router.query.from_date.substr(11, 4)} -{" "} */}
-        {/* //         {router.query.to_date.substr(4, 3)}/{" "} */}
-        {/* //         {router.query.to_date.substr(11, 4)} */}
-        {/* //       </> */}
-        {/* //     )}{" "} */}
-        {/* //   </b> */}
-        {/* // </> */}
-        {/* //     ) : ( */}
-        {/* //       "" */}
-        {/* //   )} */}
-        {/* // </div> */}
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
         {data?.message ? (

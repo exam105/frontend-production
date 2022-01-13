@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { resetQuestion } from "@services/questionSlice";
-import { resetQuestions } from "@services/questionsSlice";
+import { resetQuestion } from "@components/QuestionsComponent/questionSlice";
+import { resetQuestions } from "@components/QuestionsComponent/questionsSlice";
 import styles from "./SearchedPaperCard.module.css";
 import ButtonLoader from "@components/common/ButtonLoader";
 

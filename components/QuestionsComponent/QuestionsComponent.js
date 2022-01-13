@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 import { SingleQuestion } from "@components/SingleQuestion";
 import { Modal } from "@components/common/Modals";
 import { BookModal } from "@components/common/Modals";
 import styles from "./QuestionsComponent.module.css";
-import { getQuestion } from "@services/questionSlice";
+import { getQuestion } from "@components/QuestionsComponent/questionSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getQuestions } from "@services/questionsSlice";
+import { getQuestions } from "@components/QuestionsComponent/questionsSlice";
 import Loader from "@components/common/Loader";
 
 function QuestionsComponent() {
@@ -48,12 +47,6 @@ function QuestionsComponent() {
     let id = url?.split("/");
     setPaperId(id[0]);
     return () => sessionStorage.removeItem("secondPageUrl");
-    // Here is a corner case where the user closes the tab or the browser is closed, the secondPageUrl from sessionStorage is not cleared.
-    // What is the solution for it:
-    // 1. Clear the sessionStorage on page load
-    // 2. Clear the sessionStorage on page unload
-    // 3. Clear the sessionStorage on browser close
-    // Try the unload and the beforeunload event listener on the window
   }, []);
 
   useEffect(() => {

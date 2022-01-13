@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-// import Select from "react-dropdown-select";
 import Select from "react-select";
+import { API } from "@config/index";
 import styles from "./HomeComponent.module.css";
-import { useDispatch } from "react-redux";
-import { getSearchPapers } from "../../services/searchSlice";
 import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,12 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
 
 function HomeComponent() {
-  const dispatch = useDispatch();
-  const choiceRef = useRef("date");
-  // const [choice, setChoice] = useState("date"); //delete this
-
+  const [chemistryLength, setChemistryLength] = useState(0);
+  const [mathsLength, setMathsLength] = useState(0);
   const [date, setDate] = useState(normalizeDate(new Date()));
-  const [startDate, setStartDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
   // redding the borders of fields if there is a missing field
@@ -37,12 +32,47 @@ function HomeComponent() {
     to_date: endDate,
   });
   useEffect(() => {
-    if (isDateRange) {
-      choiceRef.current = "daterange";
-    } else {
-      choiceRef.current = "date";
-    }
-  }, [isDateRange]);
+    const fetchMathLength = async () => {
+      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Math",
+          system: "IGCSE",
+          board: "Edexcel",
+          from_date: "2011-01-01T00:00:00.000Z",
+          to_date: "2019-12-01T00:00:00.000Z",
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setMathsLength(data?.length);
+      }
+    };
+    const fetchChemistryLength = async () => {
+      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Chemistry",
+          system: "IGCSE",
+          board: "Edexcel",
+          from_date: "2011-01-01T00:00:00.000Z",
+          to_date: "2019-12-01T00:00:00.000Z",
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setChemistryLength(data?.length);
+      }
+    };
+    fetchMathLength();
+    fetchChemistryLength();
+  }, []);
 
   const change_input = (e) => {
     if (e !== undefined) {
@@ -102,71 +132,8 @@ function HomeComponent() {
       }
       setPaper({ ...paper, [e.text]: e.value });
     }
-
-    // if (e[0] !== undefined) {
-    //   if (e[0].text === "subject") {
-    //     setRedSubject(false);
-    //   }
-    //   if (e[0].text === "board") {
-    //     setRedBoard(false);
-    //   }
-    //   if (e[0].text === "system") {
-    //     setRedSystem(false);
-    //     setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //     if (e[0].value === "GCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 1, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 2, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 3, value: "CCEA", text: "board", label: "CCEA" },
-    //       ]);
-    //     } else if (e[0].value === "IGCSE") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 0, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //       ]);
-    //     } else if (e[0].value === "AS" || e[0].value === "A Level") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         { key: 4, value: "Edexcel", text: "board", label: "Edexcel" },
-    //         { key: 5, value: "AQA", text: "board", label: "AQA" },
-    //         { key: 6, value: "OCR", text: "board", label: "OCR" },
-    //         { key: 7, value: "CIE", text: "board", label: "CIE" },
-    //         {
-    //           key: 8,
-    //           value: "Edexcel IAL",
-    //           text: "board",
-    //           label: "Edexcel IAL",
-    //         },
-    //       ]);
-    //     } else if (e[0].value === "O Level" || e[0].value === "Pre U") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([{ key: 7, value: "CIE", text: "board", label: "CIE" }]);
-    //     } else if (e[0].value === "IB") {
-    //       setBoards([{ key: 0, value: "", text: "", label: "" }]);
-    //       setBoards([
-    //         {
-    //           key: 9,
-    //           value: "No Board",
-    //           text: "board",
-    //           label: "No Board",
-    //           status: "disable",
-    //         },
-    //       ]);
-    //     }
-    //   }
-    //   setPaper({ ...paper, [e[0].text]: e[0].value });
-    // }
   };
 
-  // const change_start_month_and_year = (date) => {
-  //   setRedStartDate(false);
-  //   const newDate = normalizeDate(date);
-  //   setStartDate(newDate);
-  //   setPaper({ ...paper, from_date: newDate });
-  // };
   const change_end_month_and_year = (date) => {
     setRedEndDate(false);
     const newDate = normalizeDate(date);
@@ -194,16 +161,10 @@ function HomeComponent() {
         if (!paper.from_date) {
           paper.from_date = paper.date;
         }
-        // paper["choice"] = isDateRange ? "daterange" : "date";
-        // dispatch(getSearchPapers(paper));
         router.push(
-          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=daterange`
         );
-        // delete paper["choice"];
       } else {
-        // console.log("i came here in dtrange");
-
-        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -229,14 +190,10 @@ function HomeComponent() {
         (paper.date || paper.from_date)
       ) {
         paper.date = paper.from_date;
-        // paper["choice"] = isDateRange ? "daterange" : "date";
-        // dispatch(getSearchPapers(paper));
         router.push(
-          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=date`
         );
-        // delete paper["choice"];
       } else {
-        // e.preventDefault();
         if (!paper.subject) {
           setRedSubject(true);
         }
@@ -261,9 +218,41 @@ function HomeComponent() {
         <h1 className={styles.heading}>
           Welcome to
           <span className={styles.textGreen}> EXAM105 Platform.</span> Right now
-          we have papers of IGCSE Edexcel from{" "}
+          we have{" "}
+          <span
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline 2px",
+            }}
+            onClick={() => {
+              router.push(
+                `/search?subject=Math&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
+              );
+            }}
+          >
+            {mathsLength > 0 && mathsLength}
+          </span>{" "}
+          {chemistryLength > 0 && (
+            <>
+              and{" "}
+              <span
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline 2px",
+                }}
+                onClick={() => {
+                  router.push(
+                    `/search?subject=Chemistry&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
+                  );
+                }}
+              >
+                {chemistryLength}
+              </span>
+            </>
+          )}{" "}
+          papers of IGCSE Edexcel from{" "}
           <span className={styles.importantPart}>
-            2011 to 2019 for Maths and Chemistry subjects
+            2011 to 2019 for Maths and Chemistry subjects respectively
           </span>
           .
           {/* Here you
@@ -445,15 +434,7 @@ function HomeComponent() {
 
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
-            {/* <Link
-              href={`${
-                isDateRange
-                  ? `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
-                  : `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
-              }`}
-            > */}
             <a className="btn-style sign">Search</a>
-            {/* </Link> */}
           </div>
         </div>
       </div>
