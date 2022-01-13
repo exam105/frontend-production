@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Select from "react-select";
+import { API } from "@config/index";
 import styles from "./HomeComponent.module.css";
 import { normalizeDate } from "@lib/normalizeDate";
 import { subjects, systems } from "@lib/papersData";
@@ -10,7 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
 
 function HomeComponent() {
-  const choiceRef = useRef("date");
+  const [chemistryLength, setChemistryLength] = useState(0);
+  const [mathsLength, setMathsLength] = useState(0);
   const [date, setDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
@@ -30,12 +32,47 @@ function HomeComponent() {
     to_date: endDate,
   });
   useEffect(() => {
-    if (isDateRange) {
-      choiceRef.current = "daterange";
-    } else {
-      choiceRef.current = "date";
-    }
-  }, [isDateRange]);
+    const fetchMathLength = async () => {
+      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Math",
+          system: "IGCSE",
+          board: "Edexcel",
+          from_date: "2011-01-01T00:00:00.000Z",
+          to_date: "2019-12-01T00:00:00.000Z",
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setMathsLength(data?.length);
+      }
+    };
+    const fetchChemistryLength = async () => {
+      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Chemistry",
+          system: "IGCSE",
+          board: "Edexcel",
+          from_date: "2011-01-01T00:00:00.000Z",
+          to_date: "2019-12-01T00:00:00.000Z",
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setChemistryLength(data?.length);
+      }
+    };
+    fetchMathLength();
+    fetchChemistryLength();
+  }, []);
 
   const change_input = (e) => {
     if (e !== undefined) {
@@ -125,7 +162,7 @@ function HomeComponent() {
           paper.from_date = paper.date;
         }
         router.push(
-          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=${choiceRef.current}`
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&from_date=${paper.from_date}&to_date=${paper.to_date}&choice=daterange`
         );
       } else {
         if (!paper.subject) {
@@ -154,7 +191,7 @@ function HomeComponent() {
       ) {
         paper.date = paper.from_date;
         router.push(
-          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=${choiceRef.current}`
+          `/search?subject=${paper.subject}&system=${paper.system}&board=${paper.board}&date=${paper.date}&choice=date`
         );
       } else {
         if (!paper.subject) {
@@ -181,9 +218,41 @@ function HomeComponent() {
         <h1 className={styles.heading}>
           Welcome to
           <span className={styles.textGreen}> EXAM105 Platform.</span> Right now
-          we have papers of IGCSE Edexcel from{" "}
+          we have{" "}
+          <span
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline 2px",
+            }}
+            onClick={() => {
+              router.push(
+                `/search?subject=Math&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
+              );
+            }}
+          >
+            {mathsLength > 0 && mathsLength}
+          </span>{" "}
+          {chemistryLength > 0 && (
+            <>
+              and{" "}
+              <span
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline 2px",
+                }}
+                onClick={() => {
+                  router.push(
+                    `/search?subject=Chemistry&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
+                  );
+                }}
+              >
+                {chemistryLength}
+              </span>
+            </>
+          )}{" "}
+          papers of IGCSE Edexcel from{" "}
           <span className={styles.importantPart}>
-            2011 to 2019 for Maths and Chemistry subjects
+            2011 to 2019 for Maths and Chemistry subjects respectively
           </span>
           .
           {/* Here you
