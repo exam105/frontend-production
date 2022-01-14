@@ -18,9 +18,10 @@
 .share {
   margin-right: 40px;
   cursor: pointer;
+  color: #268dec;
 }
 .share:hover {
-  color: rgb(82, 80, 80);
+  color: #2196f3;
   transition: 0.2s ease;
 }
 .questionHead {
