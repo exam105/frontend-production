@@ -4,6 +4,9 @@ import { useState } from "react";
 import styles from "./SingleQuestion.module.css";
 import { MathpixMarkdown, MathpixLoader } from "mathpix-markdown-it";
 import Loader from "@components/common/Loader";
+import { FiShare2 } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SingleQuestion({
   data,
@@ -17,31 +20,44 @@ function SingleQuestion({
   const [showImageSliderModal, setShowImageSliderModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
+
   return (
     <main className={styles.main}>
       <div
         className={styles.mainContent}
         style={{ height: "100vh", overflowX: "hidden", overflowY: "auto" }}
       >
+        <ToastContainer />
         {pending && <Loader />}
         {error && <div>There was some problem fetching the data.</div>}
         {!pending && !error && (
           <>
-            {data.topics && (
-              <div className={styles.badgeHeader}>
-                {/* map through topics in data */}
-                {data.topics
-                  ? data.topics.map((topic, index) => (
-                      <span
-                        key={index}
-                        className={`${styles.badge} ${styles.badgePrimary}`}
-                      >
-                        {topic.topic}
-                      </span>
-                    ))
-                  : ""}
-              </div>
-            )}
+            <div className={styles.topicsLane}>
+              {data.topics && (
+                <div className={styles.badgeHeader}>
+                  {/* map through topics in data */}
+                  {data.topics
+                    ? data.topics.map((topic, index) => (
+                        <span
+                          key={index}
+                          className={`${styles.badge} ${styles.badgePrimary}`}
+                        >
+                          {topic.topic}
+                        </span>
+                      ))
+                    : ""}
+                </div>
+              )}
+              <span
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                  toast.success("Question link copied!");
+                }}
+                className={styles.share}
+              >
+                <FiShare2 size={25} />
+              </span>
+            </div>
 
             <div className={styles.mainHeader}>
               <div className={styles.questionMain}>
