@@ -22,7 +22,6 @@ function SingleQuestion({
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
 
   const shareQuestion = () => {
-    console.log(window.location.href);
     navigator.clipboard.writeText(window.location.href);
     toast.success("Question link copied!");
   };
