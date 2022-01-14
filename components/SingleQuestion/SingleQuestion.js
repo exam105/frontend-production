@@ -48,14 +48,15 @@ function SingleQuestion({
                     : ""}
                 </div>
               )}
-              <div
-                onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
-                  toast.success("Question link copied!");
-                }}
-                className={styles.share}
-              >
-                <FiShare2 size={25} />
+              <div>
+                <FiShare2
+                  className={styles.share}
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    toast.success("Question link copied!");
+                  }}
+                  size={25}
+                />
               </div>
             </div>
 
