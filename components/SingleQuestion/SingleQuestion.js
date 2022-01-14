@@ -21,6 +21,11 @@ function SingleQuestion({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
 
+  const shareQuestion = () => {
+    console.log(window.location.href);
+    navigator.clipboard.writeText(window.location.href);
+    toast.success("Question link copied!");
+  };
   return (
     <main className={styles.main}>
       <div
@@ -51,10 +56,7 @@ function SingleQuestion({
               <div>
                 <FiShare2
                   className={styles.share}
-                  onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    toast.success("Question link copied!");
-                  }}
+                  onClick={() => shareQuestion()}
                   size={25}
                 />
               </div>
