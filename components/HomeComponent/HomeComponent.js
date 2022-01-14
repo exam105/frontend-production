@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import { API } from "@config/index";
 import styles from "./HomeComponent.module.css";
@@ -359,21 +359,6 @@ function HomeComponent() {
                   dateFormat="MMMM yyyy"
                   onChange={change_month_and_year}
                 />
-                {/* <input
-                  className={styles.inputDate}
-                  type="date"
-                  name="startDate"
-                  id="startDate"
-                  required
-                  onChange={
-                    isDateRange
-                      ? change_start_month_and_year
-                      : change_month_and_year
-                  }
-                  min="2000-01-01"
-                  max="2040-12-28"
-                  style={{ border: redStartDate ? "1px solid red" : "none" }}
-                /> */}
               </div>
             </div>
 
@@ -391,6 +376,7 @@ function HomeComponent() {
                       type="radio"
                       name="radio"
                       value="daterange"
+                      checked={isDateRange === true}
                       onChange={(e) =>
                         e.currentTarget.value === "daterange"
                           ? setIsDateRange(true)
