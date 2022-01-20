@@ -37,21 +37,23 @@ function SingleQuestion({
         {!pending && !error && (
           <>
             <div className={styles.topicsLane}>
-              {data.topics && (
-                <div className={styles.badgeHeader}>
-                  {/* map through topics in data */}
-                  {data.topics
-                    ? data.topics.map((topic, index) => (
-                        <span
-                          key={index}
-                          className={`${styles.badge} ${styles.badgePrimary}`}
-                        >
-                          {topic.topic}
-                        </span>
-                      ))
-                    : ""}
-                </div>
-              )}
+              <div>
+                {data.topics && (
+                  <div className={styles.badgeHeader}>
+                    {/* map through topics in data */}
+                    {data.topics
+                      ? data.topics.map((topic, index) => (
+                          <span
+                            key={index}
+                            className={`${styles.badge} ${styles.badgePrimary}`}
+                          >
+                            {topic.topic}
+                          </span>
+                        ))
+                      : ""}
+                  </div>
+                )}
+              </div>
               <div>
                 <FiShare2
                   className={styles.share}
