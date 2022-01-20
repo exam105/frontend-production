@@ -9,6 +9,7 @@ const store = configureStore({
     question: questionReducer,
     questions: questionsReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;
