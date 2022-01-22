@@ -7,6 +7,8 @@ import {
   View,
   Canvas,
 } from "@react-pdf/renderer";
+import { MathpixLoader, MathpixMarkdown } from "mathpix-markdown-it";
+
 import Question from "./Question";
 // Create styles
 Font.register({

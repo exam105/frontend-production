@@ -68,15 +68,18 @@ const styles = StyleSheet.create({
 
 const Question = ({ question, answer, marks, topics, images }) => {
   /* "https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" */
-
+  const obj = {
+    quesstion: "blah blah blah",
+  };
   return (
     <Document>
       <Text> </Text>
       <View>
-        <Image alt="Error" style={styles.image} src={TextImage} />
+        {/* <Image alt="Error" style={styles.image} src={TextImage} /> */}
         {/* <MathpixLoader>
-          <MathpixMarkdown text="yo yo \\(ax^2 + bx + c = 0\\)" />
-        </MathpixLoader> */}
+              <MathpixMarkdown text={obj.quesstion} />
+            </MathpixLoader> */}
+        <div>blah</div>
       </View>
       <Text>Topics:</Text>
       <View style={styles.topic}>

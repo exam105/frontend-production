@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import useSWR from "swr";
-import axios from "axios";
+// import axios from "axios";
 import styles from "@/styles/Search.module.css";
 
 export default function Search() {

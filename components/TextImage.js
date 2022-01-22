@@ -6,9 +6,10 @@ import ElementModal from "./ElementModal";
 const Text = () => {
   return (
     <div>
-      <MathpixLoader>
+      hi people
+      {/* <MathpixLoader>
         <MathpixMarkdown text="yo yo \\(ax^2 + bx + c = 0\\)" />
-      </MathpixLoader>
+      </MathpixLoader> */}
     </div>
   );
 };

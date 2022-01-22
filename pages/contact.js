@@ -54,7 +54,7 @@ export default function ContactPage() {
       <MathpixLoader>
         <MathpixMarkdown text="\\(ax^2 + bx + c = 0\\)" />
       </MathpixLoader>
-      <Image src={<TextImage />} alt="error" />
+      {/* <Image src={<TextImage />} alt="error" /> */}
       <a target="_blank" href={`/pdfPage`} rel="noopener noreferrer">
         <button
           style={{
