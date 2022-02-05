@@ -260,11 +260,10 @@ function HomeComponent() {
           download your customized eBook composed of different questions from
           different papers. */}
         </h1>
-        <h2 style={{ color: "gray" }}>
+        {/* <h2 style={{ color: "gray" }}>
           We are constantly uploading new papers in our databases for your
           better experience.
-        </h2>
-
+        </h2> */}
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <Select
@@ -417,12 +416,18 @@ function HomeComponent() {
             </div>
           </div>
         </div>
-
         <div className={styles.searchButton}>
           <div onClick={onSubmit} className={styles.loginBtn}>
             <a className="btn-style sign">Search</a>
           </div>
         </div>
+        {/* <div className={styles.quickLinks}>
+          <span>Quick Links: </span>
+          <div>
+            <a className="btn-style-secondary">Edexcel Maths 2011 - 2019</a>{" "}
+            <a className="btn-style-secondary">Edexcel Chemistry 2011 - 2019</a>
+          </div>{" "}
+        </div> */}
       </div>
     </div>
   );

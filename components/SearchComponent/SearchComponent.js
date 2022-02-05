@@ -458,7 +458,7 @@ function SearchComponent() {
             ) : data && data[0].id ? (
               // <div className="content-width">
               <>
-                <div className={styles.mainBox}>
+                <div className={styles.mainBox} style={{ height: "50vh" }}>
                   <div className={`${styles.gridLogoss} ${styles.logos}`}>
                     {/* mapping through the data */}
                     {data?.map((paper, i) => {
