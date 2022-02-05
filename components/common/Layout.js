@@ -10,7 +10,7 @@ export default function Layout({
   height,
 }) {
   return (
-    <div /*style={{ height: "100vh" }}*/>
+    <div>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />

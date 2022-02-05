@@ -40,6 +40,7 @@ function SearchedPaperComponent({ paper }) {
         className={`${styles.gridLogos__itemm} ${styles.card}`}
       >
         <div className={styles.cardContent}>
+          {/* System - Board - Quetions Length */}
           <div className={styles.cardHead}>
             <div className={styles.blueColor}>
               <p>{paper.system}</p>
@@ -51,6 +52,16 @@ function SearchedPaperComponent({ paper }) {
               <p>Qs: {paper.question_hex_ids.length}</p>
             </div>
           </div>
+          {/* Paper Reference */}
+          {/* <div
+            className={styles.cardFooter}
+            style={{ justifyContent: "center" }}
+          >
+            <div style={{ fontSize: "14px" }} className={styles.blackColor}>
+              <p>{paper.reference}</p>
+            </div>
+          </div> */}
+          {/* Subject - Month/Year */}
           <div className={styles.cardFooter}>
             <div className={styles.blackColor}>
               <p>{paper.subject}</p>

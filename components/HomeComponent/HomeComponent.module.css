@@ -32,7 +32,26 @@
   flex-direction: row;
   height: 80px;
 }
-
+.quickLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: flex-start;
+}
+.quickLinks > span {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.quickLinks > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 30px;
+}
+.quickLinks > div > a {
+  margin-left: 30px;
+}
 .searchContainer {
   margin-left: 30px;
 }

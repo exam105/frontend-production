@@ -53,7 +53,31 @@ a {
   background: #fff;
   color: #268dec;
 }
+.btn-style-secondary {
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.015em;
+  background-color: #ffffff;
+  color: #268dec;
+  width: fit-content;
+  height: 50px;
+  padding: 20px 32px;
+  /* background: #fff; */
+  border: 2px solid #268dec;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+}
 
+.btn-style-secondary:hover {
+  color: #fff;
+  background: #268dec;
+}
 .logo {
   cursor: pointer;
   display: flex;
