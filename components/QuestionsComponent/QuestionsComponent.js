@@ -58,6 +58,7 @@ function QuestionsComponent() {
   }, [router.query.questionId]);
 
   useEffect(() => {
+    // changing route to questionId if question is selected with shallow routing
     if (questionId) {
       router.push(`/search/${paperId}/${questionId}`, undefined, {
         shallow: true,

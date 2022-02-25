@@ -39,6 +39,7 @@ function ImageSliderModal({ data, currentImageIndex }) {
         <div className={styles.image}>
           <Magnifier
             src={currentImage.imageurl}
+            // src="https://exam105.s3-ap-southeast-1.amazonaws.com/Chemistry/Igcse_edexcel_1_2012_paper2_ques_4(c).jpg"
             mgShape="square"
             mgWidth={450}
             mgHeight={450}
