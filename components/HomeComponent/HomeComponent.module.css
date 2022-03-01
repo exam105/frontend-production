@@ -9,6 +9,13 @@
   font-size: 28px;
   margin-top: 50px;
 }
+.subjectLength {
+  cursor: pointer;
+  text-decoration: underline 2px;
+}
+.subjectLength:hover {
+  color: #268dec;
+}
 .textGreen {
   color: #34a853;
 }
