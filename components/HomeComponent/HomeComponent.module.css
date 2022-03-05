@@ -170,7 +170,7 @@
 /* The .select style is applied to the react select dropdown package, so I had to use the !Important for applying custom css styles */
 .select {
   width: 380px !important;
-  height: 45px !important;
+  height: 41px !important;
   font-size: 1rem !important;
   margin: 0 auto !important;
   margin-left: 30px !important;
@@ -258,12 +258,34 @@
   border: none;
 }
 
-.select:active {
+/* .select:active {
   outline: none !important;
   box-shadow: none !important;
   border: 2px solid #268dec !important;
+} */
+
+.systemContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 40px;
 }
 
+.systemParent {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60%;
+}
+
+.system {
+  padding: 10px 20px;
+  background-color: #268dec;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+}
 /* .select:hover{
   outline: none !important;
   box-shadow: none !important;

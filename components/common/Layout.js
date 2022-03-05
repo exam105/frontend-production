@@ -10,14 +10,18 @@ export default function Layout({
   height,
 }) {
   return (
-    <div>
+    <div  style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "100vh"
+    }}>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      <div style={{ height: height }}>{children}</div>
+      <div style={{ flex: 1 }}>{children}</div>
       <Footer />
     </div>
   );

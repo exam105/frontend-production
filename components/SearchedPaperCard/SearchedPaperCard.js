@@ -52,15 +52,7 @@ function SearchedPaperComponent({ paper }) {
               <p>Qs: {paper.question_hex_ids.length}</p>
             </div>
           </div>
-          {/* Paper Reference */}
-          {/* <div
-            className={styles.cardFooter}
-            style={{ justifyContent: "center" }}
-          >
-            <div style={{ fontSize: "14px" }} className={styles.blackColor}>
-              <p>{paper.reference}</p>
-            </div>
-          </div> */}
+
           {/* Subject - Month/Year */}
           <div className={styles.cardFooter}>
             <div className={styles.blackColor}>
@@ -76,14 +68,22 @@ function SearchedPaperComponent({ paper }) {
             </div>
           </div>
         </div>
+
         {isLoading && (
           <ButtonLoader
             fontSize="7px"
             position="absolute"
-            margin="0rem 0rem 30rem 0rem"
+            margin="-1.3rem 0rem 0rem 0rem"
             left="50%"
           />
         )}
+
+        <div className={styles.referenceContainer}>
+          <p className={styles.singleReference}>4MA0/3FR</p>
+          <p className={styles.singleReference}>4MA0/2FR</p>
+          <p className={styles.singleReference}>4NA0/1AR</p>
+          <p className={styles.singleReference}>9A0/2FR</p>
+        </div>
       </div>
     </Link>
   );
