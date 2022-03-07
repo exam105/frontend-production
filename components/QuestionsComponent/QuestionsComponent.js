@@ -174,17 +174,23 @@ function QuestionsComponent() {
         </div>
         {paperData.id && (
           <>
-            <div className={styles.referenceContainer}>
-              <div>
-                <p className={styles.referenceNumber}>Reference Number:</p>
+            {paperData.reference && (
+              <div className={styles.referenceContainer}>
+                <div>
+                  <p className={styles.referenceNumber}>Reference Number:</p>
+                </div>
+                <div className={styles.reference}>
+                  {paperData.reference &&
+                    paperData.reference.split(",").map((value, index) => {
+                      return (
+                        <p key={index} className={styles.singleReference}>
+                          {value}{" "}
+                        </p>
+                      );
+                    })}
+                </div>
               </div>
-              <div className={styles.reference}>
-                <p className={styles.singleReference}>4MA0/3FR</p>
-                <p className={styles.singleReference}>4MA0/2FR</p>
-                <p className={styles.singleReference}>4NA0/1AR</p>
-                <p className={styles.singleReference}>9A0/2FR</p>
-              </div>
-            </div>
+            )}
             <div className={styles.paperData}>
               <div>
                 {paperData.system} - {paperData.board} - {paperData.subject}

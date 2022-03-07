@@ -265,14 +265,14 @@ function HomeComponent() {
           better experience.
         </h2> */}
 
-        <div className={styles.systemContainer}>
+        {/* <div className={styles.systemContainer}>
           <div className={styles.systemParent}>
             <div className={styles.system}>GCSE</div>
             <div className={styles.system}>IGCSE</div>
             <div className={styles.system}>AS</div>
             <div className={styles.system}>IB</div>
           </div>
-        </div>
+        </div> */}
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <Select

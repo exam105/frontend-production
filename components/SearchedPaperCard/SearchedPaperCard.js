@@ -78,12 +78,18 @@ function SearchedPaperComponent({ paper }) {
           />
         )}
 
-        <div className={styles.referenceContainer}>
-          <p className={styles.singleReference}>4MA0/3FR</p>
-          <p className={styles.singleReference}>4MA0/2FR</p>
-          <p className={styles.singleReference}>4NA0/1AR</p>
-          <p className={styles.singleReference}>9A0/2FR</p>
-        </div>
+        {paper?.reference && (
+          <div className={styles.referenceContainer}>
+            {paper.reference &&
+              paper.reference.split(",").map((value, index) => {
+                return (
+                  <p key={index} className={styles.singleReference}>
+                    {value}{" "}
+                  </p>
+                );
+              })}
+          </div>
+        )}
       </div>
     </Link>
   );
