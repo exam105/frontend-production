@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./SingleQuestion.module.css";
 import { MathpixMarkdown, MathpixLoader } from "mathpix-markdown-it";
 import Loader from "@components/common/Loader";
-import { FiShare2 } from "react-icons/fi";
+import { FiCopy } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -55,7 +55,7 @@ function SingleQuestion({
                 )}
               </div>
               <div>
-                <FiShare2
+                <FiCopy
                   className={styles.share}
                   onClick={() => shareQuestion()}
                   size={25}

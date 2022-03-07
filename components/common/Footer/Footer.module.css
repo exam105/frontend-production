@@ -1,7 +1,7 @@
 .footerBorder {
   border-top: 1px solid lightgray;
   background-color: #f8f9f9;
-  min-height: 125px !important;
+  min-height: 100px !important;
 }
 .footerContainer {
   margin-top: 20px;

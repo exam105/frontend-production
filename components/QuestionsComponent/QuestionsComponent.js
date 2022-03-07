@@ -174,25 +174,36 @@ function QuestionsComponent() {
           </div> */}
         </div>
         {paperData.id && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 15px",
-            }}
-          >
-            <div>
-              {paperData.system} - {paperData.board} - {paperData.subject}
+          <>
+            {paperData.reference && (
+              <div className={styles.referenceContainer}>
+                <div>
+                  <p className={styles.referenceNumber}>Reference Number:</p>
+                </div>
+                <div className={styles.reference}>
+                  {paperData.reference &&
+                    paperData.reference.split(",").map((value, index) => {
+                      return (
+                        <p key={index} className={styles.singleReference}>
+                          {value}{" "}
+                        </p>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
+            <div className={styles.paperData}>
+              <div>
+                {paperData.system} - {paperData.board} - {paperData.subject}
+              </div>
+              <div className={styles.date}>
+                {new Date(paperData.date).toLocaleString("default", {
+                  month: "long",
+                })}{" "}
+                / {new Date(paperData.date).getFullYear()}
+              </div>
             </div>
-            <div>
-              {new Date(paperData.date).toLocaleString("default", {
-                month: "long",
-              })}{" "}
-              / {new Date(paperData.date).getFullYear()}
-            </div>
-          </div>
+          </>
         )}
         <div className={styles.sidenavList}>
           {/* map through questions */}
