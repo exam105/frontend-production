@@ -1,13 +1,15 @@
 .gridLogos__itemm {
   flex-basis: 30%;
   display: flex;
-  height: 120px;
+  flex-direction: column;
+  height: 100%;
   margin-bottom: 40px;
 }
+
 .card {
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   border-radius: 5px;
 }
 .card:hover {
@@ -15,7 +17,11 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 16px 0px;
 }
 .cardContent {
-  padding: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 6px;
+  height: 80px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -62,4 +68,30 @@
     height: 100px;
     margin-bottom: 30px;
   }
+}
+
+.reference {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  color: #92929e;
+  font-weight: 500;
+}
+
+.singleReference {
+  padding: 0px 8px 0px 0px;
+}
+
+.referenceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  background-color: #fff;
+  font-weight: 500;
+  color: #92929e;
+  background-color: #f8f9f9;
 }

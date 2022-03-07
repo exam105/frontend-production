@@ -3,8 +3,10 @@ import Layout from "../components/common/Layout";
 
 export default function HomePage() {
   return (
-    <Layout height="100vh">
-      <HomeComponent />
+    <Layout>
+      <div style={{display: "flex", flex: "1"}}>
+        <HomeComponent />
+      </div>
     </Layout>
   );
 }
