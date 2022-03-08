@@ -195,7 +195,7 @@ function QuestionsComponent() {
               <div>
                 {paperData.system} - {paperData.board} - {paperData.subject}
               </div>
-              <div className={styles.date}>
+              <div>
                 {new Date(paperData.date).toLocaleString("default", {
                   month: "long",
                 })}{" "}
