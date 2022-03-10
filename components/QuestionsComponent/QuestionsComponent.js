@@ -192,14 +192,47 @@ function QuestionsComponent() {
               </div>
             )}
             <div className={styles.paperData}>
-              <div>
-                {paperData.system} - {paperData.board} - {paperData.subject}
+              <div className={styles.system}>
+                <div className={styles.iconBullet}>
+                  <Image
+                    src="/images/bullet-green.svg"
+                    width="14"
+                    height="12"
+                    alt="bullet"
+                  />
+                </div>
+                <div className={styles.systemBoards}>
+                  {paperData.system} - {paperData.board}
+                </div>
               </div>
-              <div>
-                {new Date(paperData.date).toLocaleString("default", {
-                  month: "long",
-                })}{" "}
-                / {new Date(paperData.date).getFullYear()}
+              <div className={styles.system}>
+                <div className={styles.iconBullet}>
+                  <Image
+                    src="/images/bullet-green.svg"
+                    width="14"
+                    height="12"
+                    alt="bullet"
+                  />
+                </div>
+                <div className={styles.subject}>
+                  {paperData.subject} {paperData.subject} {paperData.subject}
+                </div>
+              </div>
+              <div className={styles.system}>
+                <div className={styles.iconBullet}>
+                  <Image
+                    src="/images/bullet-green.svg"
+                    width="14"
+                    height="12"
+                    alt="bullet"
+                  />
+                </div>
+                <div className={styles.systemBoards}>
+                  {new Date(paperData.date).toLocaleString("default", {
+                    month: "long",
+                  })}{" "}
+                  / {new Date(paperData.date).getFullYear()}
+                </div>
               </div>
             </div>
           </>
