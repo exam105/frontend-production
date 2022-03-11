@@ -214,9 +214,7 @@ function QuestionsComponent() {
                     alt="bullet"
                   />
                 </div>
-                <div className={styles.subject}>
-                  {paperData.subject} {paperData.subject} {paperData.subject}
-                </div>
+                <div className={styles.subject}>{paperData.subject}</div>
               </div>
               <div className={styles.system}>
                 <div className={styles.iconBullet}>
