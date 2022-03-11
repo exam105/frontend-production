@@ -184,3 +184,23 @@
   color: #92929e;
   background-color: #f8f9f9;
 }
+
+.system {
+  display: flex;
+  align-items: flex-start;
+}
+
+.systemBoards {
+  margin-left: 6px;
+}
+
+.subject {
+  margin-left: 6px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.iconBullet {
+  height: 24px;
+}
