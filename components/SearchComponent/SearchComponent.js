@@ -18,6 +18,7 @@ function SearchComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const [referenceFilter, setReferenceFilter] = useState("");
   const [date, setDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
@@ -145,6 +146,23 @@ function SearchComponent() {
     }
     setUpdateUrl(false);
   }, [updateUrl]);
+
+  // cleaning up the reference state upon unmounting the page
+  useEffect(() => {
+    return () => {
+      setReferenceFilter("");
+    };
+  }, []);
+
+  const filteredData =
+    data &&
+    data[0].id &&
+    data?.filter((paper) => {
+      return paper.reference
+        .toLowerCase()
+        .includes(referenceFilter.toLocaleLowerCase());
+    });
+
   const change_input = (e) => {
     if (e !== undefined) {
       if (e.text === "subject") {
@@ -430,6 +448,19 @@ function SearchComponent() {
                     </button>
                   </div>
                 </div>
+                <div className={styles.searchBox}>
+                  <div
+                    className={`${styles.searchFields} ${styles.mobileResponsive}`}
+                  >
+                    <input
+                      type="text"
+                      id="reference"
+                      name="reference"
+                      placeholder="Filter with reference"
+                      onChange={(e) => setReferenceFilter(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -461,7 +492,7 @@ function SearchComponent() {
                 <div className={styles.mainBox} style={{ minHeight: "50vh" }}>
                   <div className={`${styles.gridLogoss} ${styles.logos}`}>
                     {/* mapping through the data */}
-                    {data?.map((paper, i) => {
+                    {filteredData?.map((paper, i) => {
                       return <SearchedPaperCard paper={paper} key={i} />;
                     })}
                   </div>
