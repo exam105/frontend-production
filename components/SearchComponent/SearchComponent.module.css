@@ -317,3 +317,8 @@
 .react-dropdown-select-dropdown-position-bottom {
   text-align: left !important;
 }
+
+.field {
+  display: flex;
+  align-items: flex-end;
+}

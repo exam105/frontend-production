@@ -432,6 +432,17 @@ function SearchComponent() {
                 </div>
               </div>
             </div>
+            <div
+              className={`${styles.searchFields} ${styles.mobileResponsive}`}
+            >
+              <div className={styles.field}>
+                <input
+                  className={styles.inputDate}
+                  type="text"
+                  placeholder="Text"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
