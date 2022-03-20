@@ -432,8 +432,28 @@ function SearchComponent() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-width">
+        <div className={styles.identityContainer}>
+          <div className={styles.abc}>
+            <div>
+
+            <p className={styles.identity}>LEGENDS</p>
+            <div className={styles.colors}>
+              <div className={styles.colorContainer}>
+                <div className={styles.color}></div>
+                <p className={styles.mcqs}>MCQs</p>
+              </div>
+              <div className={styles.secondColorContainer}>
+                <div className={styles.secondColor}></div>
+                <p className={styles.mcqs}>Theory</p>
+              </div>
+            </div>
+            </div>
             <div
-              className={`${styles.searchFields} ${styles.mobileResponsive}`}
+            // className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
               <div className={styles.field}>
                 <input
@@ -445,8 +465,7 @@ function SearchComponent() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="content-width">
+
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
         {data?.message ? (
@@ -476,13 +495,13 @@ function SearchComponent() {
                       return <SearchedPaperCard paper={paper} key={i} />;
                     })}
                   </div>
-                  <div
+                  {/* <div
                     className={`${styles.searchButton} ${styles.buttonMargin}`}
                   >
                     <div className={styles.loginBtn}>
-                      {/* <button className="btn-style sign">Read More</button> */}
+                      <button className="btn-style sign">Read More</button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </>
             ) : (

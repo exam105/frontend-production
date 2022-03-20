@@ -3,7 +3,12 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 40px;
+  margin: 20px 18px;
+  
+  /* border-top: 4px solid #EE9D1D; */
+  /* border-left: 4px solid #ee9d1d; */
+  /* border-top: 4px solid #9C6854; */
+  border-left: 4px solid #9C6854;
 }
 
 .card {
@@ -27,26 +32,31 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .cardHead {
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
 }
+
 .blueColor {
   color: #268dec;
   font-size: 14px;
   font-weight: 600;
 }
+
 .grayColor {
   color: #92929e;
   font-size: 14px;
   font-weight: 600;
 }
+
 .cardFooter {
   display: flex;
   justify-content: space-between;
 }
+
 .blackColor {
   color: #101010;
   font-size: 18px;
@@ -61,6 +71,7 @@
     margin-bottom: 30px;
   }
 }
+
 @media only screen and (max-width: 650px) {
   .gridLogos__itemm {
     flex-basis: 100% !important;
