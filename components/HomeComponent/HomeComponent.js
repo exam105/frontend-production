@@ -292,7 +292,7 @@ function HomeComponent() {
           different papers. */}
         </h1>
 
-        <div className={styles.innerContainer}>
+        {/* <div className={styles.innerContainer}>
           <div className={styles.innerRightContainer}>
             <div className={styles.newInnerRightContent}>
               <div className={styles.newSystemText}>
@@ -524,7 +524,7 @@ function HomeComponent() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <Select

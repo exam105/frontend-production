@@ -11,6 +11,7 @@ function SearchedPaperComponent({ paper }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     return () => {
       setIsLoading(false);
@@ -30,7 +31,12 @@ function SearchedPaperComponent({ paper }) {
       passHref
     >
       <div
-        style={{ position: "relative" }}
+        style={{
+          position: "relative",
+          borderLeft: paper.is_theory
+            ? "4px solid #FFFF00"
+            : "4px solid #0000FF",
+        }}
         onClick={() => {
           setIsLoading(true);
           sessionStorage.setItem("secondPageUrl", window.location.href);

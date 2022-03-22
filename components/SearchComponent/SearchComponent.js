@@ -448,7 +448,7 @@ function SearchComponent() {
                     </button>
                   </div>
                 </div>
-                <div className={styles.searchBox}>
+                {/* <div className={styles.searchBox}>
                   <div
                     className={`${styles.searchFields} ${styles.mobileResponsive}`}
                   >
@@ -460,7 +460,7 @@ function SearchComponent() {
                       onChange={(e) => setReferenceFilter(e.target.value)}
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -470,27 +470,29 @@ function SearchComponent() {
         <div className={styles.identityContainer}>
           <div className={styles.abc}>
             <div>
-
-            <p className={styles.identity}>LEGENDS</p>
-            <div className={styles.colors}>
-              <div className={styles.colorContainer}>
-                <div className={styles.color}></div>
-                <p className={styles.mcqs}>MCQs</p>
+              <p className={styles.identity}>LEGENDS</p>
+              <div className={styles.colors}>
+                <div className={styles.colorContainer}>
+                  <div className={styles.color}></div>
+                  <p className={styles.mcqs}>MCQs</p>
+                </div>
+                <div className={styles.secondColorContainer}>
+                  <div className={styles.secondColor}></div>
+                  <p className={styles.mcqs}>Theory</p>
+                </div>
               </div>
-              <div className={styles.secondColorContainer}>
-                <div className={styles.secondColor}></div>
-                <p className={styles.mcqs}>Theory</p>
-              </div>
-            </div>
             </div>
             <div
             // className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
               <div className={styles.field}>
                 <input
-                  className={styles.inputDate}
                   type="text"
-                  placeholder="Text"
+                  className={styles.inputDate}
+                  id="reference"
+                  name="reference"
+                  placeholder="Filter with reference"
+                  onChange={(e) => setReferenceFilter(e.target.value)}
                 />
               </div>
             </div>

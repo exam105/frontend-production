@@ -4,11 +4,10 @@
   flex-direction: column;
   height: 100%;
   margin: 20px 18px;
-  
+
   /* border-top: 4px solid #EE9D1D; */
   /* border-left: 4px solid #ee9d1d; */
   /* border-top: 4px solid #9C6854; */
-  border-left: 4px solid #9C6854;
 }
 
 .card {
