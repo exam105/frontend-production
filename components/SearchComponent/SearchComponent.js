@@ -18,6 +18,7 @@ function SearchComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const [referenceFilter, setReferenceFilter] = useState("");
   const [date, setDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
@@ -145,6 +146,23 @@ function SearchComponent() {
     }
     setUpdateUrl(false);
   }, [updateUrl]);
+
+  // cleaning up the reference state upon unmounting the page
+  useEffect(() => {
+    return () => {
+      setReferenceFilter("");
+    };
+  }, []);
+
+  const filteredData =
+    data &&
+    data[0].id &&
+    data?.filter((paper) => {
+      return paper.reference
+        .toLowerCase()
+        .includes(referenceFilter.toLocaleLowerCase());
+    });
+
   const change_input = (e) => {
     if (e !== undefined) {
       if (e.text === "subject") {
@@ -430,12 +448,57 @@ function SearchComponent() {
                     </button>
                   </div>
                 </div>
+                {/* <div className={styles.searchBox}>
+                  <div
+                    className={`${styles.searchFields} ${styles.mobileResponsive}`}
+                  >
+                    <input
+                      type="text"
+                      id="reference"
+                      name="reference"
+                      placeholder="Filter with reference"
+                      onChange={(e) => setReferenceFilter(e.target.value)}
+                    />
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="content-width">
+        <div className={styles.identityContainer}>
+          <div className={styles.abc}>
+            <div>
+              <p className={styles.identity}>LEGENDS</p>
+              <div className={styles.colors}>
+                <div className={styles.colorContainer}>
+                  <div className={styles.color}></div>
+                  <p className={styles.mcqs}>MCQs</p>
+                </div>
+                <div className={styles.secondColorContainer}>
+                  <div className={styles.secondColor}></div>
+                  <p className={styles.mcqs}>Theory</p>
+                </div>
+              </div>
+            </div>
+            <div
+            // className={`${styles.searchFields} ${styles.mobileResponsive}`}
+            >
+              <div className={styles.field}>
+                <input
+                  type="text"
+                  className={styles.inputDate}
+                  id="reference"
+                  name="reference"
+                  placeholder="Filter with reference"
+                  onChange={(e) => setReferenceFilter(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Grid */}
         {/*check if data, pending, and error all are false */}
         {data?.message ? (
@@ -461,17 +524,17 @@ function SearchComponent() {
                 <div className={styles.mainBox} style={{ minHeight: "50vh" }}>
                   <div className={`${styles.gridLogoss} ${styles.logos}`}>
                     {/* mapping through the data */}
-                    {data?.map((paper, i) => {
+                    {filteredData?.map((paper, i) => {
                       return <SearchedPaperCard paper={paper} key={i} />;
                     })}
                   </div>
-                  <div
+                  {/* <div
                     className={`${styles.searchButton} ${styles.buttonMargin}`}
                   >
                     <div className={styles.loginBtn}>
-                      {/* <button className="btn-style sign">Read More</button> */}
+                      <button className="btn-style sign">Read More</button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </>
             ) : (
