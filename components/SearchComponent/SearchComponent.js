@@ -158,9 +158,9 @@ function SearchComponent() {
     data &&
     data[0].id &&
     data?.filter((paper) => {
-      return paper.reference
-        .toLowerCase()
-        .includes(referenceFilter.toLocaleLowerCase());
+      return paper?.reference
+        ?.toLowerCase()
+        ?.includes(referenceFilter?.toLocaleLowerCase());
     });
 
   const change_input = (e) => {
