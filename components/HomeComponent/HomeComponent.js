@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
-import Image from "next/image";
 
 function HomeComponent() {
   const [chemistryLength, setChemistryLength] = useState(0);
@@ -33,6 +32,7 @@ function HomeComponent() {
     from_date: date,
     to_date: endDate,
   });
+  const [jsonData, setJsonData] = useState([]);
   useEffect(() => {
     const fetchBiologyLength = async () => {
       const res = await fetch(`${API}/dashboard/de/search/daterange`, {
@@ -94,6 +94,22 @@ function HomeComponent() {
     fetchBiologyLength();
     fetchMathLength();
     fetchChemistryLength();
+
+    // getting JSON data to populate cards
+    const fetchJsonData = async () => {
+      // make GET request to API and fetch JSON
+      const res = await fetch(`${API}/exam/homepage/links`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setJsonData(data);
+      }
+    };
+    fetchJsonData();
   }, []);
 
   const change_input = (e) => {
@@ -291,240 +307,71 @@ function HomeComponent() {
           download your customized eBook composed of different questions from
           different papers. */}
         </h1>
+        {jsonData?.details && (
+          <div className={styles.innerContainer}>
+            {jsonData.details.length > 0 &&
+              jsonData.details.map((card, i) => {
+                return (
+                  <div key={i} className={styles.innerRightContainer}>
+                    <div
+                      className={styles.newInnerRightContent}
+                      onClick={() => {
+                        router.push(
+                          `/search?subject=${card.subject}&system=${
+                            card.system
+                          }&board=${card.board}&from_date=${new Date(
+                            card.startyear
+                          )}&to_date=${new Date(card.endyear)}&choice=daterange`
+                        );
+                      }}
+                    >
+                      <div className={styles.newSystemText}>
+                        <p className={styles.systemRight}>{card.system}</p>
+                        <p className={styles.boardText}> {card.board}</p>
+                      </div>
+                      <div className={styles.cardsMain}>
+                        <div className={styles.systems}>
+                          <div className={styles.years}>
+                            <p className={styles.newSubject}>{card.subject}</p>
+                          </div>
+                        </div>
 
-        {/* <div className={styles.innerContainer}>
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
+                        <div className={styles.systems}>
+                          <div className={styles.years}>
+                            <div className={styles.systemsYear}>
+                              <p className={styles.newCardsSubject}>Date:</p>
+                              <div className={styles.newDates}>
+                                <p className={styles.newCardsDate}>
+                                  {new Date(card.startyear).toLocaleString(
+                                    "default",
+                                    {
+                                      month: "short",
+                                    }
+                                  )}{" "}
+                                  /{new Date(card.startyear).getFullYear()}
+                                </p>
+                                <p className={styles.dash}>-</p>
+                                <p className={styles.newCardsDate}>
+                                  {new Date(card.endyear).toLocaleString(
+                                    "default",
+                                    {
+                                      month: "short",
+                                    }
+                                  )}{" "}
+                                  /{new Date(card.endyear).getFullYear()}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                );
+              })}
           </div>
+        )}
 
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.innerRightContainer}>
-            <div className={styles.newInnerRightContent}>
-              <div className={styles.newSystemText}>
-                <p className={styles.systemRight}>IGCSE</p>
-                <p className={styles.boardText}> Edexcel</p>
-              </div>
-              <div className={styles.cardsMain}>
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <p className={styles.newSubject}>Computer Science</p>
-                  </div>
-                </div>
-
-                <div className={styles.systems}>
-                  <div className={styles.years}>
-                    <div className={styles.systemsYear}>
-                      <p className={styles.newCardsSubject}>Date:</p>
-                      <div className={styles.newDates}>
-                        <p className={styles.newCardsDate}>Jan / 2012</p>
-                        <p className={styles.dash}>-</p>
-                        <p className={styles.newCardsDate}>Dec / 2022</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
         <div className={styles.searchBox}>
           <div className={`${styles.searchFields} ${styles.mobileResponsive}`}>
             <Select
