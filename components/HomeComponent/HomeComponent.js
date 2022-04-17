@@ -103,7 +103,7 @@ function HomeComponent() {
       });
       if (res?.ok) {
         const data = await res.json();
-        setJsonData(data);
+        data ? setJsonData(data) : "";
       }
     };
 
