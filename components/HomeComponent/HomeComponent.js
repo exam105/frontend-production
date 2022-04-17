@@ -91,9 +91,6 @@ function HomeComponent() {
         setChemistryLength(data?.length);
       }
     };
-    fetchBiologyLength();
-    fetchMathLength();
-    fetchChemistryLength();
 
     // getting JSON data to populate cards
     const fetchJsonData = async () => {
@@ -104,11 +101,16 @@ function HomeComponent() {
           "Content-Type": "application/json",
         },
       });
-      if (res.ok) {
+      if (res?.ok) {
         const data = await res.json();
         setJsonData(data);
       }
     };
+
+    fetchBiologyLength();
+    fetchMathLength();
+    fetchChemistryLength();
+
     fetchJsonData();
   }, []);
 
