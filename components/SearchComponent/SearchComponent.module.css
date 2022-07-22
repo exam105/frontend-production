@@ -360,13 +360,7 @@
 .colorContainer {
   display: flex;
   align-items: center;
-  padding: 0px 6px 0px 0px;
-}
-
-.secondColorContainer {
-  display: flex;
-  align-items: center;
-  padding: 0px 6px 0px 0px;
+  padding: 0px 12px 0px 0px;
 }
 
 .color {
@@ -374,7 +368,6 @@
   border-radius: 4px;
   margin-right: 4px;
   height: 18px;
-  background-color: #0000ff;
 }
 
 .mcqs {
@@ -382,14 +375,6 @@
   font-weight: 500;
   color: #92929e;
   font-size: 14px;
-}
-
-.secondColor {
-  width: 18px;
-  border-radius: 4px;
-  margin-right: 4px;
-  height: 18px;
-  background-color: #ffff00;
 }
 
 .colors {

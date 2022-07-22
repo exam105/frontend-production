@@ -473,12 +473,25 @@ function SearchComponent() {
               <p className={styles.identity}>LEGENDS</p>
               <div className={styles.colors}>
                 <div className={styles.colorContainer}>
-                  <div className={styles.color}></div>
+                  <div
+                    style={{ backgroundColor: "#0000ff" }}
+                    className={styles.color}
+                  ></div>
                   <p className={styles.mcqs}>MCQs</p>
                 </div>
-                <div className={styles.secondColorContainer}>
-                  <div className={styles.secondColor}></div>
+                <div className={styles.colorContainer}>
+                  <div
+                    style={{ backgroundColor: "#ffff00" }}
+                    className={styles.color}
+                  ></div>
                   <p className={styles.mcqs}>Theory</p>
+                </div>
+                <div className={styles.colorContainer}>
+                  <div
+                    style={{ backgroundColor: "#00ff00" }}
+                    className={styles.color}
+                  ></div>
+                  <p className={styles.mcqs}>Practical</p>
                 </div>
               </div>
             </div>
