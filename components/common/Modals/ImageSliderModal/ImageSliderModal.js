@@ -54,6 +54,14 @@ function ImageSliderModal({ data, currentImageIndex }) {
             // layout="fill"
             className={styles.imageSize}
           /> */}
+          {/* <img
+            // src={currentImage.imageurl}
+            src="https://exam105.s3-ap-southeast-1.amazonaws.com/Chemistry/Igcse_edexcel_1_2012_paper2_ques_4(c).jpg"
+            alt={currentImage.imageurl}
+            // layout="fill"
+            className={styles.zoomImage}
+            style={{ position: "absolute" }}
+          /> */}
         </div>
       </div>
       <div className={styles.buttonHead}>

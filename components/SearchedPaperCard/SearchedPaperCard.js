@@ -33,9 +33,12 @@ function SearchedPaperComponent({ paper }) {
       <div
         style={{
           position: "relative",
-          borderLeft: paper.is_theory
-            ? "4px solid #FFFF00"
-            : "4px solid #0000FF",
+          borderLeft:
+            paper.notes && paper.notes === "Practical"
+              ? "4px solid #00ff00"
+              : paper.is_theory
+              ? "4px solid #FFFF00"
+              : "4px solid #0000FF",
         }}
         onClick={() => {
           setIsLoading(true);
