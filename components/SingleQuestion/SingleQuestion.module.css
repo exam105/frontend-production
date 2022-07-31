@@ -71,8 +71,8 @@
 
 .mainOverview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-  grid-auto-rows: 180px;
+  grid-template-columns: repeat(auto-fit, minmax(365px, 3fr));
+  grid-auto-rows: auto;
   grid-gap: 20px;
   margin: 20px;
   padding-left: 20px;
@@ -94,10 +94,11 @@
   justify-content: space-between;
   cursor: pointer;
   /* margin-bottom: 50px; */
+  height: auto;
 }
 .cardImageContainer {
-  height: 174px;
-  width: 400px;
+  height: 100%;
+  /* width: 100%; */
 }
 .cardImage {
   width: 100%;
@@ -164,6 +165,11 @@
 .wrong {
   margin-left: 20px !important;
 }
+.revealCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* .abc{
   margin-left: 20px;
@@ -173,4 +179,24 @@
   margin-left: 20px;
   padding-bottom: 20px;
   padding-top: 20px;
+}
+.revealBtn {
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.015em;
+  color: #ffffff;
+  background-color: #268dec;
+  width: 280px;
+  height: 50px;
+  padding: 20px 32px;
+  /* background: #fff; */
+  border: 2px solid #268dec;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
 }
