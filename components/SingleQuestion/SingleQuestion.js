@@ -7,7 +7,11 @@ import Loader from "@components/common/Loader";
 import { FiCopy } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import Collapsible from "react-collapsible";
+import { IoIosArrowDown } from "react-icons/io";
+import Toggle from "react-toggle";
 import "react-toastify/dist/ReactToastify.css";
+import "react-toggle/style.css";
 
 function SingleQuestion({
   data,
@@ -21,13 +25,18 @@ function SingleQuestion({
   const [showImageSliderModal, setShowImageSliderModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   const [reveal, setReveal] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("reveal") === "true") {
       setReveal(true);
+      setCollapse(true);
     }
   }, []);
+  useEffect(() => {
+    setCollapse(reveal);
+  }, [reveal]);
 
   const shareQuestion = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -44,6 +53,28 @@ function SingleQuestion({
         {error && <div>There was some problem fetching the data.</div>}
         {!pending && !error && (
           <>
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+                marginLeft: "40px",
+                marginTop: "5px",
+                marginBottom: "20px",
+                gap: "8px",
+              }}
+            >
+              <Toggle
+                // defaultChecked={reveal}
+                checked={reveal}
+                icons={false}
+                onChange={() => {
+                  setReveal(!reveal);
+                  localStorage.setItem("reveal", !reveal);
+                }}
+              />
+              <span>Hide answers and correct MCQs by default</span>
+            </label>
             <div className={styles.topicsLane}>
               <div>
                 {data.topics && (
@@ -127,46 +158,119 @@ function SingleQuestion({
 
             <div className={styles.mainHeader}>
               <div className={styles.questionMain}>
-                <div className={styles.questionHead}>
-                  <p className={styles.questionText}>
-                    {data.answer ? "Answer:" : "Options:"}
-                  </p>
-                  <span className={styles.revealCheckbox}>
-                    <button
-                      onClick={() => {
-                        setReveal(!reveal);
-                        localStorage.setItem("reveal", !reveal);
-                      }}
-                      style={
-                        reveal
-                          ? { color: "#268dec", backgroundColor: "#ffffff" }
-                          : { color: "#ffffff", backgroundColor: "#268dec" }
-                      }
-                      className={styles.revealBtn}
+                <div
+                  className={styles.questionHead}
+                  style={{ position: "relative" }}
+                >
+                  {data.answer && (
+                    <div
+                      className={styles.answerText}
+                      style={{ paddingTop: "10px" }}
                     >
-                      {data.options ? (
-                        <>
-                          {reveal
-                            ? "Hide the correct option"
-                            : "Reveal the correct option"}
-                        </>
-                      ) : (
-                        <>{reveal ? "Hide the answer" : "Reveal the answer"}</>
-                      )}
-                    </button>
-                  </span>
-                </div>
-
-                <div className={styles.answerText}>
-                  {data.answer ? (
-                    <>
-                      {reveal && (
+                      <Collapsible
+                        open={collapse}
+                        triggerStyle={{
+                          cursor: "pointer",
+                          fontSize: "1.2rem",
+                          width: "100%",
+                          position: "absolute",
+                          top: "0",
+                          right: "0",
+                        }}
+                        trigger={
+                          <span
+                            style={{
+                              color: "#268dec",
+                              display: "flex",
+                              justifyContent: "space-between",
+                            }}
+                            onClick={() => {
+                              setCollapse(!collapse);
+                            }}
+                          >
+                            <p
+                              style={{ color: "black" }}
+                              className={styles.questionText}
+                            >
+                              {data.answer ? "Answer:" : "Options:"}
+                            </p>
+                            <span>
+                              {collapse ? "Hide Question" : "Show Question"}
+                              <span
+                                style={{
+                                  position: "relative",
+                                  top: "2px",
+                                  marginLeft: "10px",
+                                }}
+                              >
+                                <IoIosArrowDown
+                                  color="#268dec"
+                                  className="rotate"
+                                  style={{
+                                    transform: collapse
+                                      ? "rotate(180deg)"
+                                      : "rotate(0deg)",
+                                  }}
+                                />
+                              </span>
+                            </span>
+                          </span>
+                        }
+                      >
                         <MathpixLoader>
                           <MathpixMarkdown text={data.answer} />
                         </MathpixLoader>
-                      )}
-                    </>
-                  ) : (
+                      </Collapsible>
+                    </div>
+                  )}
+                  {data.options && (
+                    <div
+                      className={styles.answerText}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <p
+                        style={{ color: "black" }}
+                        className={styles.questionText}
+                      >
+                        Options:
+                      </p>
+                      <span className={styles.revealCheckbox}>
+                        <button
+                          onClick={() => {
+                            setCollapse(!collapse);
+                          }}
+                          style={
+                            collapse
+                              ? { color: "#268dec", backgroundColor: "#ffffff" }
+                              : { color: "#ffffff", backgroundColor: "#268dec" }
+                          }
+                          className={styles.revealBtn}
+                        >
+                          {data.options ? (
+                            <>
+                              {collapse
+                                ? "Hide the correct option"
+                                : "Reveal the correct option"}
+                            </>
+                          ) : (
+                            <>
+                              {collapse
+                                ? "Hide the answer"
+                                : "Reveal the answer"}
+                            </>
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.answerText}>
+                  {data.options && (
                     <div className={styles.options}>
                       {data.options?.map((option, index) => (
                         <div
@@ -176,7 +280,7 @@ function SingleQuestion({
                             paddingTop: "10px",
                           }}
                         >
-                          {reveal === true && (
+                          {collapse === true && (
                             <>
                               {option.correct === true ? (
                                 <Image
@@ -196,7 +300,7 @@ function SingleQuestion({
                               )}
                             </>
                           )}
-                          {reveal === false && (
+                          {collapse === false && (
                             <div style={{ marginTop: "10px" }}>
                               <FaCircle
                                 width={22}
@@ -224,12 +328,12 @@ function SingleQuestion({
                 </div>
               </div>
               <p className={styles.questionText}>
-                {ansImages && ansImages.length > 0 && reveal ? "Images:" : ""}
+                {ansImages && ansImages.length > 0 && collapse ? "Images:" : ""}
               </p>
             </div>
 
             <div className={styles.mainOverview}>
-              {ansImages?.length !== 0 && reveal
+              {ansImages?.length !== 0 && collapse
                 ? ansImages?.map((image, index) => {
                     return (
                       <div

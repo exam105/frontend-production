@@ -19,6 +19,10 @@
   margin: 0 auto;
   padding: 0 15px;
 }
+.rotate {
+  transition: 0.3s all;
+}
+
 a {
   text-decoration: none;
   color: steelblue;
