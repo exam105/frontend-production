@@ -50,7 +50,9 @@
 .main {
   grid-area: main;
 }
-
+.Collapsible__contentInner {
+  padding-top: 6rem;
+}
 .mainHeader {
   display: flex;
   justify-content: space-between;
