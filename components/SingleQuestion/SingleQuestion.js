@@ -21,11 +21,13 @@ function SingleQuestion({
   error,
   quesImages,
   ansImages,
+  selectedQuestionId,
 }) {
   const [showImageSliderModal, setShowImageSliderModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [ansImagesSlider, setAnsImagesSlider] = useState(false);
   const [collapse, setCollapse] = useState(false);
+
   const [reveal, setReveal] = useState(false);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function SingleQuestion({
   }, []);
   useEffect(() => {
     setCollapse(reveal);
-  }, [reveal]);
+  }, [reveal, selectedQuestionId]);
 
   const shareQuestion = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -66,14 +68,14 @@ function SingleQuestion({
             >
               <Toggle
                 // defaultChecked={reveal}
-                checked={reveal}
+                checked={!reveal}
                 icons={false}
                 onChange={() => {
                   setReveal(!reveal);
                   localStorage.setItem("reveal", !reveal);
                 }}
               />
-              <span>Hide answers and correct MCQs by default</span>
+              <span>Hide all answers</span>
             </label>
             <div className={styles.topicsLane}>
               <div>
@@ -195,7 +197,7 @@ function SingleQuestion({
                               {data.answer ? "Answer:" : "Options:"}
                             </p>
                             <span>
-                              {collapse ? "Hide Question" : "Show Question"}
+                              {collapse ? "Hide Answer" : "Show Answer"}
                               <span
                                 style={{
                                   position: "relative",
@@ -250,19 +252,9 @@ function SingleQuestion({
                           }
                           className={styles.revealBtn}
                         >
-                          {data.options ? (
-                            <>
-                              {collapse
-                                ? "Hide the correct option"
-                                : "Reveal the correct option"}
-                            </>
-                          ) : (
-                            <>
-                              {collapse
-                                ? "Hide the answer"
-                                : "Reveal the answer"}
-                            </>
-                          )}
+                          {collapse
+                            ? "Hide the correct option"
+                            : "Reveal the correct option"}
                         </button>
                       </span>
                     </div>

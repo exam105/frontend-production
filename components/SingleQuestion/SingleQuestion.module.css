@@ -61,7 +61,9 @@
   margin-top: 0px;
   padding: 20px;
 }
-
+.Collapsible__contentOuter {
+  border: 1px solid black;
+}
 .answerText {
   font-size: 16px;
   font-weight: 400;
