@@ -20,6 +20,7 @@ function QuestionsComponent() {
   const [paperId, setPaperId] = useState("");
   const [questionCart, setQuestionCart] = useState(0);
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
+
   // Getting individual question
   const { data, pending, error } = useSelector((state) => state.question);
   const quesImages = data?.images?.filter((image) =>
@@ -310,6 +311,7 @@ function QuestionsComponent() {
           error={error}
           quesImages={quesImages}
           ansImages={ansImages}
+          selectedQuestionId={selectedQuestionId}
         />
       )}
 
