@@ -34,84 +34,130 @@ function HomeComponent() {
   });
   const [jsonData, setJsonData] = useState([]);
   useEffect(() => {
-    const fetchBiologyLength = async () => {
-      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    //   const fetchBiologyLength = async () => {
+    //     const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         subject: "Biology",
+    //         system: "IGCSE",
+    //         board: "Edexcel",
+    //         from_date: "2011-01-01T00:00:00.000Z",
+    //         to_date: "2019-12-01T00:00:00.000Z",
+    //       }),
+    //     });
+    //     if (res.ok) {
+    //       const data = await res.json();
+    //       setBiologyLength(data?.length);
+    //     }
+    //   };
+    //   const fetchMathLength = async () => {
+    //     const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         subject: "Math",
+    //         system: "IGCSE",
+    //         board: "Edexcel",
+    //         from_date: "2011-01-01T00:00:00.000Z",
+    //         to_date: "2019-12-01T00:00:00.000Z",
+    //       }),
+    //     });
+    //     if (res.ok) {
+    //       const data = await res.json();
+    //       setMathsLength(data?.length);
+    //     }
+    //   };
+    //   const fetchChemistryLength = async () => {
+    //     const res = await fetch(`${API}/dashboard/de/search/daterange`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         subject: "Chemistry",
+    //         system: "IGCSE",
+    //         board: "Edexcel",
+    //         from_date: "2011-01-01T00:00:00.000Z",
+    //         to_date: "2019-12-01T00:00:00.000Z",
+    //       }),
+    //     });
+    //     if (res.ok) {
+    //       const data = await res.json();
+    //       setChemistryLength(data?.length);
+    //     }
+    //   };
+
+    //   // getting JSON data to populate cards
+    //   const fetchJsonData = async () => {
+    //     // make GET request to API and fetch JSON
+    //     const res = await fetch(`${API}/exam/homepage/links`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     });
+    //     if (res?.ok) {
+    //       const data = await res.json();
+    //       data ? setJsonData(data) : "";
+    //     }
+    //   };
+
+    //   fetchBiologyLength();
+    //   fetchMathLength();
+    //   fetchChemistryLength();
+
+    setJsonData({
+      cards: 6,
+      details: [
+        {
+          subject: "Math",
+          system: "IGCSE",
+          board: "CIE",
+          startyear: "2002",
+          endyear: "2021",
         },
-        body: JSON.stringify({
+        {
           subject: "Biology",
           system: "IGCSE",
           board: "Edexcel",
-          from_date: "2011-01-01T00:00:00.000Z",
-          to_date: "2019-12-01T00:00:00.000Z",
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setBiologyLength(data?.length);
-      }
-    };
-    const fetchMathLength = async () => {
-      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+          startyear: "2002",
+          endyear: "2021",
         },
-        body: JSON.stringify({
-          subject: "Math",
-          system: "IGCSE",
-          board: "Edexcel",
-          from_date: "2011-01-01T00:00:00.000Z",
-          to_date: "2019-12-01T00:00:00.000Z",
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setMathsLength(data?.length);
-      }
-    };
-    const fetchChemistryLength = async () => {
-      const res = await fetch(`${API}/dashboard/de/search/daterange`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+        {
           subject: "Chemistry",
           system: "IGCSE",
           board: "Edexcel",
-          from_date: "2011-01-01T00:00:00.000Z",
-          to_date: "2019-12-01T00:00:00.000Z",
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setChemistryLength(data?.length);
-      }
-    };
-
-    // getting JSON data to populate cards
-    const fetchJsonData = async () => {
-      // make GET request to API and fetch JSON
-      const res = await fetch(`${API}/exam/homepage/links`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+          startyear: "2002",
+          endyear: "2021",
         },
-      });
-      if (res?.ok) {
-        const data = await res.json();
-        data ? setJsonData(data) : "";
-      }
-    };
-
-    fetchBiologyLength();
-    fetchMathLength();
-    fetchChemistryLength();
-
-    fetchJsonData();
+        {
+          subject: "Economics",
+          system: "IGCSE",
+          board: "CIE",
+          startyear: "2002",
+          endyear: "2021",
+        },
+        {
+          subject: "Design and Technology",
+          system: "IGCSE",
+          board: "Edexcel",
+          startyear: "2002",
+          endyear: "2021",
+        },
+        {
+          subject: "Computer Science",
+          system: "IGCSE",
+          board: "Edexcel",
+          startyear: "2002",
+          endyear: "2021",
+        },
+      ],
+    });
   }, []);
 
   const change_input = (e) => {
@@ -255,60 +301,22 @@ function HomeComponent() {
     <div className="content-width">
       <div className={styles.homeContent}>
         <ToastContainer />
-        <h1 className={styles.heading}>
+        <h1 style={{ fontWeight: "normal" }} className={styles.heading}>
           Welcome to
           <span className={styles.textGreen}> EXAM105 Platform.</span> Right now
-          we have{" "}
-          <span
-            className={`${styles.subjectLength}`}
-            onClick={() => {
-              router.push(
-                `/search?subject=Math&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
-              );
-            }}
-          >
-            {mathsLength > 0 && mathsLength}
-          </span>
-          {chemistryLength > 0 && (
-            <>
-              {", "}
-              <span
-                className={`${styles.subjectLength}`}
-                onClick={() => {
-                  router.push(
-                    `/search?subject=Chemistry&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
-                  );
-                }}
-              >
-                {chemistryLength}
-              </span>
-            </>
-          )}{" "}
-          {biologyLength > 0 && (
-            <>
-              {"and "}
-              <span
-                className={`${styles.subjectLength}`}
-                onClick={() => {
-                  router.push(
-                    `/search?subject=Biology&system=IGCSE&board=Edexcel&from_date=Sat Jan 01 2011 05:30:00 GMT+0530 (India Standard Time)&to_date=Sun Dec 01 2019 05:30:00 GMT+0530 (India Standard Time)&choice=daterange`
-                  );
-                }}
-              >
-                {biologyLength}
-              </span>
-            </>
-          )}{" "}
-          papers of IGCSE Edexcel from{" "}
-          <span className={styles.importantPart}>
-            2011 to 2019 for Maths, Chemistry, and Biology subjects respectively
-          </span>
-          .
+          we have papers in {/* <span className={styles.importantPart}> */}
+          IGCSE ( CIE and Edexcel ) from 2002 to 2021 across various subjects.
+          And in future we will be adding papers in other systems and boards
+          including GCSE, A/O Levels and IB
+          {/* </span> */}.
           {/* Here you
           can Explore and Download Cambridge board past papers. You can even
           download your customized eBook composed of different questions from
           different papers. */}
         </h1>
+        <h2 style={{ fontWeight: "normal", color: "#288eec" }}>
+          Checkout some quick links below to explore our content
+        </h2>
         {jsonData?.details && (
           <div className={styles.innerContainer}>
             {jsonData.details.length > 0 &&
