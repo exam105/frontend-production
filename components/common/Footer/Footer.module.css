@@ -10,8 +10,13 @@
   z-index: auto;
 }
 .footerLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
   margin-top: 5px;
-  width: 15%;
 }
 .logo {
   cursor: pointer;
@@ -20,11 +25,45 @@
   color: #92929e;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.socialIcon {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.socialIcon:hover {
+  /* opacity: 0.5; */
+  color: #268dec;
+}
+.discord:hover {
+  color: #7289da;
+}
+.facebook:hover {
+  color: #3b5998;
+}
+.linkedin:hover {
+  color: #0077b5;
+}
+.icons {
+  display: flex;
+}
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 .noStyle {
   text-decoration: none;
   color: #92929e;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -36,6 +75,12 @@
   justify-content: space-between;
   list-style-type: none;
 }
+/* new classes start */
+
+.navigation-mail {
+  cursor: pointer;
+}
+/* new classes end */
 @media screen and (max-width: 768px) {
   .footer-links {
     width: 40% !important;
