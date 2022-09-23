@@ -361,6 +361,8 @@
   display: flex;
   align-items: center;
   padding: 0px 12px 0px 0px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .color {
@@ -373,7 +375,6 @@
 .mcqs {
   margin-top: 1px;
   font-weight: 500;
-  color: #92929e;
   font-size: 14px;
 }
 

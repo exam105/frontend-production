@@ -184,7 +184,7 @@ function SingleQuestion({
                             style={{
                               color: "#268dec",
                               display: "flex",
-                              justifyContent: "space-between",
+                              gap: "10px",
                             }}
                             onClick={() => {
                               setCollapse(!collapse);
@@ -196,7 +196,11 @@ function SingleQuestion({
                             >
                               {data.answer ? "Answer:" : "Options:"}
                             </p>
-                            <span>
+                            <span
+                              style={{
+                                paddingTop: "2px",
+                              }}
+                            >
                               {collapse ? "Hide Answer" : "Show Answer"}
                               <span
                                 style={{
@@ -230,7 +234,8 @@ function SingleQuestion({
                       className={styles.answerText}
                       style={{
                         display: "flex",
-                        justifyContent: "space-between",
+                        gap: "10px",
+                        // justifyContent: "space-between",
                         width: "100%",
                       }}
                     >
@@ -252,9 +257,7 @@ function SingleQuestion({
                           }
                           className={styles.revealBtn}
                         >
-                          {collapse
-                            ? "Hide the correct option"
-                            : "Reveal the correct option"}
+                          {collapse ? "Hide Answer" : "Show Answer"}
                         </button>
                       </span>
                     </div>

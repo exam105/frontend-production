@@ -314,9 +314,7 @@ function HomeComponent() {
           download your customized eBook composed of different questions from
           different papers. */}
         </h1>
-        <h2 style={{ fontWeight: "normal", color: "#288eec" }}>
-          Checkout some quick links below to explore our content
-        </h2>
+
         {jsonData?.details && (
           <div className={styles.innerContainer}>
             {jsonData.details.length > 0 &&
