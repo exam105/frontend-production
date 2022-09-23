@@ -18,7 +18,6 @@ function SearchComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [referenceFilter, setReferenceFilter] = useState("");
   const [date, setDate] = useState(normalizeDate(new Date()));
   const [endDate, setEndDate] = useState(normalizeDate(new Date()));
   const [isDateRange, setIsDateRange] = useState(false);
@@ -38,8 +37,51 @@ function SearchComponent() {
     from_date: date,
     to_date: endDate,
   });
-  const { data, pending, error } = useSelector((state) => state.papers);
 
+  const { data, pending, error } = useSelector((state) => state.papers);
+  // Filters
+  const [referenceFilter, setReferenceFilter] = useState("");
+  const [blueFilter, setBlueFilter] = useState(false);
+  const [yellowFilter, setYellowFilter] = useState(false);
+  const [greenFilter, setGreenFilter] = useState(false);
+  // const [test, setTest] = useState(1);
+  // const [filteredData, setFilteredData] = useState([]);
+  let filterReference = (paper) => {
+    if (referenceFilter === "") return paper; // if commented, all papers gone when a filter is slected
+    return paper.reference
+      .toLocaleLowerCase()
+      .includes(referenceFilter?.toLocaleLowerCase());
+  };
+  let filteredData =
+    data &&
+    data[0].id &&
+    data?.filter((paper) => {
+      let dataToFilter = filterReference(paper);
+      if (greenFilter) {
+        console.log("green");
+        console.log(dataToFilter);
+        return dataToFilter && dataToFilter.notes === "Practical";
+      }
+      if (yellowFilter) {
+        console.log("yellow");
+        return (
+          dataToFilter &&
+          dataToFilter.is_theory &&
+          (dataToFilter.notes === "" ||
+            dataToFilter.notes === null ||
+            dataToFilter.notes === undefined)
+        );
+      }
+      if (blueFilter) {
+        console.log("blue");
+        return (
+          dataToFilter &&
+          !dataToFilter.is_theory &&
+          dataToFilter.notes !== "Practical"
+        );
+      }
+      return dataToFilter;
+    });
   useEffect(() => {
     // extracting the url and sending the data to the server
     try {
@@ -130,6 +172,14 @@ function SearchComponent() {
       console.log(error);
     }
   }, []);
+  // useEffect(() => {
+  //   console.log("data got trigger");
+  //   if (data) {
+  //     console.log("inside data");
+  //     setFilteredData(data);
+  //   }
+  // }, [data]);
+
   useEffect(() => {
     if (updateUrl) {
       router.push(
@@ -147,21 +197,32 @@ function SearchComponent() {
     setUpdateUrl(false);
   }, [updateUrl]);
 
-  // cleaning up the reference state upon unmounting the page
   useEffect(() => {
+    // setTest(() => 7);
+    // console.log(test);
+    // if (data.length > 0) {
+    //   console.log("yo: ", filteredData);
+    //   setFilteredData(() => {
+    //     return (
+    //       data[0]?.id &&
+    //       data?.filter((paper) =>
+    //         paper?.reference?.toLowerCase()?.includes(
+    //           referenceFilter?.toLocaleLowerCase()
+    // && blueFilter === false
+    //   ? paper.is_theory === undefined
+    //   : yellowFilter === false
+    //   ? paper.is_theory === true
+    //   : ""
+    //         )
+    //       )
+    //     );
+    //   });
+    // }
+
     return () => {
       setReferenceFilter("");
     };
   }, []);
-
-  const filteredData =
-    data &&
-    data[0].id &&
-    data?.filter((paper) => {
-      return paper?.reference
-        ?.toLowerCase()
-        ?.includes(referenceFilter?.toLocaleLowerCase());
-    });
 
   const change_input = (e) => {
     if (e !== undefined) {
@@ -470,31 +531,68 @@ function SearchComponent() {
         <div className={styles.identityContainer}>
           <div className={styles.abc}>
             <div>
-              <p className={styles.identity}>LEGENDS</p>
+              <p className={styles.identity}>Filter with Legends</p>
               <div className={styles.colors}>
-                <div className={styles.colorContainer}>
+                <div
+                  className={styles.colorContainer}
+                  onClick={() => setBlueFilter(!blueFilter)}
+                >
                   <div
-                    style={{ backgroundColor: "#0000ff" }}
+                    style={{
+                      backgroundColor: "#0000ff",
+                    }}
                     className={styles.color}
                   ></div>
-                  <p className={styles.mcqs}>MCQs</p>
+                  <p
+                    style={{
+                      color: blueFilter ? "black" : "#92929e",
+                    }}
+                    className={styles.mcqs}
+                  >
+                    MCQs
+                  </p>
                 </div>
-                <div className={styles.colorContainer}>
+                <div
+                  className={styles.colorContainer}
+                  onClick={() => setYellowFilter(!yellowFilter)}
+                >
                   <div
-                    style={{ backgroundColor: "#ffff00" }}
+                    style={{
+                      backgroundColor: "#ffff00",
+                    }}
                     className={styles.color}
                   ></div>
-                  <p className={styles.mcqs}>Theory</p>
+                  <p
+                    style={{
+                      color: yellowFilter ? "black" : "#92929e",
+                    }}
+                    className={styles.mcqs}
+                  >
+                    Theory
+                  </p>
                 </div>
-                <div className={styles.colorContainer}>
+                <div
+                  className={styles.colorContainer}
+                  onClick={() => setGreenFilter(!greenFilter)}
+                >
                   <div
-                    style={{ backgroundColor: "#00ff00" }}
+                    style={{
+                      backgroundColor: "#00ff00",
+                    }}
                     className={styles.color}
                   ></div>
-                  <p className={styles.mcqs}>Practical</p>
+                  <p
+                    style={{
+                      color: greenFilter ? "black" : "#92929e",
+                    }}
+                    className={styles.mcqs}
+                  >
+                    Practical
+                  </p>
                 </div>
               </div>
             </div>
+
             <div
             // className={`${styles.searchFields} ${styles.mobileResponsive}`}
             >
@@ -509,6 +607,17 @@ function SearchComponent() {
                 />
               </div>
             </div>
+            <button
+              onClick={() => {
+                setBlueFilter(false);
+                setYellowFilter(false);
+                setGreenFilter(false);
+              }}
+              className="btn-style-secondary"
+              style={{ height: "38px", padding: "10px 20px" }}
+            >
+              Reset Filters
+            </button>
           </div>
         </div>
 
@@ -537,9 +646,10 @@ function SearchComponent() {
                 <div className={styles.mainBox} style={{ minHeight: "50vh" }}>
                   <div className={`${styles.gridLogoss} ${styles.logos}`}>
                     {/* mapping through the data */}
-                    {filteredData?.map((paper, i) => {
-                      return <SearchedPaperCard paper={paper} key={i} />;
-                    })}
+                    {filteredData &&
+                      filteredData?.map((paper, i) => {
+                        return <SearchedPaperCard paper={paper} key={i} />;
+                      })}
                   </div>
                   {/* <div
                     className={`${styles.searchButton} ${styles.buttonMargin}`}
