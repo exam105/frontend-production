@@ -46,23 +46,108 @@ function SearchComponent() {
   const [greenFilter, setGreenFilter] = useState(false);
   // const [test, setTest] = useState(1);
   // const [filteredData, setFilteredData] = useState([]);
-  let filterReference = (paper) => {
-    if (referenceFilter === "") return paper; // if commented, all papers gone when a filter is slected
-    return paper.reference
-      .toLocaleLowerCase()
-      .includes(referenceFilter?.toLocaleLowerCase());
-  };
+  // let filterReference = (paper) => {
+  //   if (referenceFilter === "") return paper; // if commented, all papers gone when a filter is slected
+  //   return paper.reference
+  //     .toLocaleLowerCase()
+  //     .includes(referenceFilter?.toLocaleLowerCase());
+  // };
   let filteredData =
     data &&
     data[0].id &&
     data?.filter((paper) => {
-      let dataToFilter = filterReference(paper);
-      if (greenFilter) {
+      let dataToFilter = paper;
+      if (referenceFilter && greenFilter && yellowFilter && blueFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase())
+        );
+      }
+      if (referenceFilter && greenFilter && yellowFilter && !blueFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          dataToFilter.is_theory
+        );
+      }
+      if (referenceFilter && greenFilter && blueFilter && !yellowFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          !dataToFilter.is_theory
+        );
+      }
+      if (referenceFilter && yellowFilter && blueFilter && !greenFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          dataToFilter?.notes !== "Practical"
+        );
+      }
+      if (greenFilter && yellowFilter && blueFilter && !referenceFilter) {
+        return dataToFilter;
+      }
+      if (referenceFilter && greenFilter && !yellowFilter && !blueFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          dataToFilter?.notes === "Practical"
+        );
+      }
+      if (referenceFilter && yellowFilter && !greenFilter && !blueFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          dataToFilter?.notes !== "Practical" &&
+          dataToFilter.is_theory
+        );
+      }
+      if (referenceFilter && blueFilter && !greenFilter && !yellowFilter) {
+        return (
+          dataToFilter &&
+          dataToFilter.reference
+            .toLocaleLowerCase()
+            .includes(referenceFilter?.toLocaleLowerCase()) &&
+          dataToFilter?.notes !== "Practical" &&
+          !dataToFilter.is_theory
+        );
+      }
+      if (greenFilter && yellowFilter && !referenceFilter && !blueFilter) {
+        return (
+          dataToFilter &&
+          (dataToFilter?.notes === "Practical" || dataToFilter.is_theory)
+        );
+      }
+      if (greenFilter && blueFilter && !referenceFilter && !yellowFilter) {
+        return dataToFilter && !dataToFilter.is_theory;
+      }
+      if (yellowFilter && blueFilter && !referenceFilter && !greenFilter) {
+        return dataToFilter && dataToFilter?.notes !== "Practical";
+      }
+
+      if (referenceFilter && !greenFilter && !yellowFilter && !blueFilter) {
+        return dataToFilter.reference
+          .toLocaleLowerCase()
+          .includes(referenceFilter?.toLocaleLowerCase());
+      }
+      if (greenFilter && !referenceFilter && !yellowFilter && !blueFilter) {
         console.log("green");
         console.log(dataToFilter);
         return dataToFilter && dataToFilter.notes === "Practical";
       }
-      if (yellowFilter) {
+      if (yellowFilter && !referenceFilter && !greenFilter && !blueFilter) {
         console.log("yellow");
         return (
           dataToFilter &&
@@ -72,7 +157,7 @@ function SearchComponent() {
             dataToFilter.notes === undefined)
         );
       }
-      if (blueFilter) {
+      if (blueFilter && !referenceFilter && !greenFilter && !yellowFilter) {
         console.log("blue");
         return (
           dataToFilter &&
