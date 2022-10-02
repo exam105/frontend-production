@@ -688,6 +688,7 @@ function SearchComponent() {
                   id="reference"
                   name="reference"
                   placeholder="Filter with reference"
+                  value={referenceFilter}
                   onChange={(e) => setReferenceFilter(e.target.value)}
                 />
               </div>
@@ -697,6 +698,7 @@ function SearchComponent() {
                 setBlueFilter(false);
                 setYellowFilter(false);
                 setGreenFilter(false);
+                setReferenceFilter("");
               }}
               className="btn-style-secondary"
               style={{ height: "38px", padding: "10px 20px" }}
